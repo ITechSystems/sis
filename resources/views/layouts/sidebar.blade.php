@@ -23,27 +23,17 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="/"><i class="fa fa-circle-o"></i>Class Dashboard</a></li>
-                    </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-folder"></i> <span>Admission</span>
+                        <i class="fa fa-home"></i> <span>Inventory</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Application</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Entrance Examination</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Pre-Enrollment </a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Enrollment </a></li>
+                        <li><a href="/inventory"><i class="fa fa-circle-o"></i> View</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -54,7 +44,7 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Existing </a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Existing</a></li>
                         <li><a href="#"><i class="fa fa-circle-o"></i> Student MasterList</a></li>
                     </ul>
                 </li>
