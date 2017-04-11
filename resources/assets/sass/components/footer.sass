@@ -1,0 +1,26 @@
+.main-footer
+    align-items: center
+    bottom: 0
+    display: flex
+    height: 30px
+    justify-content: space-between
+    padding: 0 10px
+    position: absolute
+    right: 0
+    width: 100%
+
+.main-footer__project,
+.main-footer__version
+    margin: 0
+    font-size: 13px
+
+    span
+        font-weight: 700
+
+@media screen and (max-width: 767px)
+    .main-footer
+        width: 100%
+        justify-content: center
+
+        .main-footer__version
+            display: none

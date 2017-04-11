@@ -11,5 +11,17 @@ const { mix } = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+mix.styles([
+        'resources/assets/css/libs/AdminLTE.min.css',
+        'resources/assets/css/libs/skins/_all-skins.min.css'
+    ], 'public/css/libs.css')
+    .sass('resources/assets/sass/app.sass', 'public/css')
+    .scripts([
+        'resources/assets/js/libs/jquery.min.js',
+        'resources/assets/js/libs/jquery-ui.min.js',
+        'resources/assets/js/libs/app.js',
+        'resources/assets/js/libs/tether.min.js',
+        'resources/assets/js/libs/bootstrap.min.js',
+        'resources/assets/js/libs/AdminLTE.min.js'
+    ], 'public/js/app.js')
+    .options({ purifyCss: true });
