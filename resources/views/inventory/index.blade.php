@@ -22,5 +22,11 @@
         @include("inventory._partials.buyer_information")
         @include("inventory._partials.unit_search_vertical")
         @include("inventory._partials.unit_search_horizontal")
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button class="btn btn-primary">SEARCH UNITS</button>
+                <button class="btn btn-default">RESET SEARCH</button>
+            </div>
+        </div>
     </div>
 @endsection
