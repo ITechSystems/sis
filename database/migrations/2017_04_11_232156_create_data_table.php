@@ -13,20 +13,36 @@ class CreateDataTable extends Migration
      */
     public function up()
     {
+
         Schema::create('data', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->string('date');
             $table->string('location');
-            $table->string('block');
-            $table->string('number');
+            $table->string('project');
             $table->string('block_lot');
             $table->string('lot_area');
             $table->string('lot_type');
             $table->string('floor_area');
             $table->string('house_model');
-            $table->string('total_contract_price');
-            $table->string('reservation_fee');
+            $table->float('total_contract_price', 10, 2);
+            $table->float('reservation_fee', 10, 2);
+            $table->string('status');
         });
+
+        // Schema::create('data', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->string('title');
+        //     $table->string('location');
+        //     $table->string('block');
+        //     $table->string('number');
+        //     $table->string('block_lot');
+        //     $table->string('lot_area');
+        //     $table->string('lot_type');
+        //     $table->string('floor_area');
+        //     $table->string('house_model');
+        //     $table->string('total_contract_price');
+        //     $table->string('reservation_fee');
+        // });
     }
 
     /**

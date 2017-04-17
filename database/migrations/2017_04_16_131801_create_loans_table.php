@@ -16,12 +16,13 @@ class CreateLoansTable extends Migration
         Schema::create('loans', function(Blueprint $table){
             $table->increments('id');
             $table->integer('data_id');
-            $table->string('one');
-            $table->string('two');
-            $table->string('three');
-            $table->string('four');
-            $table->string('five');
-            $table->string('six');
+            $table->float('total', 10, 2);
+            $table->float('mri', 10, 2);
+            $table->float('monthly_amortization', 10, 2);
+            $table->string('percentage');
+            $table->string('description');
+            $table->string('monthly_percentage');
+            $table->string('years');
         });
     }
 

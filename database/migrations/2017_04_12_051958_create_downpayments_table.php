@@ -16,10 +16,10 @@ class CreateDownpaymentsTable extends Migration
         Schema::create('downpayments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('data_id');
-            $table->string('percentage');
-            $table->string('total');
+            $table->float('equity', 10, 2);
             $table->string('term');
-            $table->string('amount');
+            $table->float('monthly', 10, 2);
+            $table->string('percentage');
         });
     }
 

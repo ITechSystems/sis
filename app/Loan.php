@@ -10,12 +10,13 @@ class Loan extends Model
 
     protected $fillable = [
     	'data_id',
-    	'one',
-    	'two',
-    	'three',
-    	'four',
-    	'five',
-    	'six'
+    	'total',
+    	'mri',
+    	'monthly_amortization',
+    	'percentage',
+    	'description',
+    	'monthly_percentage',
+    	'years'
     ];
 
     public $timestamps = false;
