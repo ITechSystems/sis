@@ -18,10 +18,13 @@ mix.styles([
     .sass('resources/assets/sass/app.sass', 'public/css')
     .scripts([
         'resources/assets/js/libs/jquery.min.js',
-        'resources/assets/js/libs/jquery-ui.min.js',
-        'resources/assets/js/libs/app.js',
+        // 'resources/assets/js/libs/jquery-ui.min.js',
+        // 'resources/assets/js/libs/app.js',
         'resources/assets/js/libs/tether.min.js',
         'resources/assets/js/libs/bootstrap.min.js',
-        'resources/assets/js/libs/AdminLTE.min.js'
+        'resources/assets/js/libs/AdminLTE.min.js',
+        'resources/assets/js/libs/vue.js',
+        'resources/assets/js/libs/axios.min.js'
     ], 'public/js/app.js')
+    .js('resources/assets/js/inventory.js', 'public/js')
     .options({ purifyCss: true });
