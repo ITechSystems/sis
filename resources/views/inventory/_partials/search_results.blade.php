@@ -1,19 +1,36 @@
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default mb-0">
-            <div class="panel-heading">Search Results</div>
+            <div class="panel-heading">
+                @if(isset($result_count))
+                    Search Results: {{ $result_count }} found.
+                @endif
+            </div>
 
             <div class="panel-body">
                 <table class="table table-hovered table-condense">
                     <thead>
                         <tr>
-                            <th>Select</th>
+                            <th>Location</th>
+                            <th>Project</th>
+                            <th>Block and Lot</th>
+                            <th>Downpayment</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @if(isset($units))
+                        @foreach($units as $unit)
                         <tr>
-                            <td><input type="checkbox" name=""></td>
+                            <td>{{ $unit->location }}</td>
+                            <td>{{ $unit->project }}</td>
+                            <td>{{ $unit->block_lot }}</td>
+                            <td>{{ number_format($unit->downpayment->equity, 2) }}</td>
                         </tr>
+                        @endforeach
+                        <!-- <tr>
+                            <td><input type="checkbox" name=""></td>
+                        </tr> -->
+                        @endif
                     </tbody>
                 </table>
                 <div class="text-center">

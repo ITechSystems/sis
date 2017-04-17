@@ -16,7 +16,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="project_name">Project Name</label>
-                            <input type="text" class="form-control" name="project_name" id="project_name">
+                            <input type="text" class="form-control" name="project_name_horizontal" id="project_name_horizontal">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -56,13 +56,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="price_minimum">Price</label>
-                                    <input class="form-control" name="price_minimum" id="price_minimum" placeholder="Min">
+                                    <input class="form-control" name="price_minimum_horizontal" id="price_minimum_horizontal" placeholder="Min">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="price_maximum">&nbsp;</label>
-                                    <input class="form-control" name="price_maximum" id="price_maximum" placeholder="Max">
+                                    <input class="form-control" name="price_maximum_horizontal" id="price_maximum_horizontal" placeholder="Max">
                                 </div>
                             </div>
                         </div>
@@ -74,13 +74,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="lot_area_min">Lot Area (sq. m)</label>
-                                    <input type="text" class="form-control" name="lot_area_min" id="lot_area_min" placeholder="Min">
+                                    <input type="text" class="form-control" name="lot_area_min_horizontal" id="lot_area_min_horizontal" placeholder="Min">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="lot_area_max">&nbsp;</label>
-                                    <input type="text" class="form-control" name="lot_area_max" id="lot_area_max" placeholder="Max">
+                                    <input type="text" class="form-control" name="lot_area_max_horizontal" id="lot_area_max_horizontal" placeholder="Max">
                                 </div>
                             </div>
                         </div>
@@ -90,13 +90,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="floor_area_min">Floor Area (sq. m)</label>
-                                    <input type="text" class="form-control" name="floor_area_min" id="floor_area_min" placeholder="Min">
+                                    <input type="text" class="form-control" name="floor_area_min_horizontal" id="floor_area_min_horizontal" placeholder="Min">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="floor_area_max">&nbsp;</label>
-                                    <input type="text" class="form-control" name="floor_area_max" id="floor_area_max" placeholder="Max">
+                                    <input type="text" class="form-control" name="floor_area_max_horizontal" id="floor_area_max_horizontal" placeholder="Max">
                                 </div>
                             </div>
                         </div>

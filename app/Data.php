@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Downpayment;
 use Illuminate\Database\Eloquent\Model;
 
 class Data extends Model
@@ -28,5 +29,9 @@ class Data extends Model
 
     public function getInstance(){
     	return new static;
-    }		
+    }	
+
+    public function downpayment(){
+        return $this->hasOne(Downpayment::class);
+    }	
 }
