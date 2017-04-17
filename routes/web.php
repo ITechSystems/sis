@@ -20,3 +20,6 @@ Auth::routes();
 Route::get('/dashboard', 'HomeController@index');
 
 Route::get('/inventory', 'InventoryController@index');
+
+Route::get('/data/upload', 'DataController@index');
+Route::post('/data/import', 'DataController@import');

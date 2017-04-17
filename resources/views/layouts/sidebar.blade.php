@@ -91,6 +91,9 @@
                         <li><a href="#"><i class="fa fa-circle-o"></i> Class</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="/data/upload">Data</a> 
+                </li>
                 <li class="header">
                     <span>Settings</span>
                 </li>
