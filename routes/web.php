@@ -25,3 +25,5 @@ Route::get('/data/upload', 'DataController@index');
 Route::post('/data/import', 'DataController@import');
 
 Route::post('/search/unit', 'InventoryController@search');
+Route::get('/search/getProjectsByLocation', 'InventoryController@getProjectsByLocation');
+Route::get('/search/getBlocksByProject', 'InventoryController@getBlocksByProject');

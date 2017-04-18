@@ -33,7 +33,7 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/inventory"><i class="fa fa-circle-o"></i> View</a></li>
+                        <li><a href="/inventory"><i class="fa fa-circle-o"></i> Horizontal</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -45,7 +45,6 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="#"><i class="fa fa-circle-o"></i> Agent Sale Status Report</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Buyer Status Report Per Team</a></li>
                         <li><a href="#"><i class="fa fa-circle-o"></i> Executive Report</a></li>
                     </ul>
                 </li>
