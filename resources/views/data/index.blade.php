@@ -12,7 +12,9 @@
 			</div>
 
 			<div class="row">
-				<input type="submit" name="">
+				<div class="col-md-6">
+					<input type="submit" name="">
+				</div>
 			</div>
 	</div>
 	</form>

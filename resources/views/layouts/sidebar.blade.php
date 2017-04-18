@@ -38,14 +38,15 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-user" aria-hidden="true"></i> <span>Students</span>
+                        <i class="fa fa-user" aria-hidden="true"></i> <span>Reports</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Existing</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Student MasterList</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Agent Sale Status Report</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Buyer Status Report Per Team</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Executive Report</a></li>
                     </ul>
                 </li>
                 <li class="header">
@@ -53,46 +54,24 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-file-text" aria-hidden="true"></i><span> Exams</span>
+                        <i class="fa fa-file-text" aria-hidden="true"></i><span> Multimedia</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Entrance Exams</a>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Pictures</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Quizes</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Periodical Exams</a>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Videos</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Audio</a>
                         </li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-dollar" aria-hidden="true"></i><span> OR Management</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Particulars</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-university" aria-hidden="true"></i><span> Class Management</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> School Year</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Section</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Class</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="/data/upload">Data</a> 
+                    <a href="/data/upload">
+                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                        Upload CSV
+                    </a> 
                 </li>
                 <li class="header">
                     <span>Settings</span>
