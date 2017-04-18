@@ -11,6 +11,13 @@
                             <input type="text" class="form-control" name="developer" id="developer">
                         </div>
                     </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="developer">Location</label>
+                            <input type="text" class="form-control" name="location_horizontal" id="location_horizontal">
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -21,35 +28,35 @@
                     </div>
                     <div class="col-md-6">
                         <div class="row">
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="phase">Phase</label>
                                     <input type="text" class="form-control" name="phase" id="phase">
                                 </div>
-                            </div>
-                            <div class="col-md-4">
+                            </div> -->
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="block">Block</label>
-                                    <input type="text" class="form-control" name="block" id="block">
+                                    <label for="block_horizontal">Block</label>
+                                    <input type="text" class="form-control" name="block_horizontal" id="block_horizontal">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="lot">Lot</label>
-                                    <input type="text" class="form-control" name="lot" id="lot">
+                                    <label for="lot_horizontal">Lot</label>
+                                    <input type="text" class="form-control" name="lot_horizontal" id="lot_horizontal">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="unit_id">Unit ID</label>
                             <input type="text" class="form-control" name="unit_id" id="unit_id">
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="row">
                     <div class="col-md-6">
                         <div class="row">
@@ -105,18 +112,18 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="house_type">House Type</label>
-                            <input type="text" class="form-control" name="house_type" id="house_type">
+                            <label for="lot_type_horizontal">Lot Type</label>
+                            <input type="text" class="form-control" name="lot_type_horizontal" id="lot_type_horizontal">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="house_model">House Model</label>
-                            <input type="text" class="form-control" name="house_model" id="house_model">
+                            <label for="house_model_horizontal">House Model</label>
+                            <input type="text" class="form-control" name="house_model_horizontal" id="house_model_horizontal">
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="lot_orientation">Lot Orientation</label>
@@ -129,7 +136,7 @@
                             <input type="text" class="form-control" name="lot_type" id="lot_type">
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

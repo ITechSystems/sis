@@ -14,6 +14,7 @@
                             <th>Location</th>
                             <th>Project</th>
                             <th>Block and Lot</th>
+                            <th>Price</th>
                             <th>Downpayment</th>
                         </tr>
                     </thead>
@@ -24,6 +25,7 @@
                             <td>{{ $unit->location }}</td>
                             <td>{{ $unit->project }}</td>
                             <td>{{ $unit->block_lot }}</td>
+                            <td>{{ number_format($unit->total_contract_price, 2) }}</td>
                             <td>{{ number_format($unit->downpayment->equity, 2) }}</td>
                         </tr>
                         @endforeach
