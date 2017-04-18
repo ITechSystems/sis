@@ -32,6 +32,19 @@ class Importer{
 	}
 
 	public static function createData($line){
+		//find any Data with this $block_lot and not this $date
+		//if any were found its status should be changed to archived
+		// $data_for_archive = Data::where('block_lot', $line[3])
+		// ->where('status', 'active')
+		// ->where('date', '<>', $line[0])
+		// ->first();
+
+		// if($data_for_archive){
+		// 	$data_for_archive->status = 'archived';
+		// 	$data_for_archive->save();
+		// }
+		
+
 		//search if this parent is active using block_lot
 		$data_active = Data::where('block_lot', $line[3])
 			->where('status', 'active')

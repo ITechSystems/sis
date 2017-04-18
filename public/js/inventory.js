@@ -129,14 +129,21 @@ module.exports = function normalizeComponent (
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bootstrap__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bootstrap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__bootstrap__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bootstrap_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bootstrap_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__bootstrap_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AidaMapModal_vue__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_AidaMapModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_AidaMapModal_vue__);
 
 
 
 new Vue({
+    data: {
+        location: '',
+        project: '',
+        projects: [],
+        blocks: []
+    },
+
     components: {
         AidaMapModal: __WEBPACK_IMPORTED_MODULE_1__components_AidaMapModal_vue___default.a
     },
@@ -147,7 +154,22 @@ new Vue({
     mounted: function mounted() {},
 
 
-    methods: {}
+    methods: {
+        getProjectsByLocation: function getProjectsByLocation(location) {
+            var _this = this;
+
+            this.$http.get('/search/getProjectsByLocation?location=' + location).then(function (res) {
+                _this.projects = res.data;
+            });
+        },
+        getBlocksByLocation: function getBlocksByLocation(project) {
+            var _this2 = this;
+
+            this.$http.get('/search/getBlocksByProject?project=' + project).then(function (res) {
+                _this2.blocks = res.data;
+            });
+        }
+    }
 });
 
 /***/ }),

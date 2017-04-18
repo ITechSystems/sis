@@ -15,25 +15,27 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="developer">Location</label>
-                            <input type="text" class="form-control" name="location_horizontal" id="location_horizontal">
+                            <select name="location_horizontal" id="location_horizontal" class="form-control" @change="getProjectsByLocation(location)" v-model="location">
+                                <option value="">From where</option>
+                                @foreach($locations as $location)
+                                    <option>{{ $location->location }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="project_name">Project Name</label>
-                            <input type="text" class="form-control" name="project_name_horizontal" id="project_name_horizontal">
+                            <label for="project_name_horizontal">Project Name</label>
+                            <select name="project_name_horizontal" id="project_name_horizontal" class="form-control" @change="getBlocksByProject(project)" v-model="project">
+                                <option value="">Project</option>
+                                <option v-for="project in projects" :value="project.project">@{{ project.project }}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="row">
-                            <!-- <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="phase">Phase</label>
-                                    <input type="text" class="form-control" name="phase" id="phase">
-                                </div>
-                            </div> -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="block_horizontal">Block</label>
@@ -49,14 +51,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="unit_id">Unit ID</label>
-                            <input type="text" class="form-control" name="unit_id" id="unit_id">
-                        </div>
-                    </div>
-                </div> -->
                 <div class="row">
                     <div class="col-md-6">
                         <div class="row">
@@ -123,20 +117,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="lot_orientation">Lot Orientation</label>
-                            <input type="text" class="form-control" name="lot_orientation" id="lot_orientation">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="lot_type">Lot Type</label>
-                            <input type="text" class="form-control" name="lot_type" id="lot_type">
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>

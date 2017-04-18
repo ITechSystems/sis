@@ -9,12 +9,16 @@ class InventoryController extends Controller
 {
     public function index()
     {
-        return view('inventory.index');
+    	$locations = Data::where('status', 'active')->distinct()->get(['location']);
+
+        return view('inventory.index', compact('locations'));
     }
 
     public function search()
     {
     	$data = request()->all();
+
+    	$locations = Data::where('status', 'active')->distinct()->get(['location']);
 
     	$location = $data['location_horizontal'];
 
@@ -44,7 +48,7 @@ class InventoryController extends Controller
 
 		$result_count = count($units);
 
-		return view('inventory.index', compact('units', 'result_count'));
+		return view('inventory.index', compact('units', 'result_count', 'locations'));
     }
 
     public function getSearchQuery($location = '', $project_name = '', $block = '', $lot = '', $min_price = 0, $max_price = 0, $min_lot = 0, $max_lot = 0, $min_floor = 0, $max_floor, $lot_type = '', $house_model = '')
@@ -56,7 +60,9 @@ class InventoryController extends Controller
     	$units = Data::all();
 
     	if($project_name != ''){
-	    	$units = Data::where('project', 'like', '%' . $project_name . '%')->get();
+	    	$units = Data::where('project', 'like', '%' . $project_name . '%')
+	    	->where('status', 'active')
+	    	->get();
     	}
 
     	//if $block is set
@@ -78,7 +84,7 @@ class InventoryController extends Controller
     	//if $location is set
     	if($location != ''){
     		$units = $units->filter(function($item) use($location){
-    			return stristr($item->location, $location);
+    			return $item->location == $location;
     		});
     	}
 
@@ -140,5 +146,18 @@ class InventoryController extends Controller
 
 
     	return $units;
+    }
+
+    public function getProjectsByLocation(Request $request){
+    	return Data::where('status', 'active')
+    	->where('location', $request->location)
+    	->distinct()
+    	->get(['project']);
+    }
+
+    public function getBlocksByProject(Request $request){
+    	return Data::where('status', 'active')
+    	->where('project',  $request->project)
+    	->get(['block']);
     }
 }

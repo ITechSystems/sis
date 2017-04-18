@@ -14,6 +14,8 @@ class DataController extends Controller
     public function import(){
     	$data = \App\Helpers\Import_Export\CsvMapper::map(file(request()->data));
 
-    	return Importer::import($data);
+    	Importer::import($data);
+
+    	return redirect()->back();
     }
 }
