@@ -76,7 +76,7 @@
                     <ul class="treeview-menu">
                         <li><a href="/data/upload"><i class="fa fa-circle-o"></i> Import</a></li>
                         <li><a href="/data/export"><i class="fa fa-circle-o"></i> Export</a></li>
-                        </li>
+                        <li><a href="/data/template"><i class="fa fa-circle-o"></i> Download Template</a></li>
                     </ul>
                 </li>
                 <li class="header">

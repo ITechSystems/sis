@@ -68,4 +68,11 @@ class DataController extends Controller
 
     	return $combined;
     }
+
+    public function template()
+    {
+        $headers = (new Data)->getHeaders();
+
+        RecordsDownloader::array_to_csv_to_download([], 'property_data', $headers);
+    }
 }

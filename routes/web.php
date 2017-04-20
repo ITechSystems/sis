@@ -24,6 +24,7 @@ Route::get('/inventory', 'InventoryController@index');
 Route::get('/data/upload', 'DataController@index');
 Route::post('/data/import', 'DataController@import');
 Route::get('/data/export', 'DataController@export');
+Route::get('/data/template', 'DataController@template');
 
 Route::post('/search/unit', 'InventoryController@search');
 Route::get('/search/getProjectsByLocation', 'InventoryController@getProjectsByLocation');
