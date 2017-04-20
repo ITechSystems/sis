@@ -73,6 +73,6 @@ class DataController extends Controller
     {
         $headers = (new Data)->getHeaders();
 
-        RecordsDownloader::array_to_csv_to_download([], 'property_data', $headers);
+        RecordsDownloader::array_to_csv_to_download([], 'property_template', $headers);
     }
 }
