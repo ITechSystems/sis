@@ -66,11 +66,18 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="/data/upload">
-                        <i class="fa fa-file-text" aria-hidden="true"></i>
-                        Upload CSV
-                    </a> 
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-file-text" aria-hidden="true"></i><span> Data</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/data/upload"><i class="fa fa-circle-o"></i> Import</a></li>
+                        <li><a href="/data/export"><i class="fa fa-circle-o"></i> Export</a></li>
+                        </li>
+                    </ul>
                 </li>
                 <li class="header">
                     <span>Settings</span>
