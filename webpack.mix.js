@@ -27,4 +27,5 @@ mix.styles([
         'resources/assets/js/libs/axios.min.js'
     ], 'public/js/app.js')
     .js('resources/assets/js/inventory.js', 'public/js')
+    .js('resources/assets/js/buyer.js', 'public/js')
     .options({ purifyCss: true });

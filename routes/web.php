@@ -26,6 +26,13 @@ Route::post('/data/import', 'DataController@import');
 Route::get('/data/export', 'DataController@export');
 Route::get('/data/template', 'DataController@template');
 
+Route::get('/buyers', 'BuyersController@index');
+Route::get('/buyers/all', 'BuyersController@all');
+Route::get('/buyers/{buyer}', 'BuyersController@show');
+Route::patch('/buyers/{buyer}', 'BuyersController@update');
+Route::post('/buyers', 'BuyersController@store');
+Route::delete('/buyers/{buyer}', 'BuyersController@destroy');
+
 Route::post('/search/unit', 'InventoryController@search');
 Route::get('/search/getProjectsByLocation', 'InventoryController@getProjectsByLocation');
 Route::get('/search/getBlocksByProject', 'InventoryController@getBlocksByProject');
