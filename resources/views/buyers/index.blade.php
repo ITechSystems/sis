@@ -10,7 +10,7 @@
                         <div class="form-group">
                             <input type="text" class="form-control" v-model="searchTerm" title="Search Term">
                         </div>
-                        <button class="btn btn-md btn-default" @click="getBuyers">
+                        <button type="button" class="btn btn-md btn-default" @click="getBuyers">
                             <i class="fa fa-search"></i> SEARCH
                         </button>
                         <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#buyer-modal" @click="setForm('', 'create')">

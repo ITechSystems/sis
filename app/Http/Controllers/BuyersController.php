@@ -62,9 +62,21 @@ class BuyersController extends Controller
     public function all()
     {
         if (! request('search')) {
-            return Buyer::all();
+            return Buyer::orderBy('created_at', 'desc')->get();
         }
 
-        return Buyer::where('id', request('search'))->get();
+        return Buyer::where(function ($query) {
+            $query->where('id', '%'. request('search'))
+                ->orWhere('name', 'like', '%' . request('search') . '%')
+                ->orWhere('name', 'like', '%' . request('search') . '%')
+                ->orWhere('contact_number', 'like', '%' . request('search') . '%')
+                ->orWhere('marital_status', 'like', '%' . request('search') . '%')
+                ->orWhere('email', 'like', '%' . request('search') . '%')
+                ->orWhere('work_location', 'like', '%' . request('search') . '%')
+                ->orWhere('facebook_url', 'like', '%' . request('search') . '%')
+                ->orWhere('financing_type', 'like', '%' . request('search') . '%')
+                ->orWhere('country', 'like', '%' . request('search') . '%')
+                ->orWhere('equity_type', 'like', '%' . request('search') . '%');
+        })->orderBy('created_at', 'desc')->get();
     }
 }
