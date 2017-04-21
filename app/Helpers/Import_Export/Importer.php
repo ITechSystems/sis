@@ -5,11 +5,13 @@ namespace App\Helpers\Import_Export;
 use App\Data;
 use App\Downpayment;
 use App\Loan;
+use Illuminate\Support\Collection;
 
 class Importer{
-
 	public static function import($data)
 	{
+		$copied_loans = new Collection;
+
 		foreach($data as $key => $line){
 			if($key == 0){
 				continue;
@@ -18,59 +20,37 @@ class Importer{
 			if($line[0] == ''){
 				continue;
 			}
-
+			
 			//create Data
-			\DB::transaction(function() use($line){
+			\DB::transaction(function() use($line, $copied_loans){
 				$data_obj = self::createData($line);
 
 				//create Downpayment
 				$downpayment = self::createDownpayment($line, $data_obj);
 
-				$loan = self::createLoan($line, $data_obj);
+				$loan = self::createLoan($line, $data_obj, $copied_loans);
 			});
 		}	
 	}
 
 	public static function createData($line){
-		//find any Data with this $block_lot and not this $date
-		//if any were found its status should be changed to archived
-		// $data_for_archive = Data::where('block_lot', $line[3])
-		// ->where('status', 'active')
-		// ->where('date', '<>', $line[0])
-		// ->first();
-
-		// if($data_for_archive){
-		// 	$data_for_archive->status = 'archived';
-		// 	$data_for_archive->save();
-		// }
-		
-
 		//search if this parent is active using block_lot
 		$data_active = Data::where('block_lot', $line[3])
 			->where('status', 'active')
 			->first();
 
 		if(! $data_active){
-			$data_obj0 = new Data;
-			$data_obj = $data_obj0->getInstance();
-			$data_obj->date = $line[0];
-			$data_obj->location = $line[1];
-			$data_obj->project = $line[2];
-			$data_obj->block_lot = $line[3];
-			$data_obj->lot_area = $line[4];
-			$data_obj->lot_type = $line[5];
-			$data_obj->floor_area = $line[6];
-			$data_obj->house_model = $line[7];
-			$data_obj->total_contract_price = (float) str_replace(',', '', $line[8]);
-			$data_obj->reservation_fee = (float) str_replace(',', '', $line[9]);
-			$data_obj->status = 'active';
-			$data_obj->save();
-
-			return $data_obj;
+			return self::createDataObject($line);
 		}
 
-		return $data_active;
-		
+		if($data_active->date == $line[0]){
+			return $data_active;
+		}
+
+		//this $data_active must be archived
+		$data_active->archive();
+
+		return self::createDataObject($line);
 	}
 
 	public static function createDownpayment($line, $data_obj){
@@ -81,7 +61,7 @@ class Importer{
 			$downpayment0 = new Downpayment;
 			$downpayment = $downpayment0->getInstance();	
 			$downpayment->data_id = $data_obj->id;
-			$downpayment->equity = (float) str_replace(',', '', $line[10]);//dd($downpayment->equity);
+			$downpayment->equity = (float) str_replace(',', '', $line[10]);
 			$downpayment->term = $line[11];
 			$downpayment->monthly = (float) str_replace(',', '', $line[12]);
 			$downpayment->percentage = $line[13];
@@ -89,10 +69,46 @@ class Importer{
 		}
 	}
 
-	public static function createLoan($line, $data_obj){
+	public static function createLoan($line, $data_obj, $copied_loans){
+		//get latest archived if any
+		$latest_archived = self::getLatestArchived($data_obj->block_lot);
+
+		if($latest_archived){
+			$archived_loan_id = self::doesNotExistInArchives($line, $latest_archived, $copied_loans);
+
+			if($archived_loan_id){
+				self::cloneArchivedLoan($data_obj, $archived_loan_id, $copied_loans);
+			}
+		}
+
+		self::createLoanObject($data_obj->id, $line);
+	}
+
+	public static function createDataObject($line)
+	{
+		$data_obj0 = new Data;
+		$data_obj = $data_obj0->getInstance();
+		$data_obj->date = $line[0];
+		$data_obj->location = $line[1];
+		$data_obj->project = $line[2];
+		$data_obj->block_lot = $line[3];
+		$data_obj->lot_area = $line[4];
+		$data_obj->lot_type = $line[5];
+		$data_obj->floor_area = $line[6];
+		$data_obj->house_model = $line[7];
+		$data_obj->total_contract_price = (float) str_replace(',', '', $line[8]);
+		$data_obj->reservation_fee = (float) str_replace(',', '', $line[9]);
+		$data_obj->status = 'active';
+		$data_obj->save();
+
+		return $data_obj;
+	}
+
+	public static function createLoanObject($data_id, $line)
+	{
 		$loan0 = new Loan;
 		$loan = $loan0->getInstance();
-		$loan->data_id = $data_obj->id;
+		$loan->data_id = $data_id;
 		$loan->total = (float) str_replace(',', '', $line[14]);
 		$loan->mri = (float) str_replace(',', '', $line[15]);
 		$loan->monthly_amortization = (float) str_replace(',', '', $line[16]);
@@ -103,81 +119,51 @@ class Importer{
 		$loan->save();
 	}
 
-	public static function importOK($data)
+	public static function getLatestArchived($block_lot)
 	{
-		$title = '';
-		$block = '';
-		$location = '';
+		return Data::archived()
+		->where('block_lot', $block_lot)
+		->orderBy('id', 'DESC')
+		->first();
+	}
 
-		foreach($data as $key => $line){
-			if($key < 4){
+	public static function doesNotExistInArchives($line, $latest_archived, &$copied_loans)
+	{
+		foreach($latest_archived->loans as $loan){
+			if($copied_loans == null){
+				return false;
+			}
+
+			if($copied_loans->contains($loan->id)){
 				continue;
 			}
-			
-			foreach($line as $key1 => $item){
-				//get title
-				if($key == 4 && $item != ''){
-					$title = $item;
-					break;
-				}
 
-				//get location
-				if($key == 8 && $item != ''){
-					$location = $item;
-					break;
-				}
-
-				//get first block
-				if($key == 9 && $item != ''){
-					$block = $item;
-					break;
-				}
-				
+			if($loan->description == $line[18]){
+				continue;
 			}
-			
-			if($key > 9){
-				if($line[1] == ''){
-					$block = $line[0];
-					continue;
-				}
-				
-				\DB::transaction(function() use($line, $block, $title, $location){
-					$data_obj0 = new Data;
-					$data_obj = $data_obj0->getInstance();
-					$data_obj->title = $title;
-					$data_obj->location = $location;
-					$data_obj->block = $block;
-					$data_obj->number = $line[0];
-					$data_obj->block_lot = $line[1];
-					$data_obj->lot_area = $line[2];
-					$data_obj->lot_type = $line[3];
-					$data_obj->floor_area = $line[4];
-					$data_obj->house_model = $line[5];
-					$data_obj->total_contract_price = $line[6];
-					$data_obj->reservation_fee = $line[7];
-					$data_obj->save();
 
-					$downpayment0 = new Downpayment;
-					$downpayment = $downpayment0->getInstance();
-					$downpayment->data_id = $data_obj->id;
-					$downpayment->percentage = '10%';
-					$downpayment->total = $line[8];
-					$downpayment->term = $line[9];
-					$downpayment->amount = $line[10];
-					$downpayment->save();
-
-					$loan0 = new Loan;
-					$loan = $loan0->getInstance();
-					$loan->data_id = $data_obj->id;
-					$loan->one = $line[11];
-					$loan->two = $line[12];
-					$loan->three = $line[13];
-					$loan->four = $line[14];
-					$loan->five = $line[15];
-					$loan->six = $line[16];
-					$loan->save();
-				});
-			}
+			return $loan->id;
 		}
+
+		return false;
+	}
+
+	public static function cloneArchivedLoan($data_obj, $archived_loan_id, &$copied_loans)
+	{
+		$archived_loan = Loan::find($archived_loan_id);
+
+		$loan0 = new Loan;
+		$loan = $loan0->getInstance();
+		$loan->data_id = $data_obj->id;
+		$loan->total = $archived_loan->total;
+		$loan->mri = $archived_loan->mri;
+		$loan->monthly_amortization = $archived_loan->monthly_amortization;
+		$loan->percentage = $archived_loan->percentage;
+		$loan->description = $archived_loan->description;
+		$loan->monthly_percentage = $archived_loan->monthly_percentage;
+		$loan->years = $archived_loan->years;
+		$loan->save();
+
+		$copied_loans->push($archived_loan_id);
 	}
 }

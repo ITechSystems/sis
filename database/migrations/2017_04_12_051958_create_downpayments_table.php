@@ -14,6 +14,7 @@ class CreateDownpaymentsTable extends Migration
     public function up()
     {
         Schema::create('downpayments', function (Blueprint $table) {
+            $table->engine = "InnoDB";
             $table->increments('id');
             $table->integer('data_id');
             $table->float('equity', 10, 2);

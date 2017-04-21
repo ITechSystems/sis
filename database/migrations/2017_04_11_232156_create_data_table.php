@@ -15,6 +15,7 @@ class CreateDataTable extends Migration
     {
 
         Schema::create('data', function (Blueprint $table) {
+            $table->engine = "InnoDB";
             $table->increments('id');
             $table->string('date');
             $table->string('location');
