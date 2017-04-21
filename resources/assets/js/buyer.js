@@ -10,6 +10,7 @@ new Vue({
         action: '',
         buyerId: '',
         buyers: [],
+        searchTerm: '',
     },
 
     el: '#app',
@@ -20,7 +21,7 @@ new Vue({
 
     methods: {
         getBuyers() {
-            this.$http.get('/buyers/all').then(response => {
+            this.$http.get(`/buyers/all?search=${this.searchTerm}`).then(response => {
                 this.buyers = response.data;
             })
         },
