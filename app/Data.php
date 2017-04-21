@@ -68,4 +68,31 @@ class Data extends Model
             'years'
         ];
     }
+
+    public function archive()
+    {
+        $this->status = $this->getArchiveStatus();
+
+        $this->save();
+    }
+
+    public function getActiveStatus()
+    {
+        return 'active';
+    }
+
+    public function getArchiveStatus()
+    {
+        return 'archived';
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', $this->getActiveStatus());
+    }
+
+    public function scopeArchived($query)
+    {
+        return $query->where('status', $this->getArchiveStatus());
+    }
 }

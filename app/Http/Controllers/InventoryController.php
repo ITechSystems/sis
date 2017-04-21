@@ -57,7 +57,7 @@ class InventoryController extends Controller
 
 		$min_price = (float) str_replace(',', '', $min_price);    	
 
-    	$units = Data::all();
+    	$units = Data::active()->get();
 
     	if($project_name != ''){
 	    	$units = Data::where('project', 'like', '%' . $project_name . '%')
