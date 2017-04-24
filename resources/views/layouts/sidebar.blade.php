@@ -26,6 +26,11 @@
                     </a>
                 </li>
                 <li class="treeview">
+                    <a href="/buyers">
+                        <i class="fa fa-users"></i> <span>Buyers</span>
+                    </a>
+                </li>
+                <li class="treeview">
                     <a href="#">
                         <i class="fa fa-home"></i> <span>Inventory</span>
                         <span class="pull-right-container">
@@ -82,7 +87,7 @@
                 <li class="header">
                     <span>Settings</span>
                 </li>
-                <li>
+                <li class="treeview">
                     <a href="{{ url('/logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();"><i class="fa fa-cog"></i> <span>Logout</span></a>
                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">

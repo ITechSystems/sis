@@ -17,6 +17,7 @@ mix.styles([
     ], 'public/css/libs.css')
     .sass('resources/assets/sass/app.sass', 'public/css')
     .scripts([
+        'resources/assets/js/libs/moment.js',
         'resources/assets/js/libs/jquery.min.js',
         // 'resources/assets/js/libs/jquery-ui.min.js',
         // 'resources/assets/js/libs/app.js',
@@ -27,4 +28,5 @@ mix.styles([
         'resources/assets/js/libs/axios.min.js'
     ], 'public/js/app.js')
     .js('resources/assets/js/inventory.js', 'public/js')
-    .options({ purifyCss: true });
+    .js('resources/assets/js/buyer.js', 'public/js');
+    // .options({ purifyCss: true })
