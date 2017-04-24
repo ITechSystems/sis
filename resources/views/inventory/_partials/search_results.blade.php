@@ -12,11 +12,14 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Location</th>
-                            <th>Project</th>
-                            <th>Block and Lot</th>
+                            <th>Unit ID</th>
+                            <th>Phase</th>
                             <th>Price</th>
-                            <th>Downpayment</th>
+                            <th>Lot(sqm)</th>
+                            <th>Floor(sqm)</th>
+                            <th>Model</th>
+                            <th>House Type</th>
+                            <th>Lot_orientation</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,11 +27,14 @@
                             @foreach($units as $unit)
                             <tr>
                                 <td><input type="checkbox" name=""></td>
-                                <td>{{ $unit->location }}</td>
-                                <td>{{ $unit->project }}</td>
                                 <td>{{ $unit->block_lot }}</td>
+                                <td>{{ $unit->project }}</td>
                                 <td>{{ number_format($unit->total_contract_price, 2) }}</td>
-                                <td>{{ number_format($unit->downpayment->equity, 2) }}</td>
+                                <td>{{ $unit->lot_area }}</td>
+                                <td>{{ $unit->floor_area }}</td>
+                                <td>{{ $unit->house_model }}</td>
+                                <td></td>
+                                <td>{{ $unit->lot_type }}</td>
                             </tr>
                             @endforeach
                         @endif
