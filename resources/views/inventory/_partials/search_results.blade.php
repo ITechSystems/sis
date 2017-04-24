@@ -40,9 +40,6 @@
                         @endif
                     </tbody>
                 </table>
-                <div class="text-center">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aida-map-modal">CREATE AIDA MAP</button>
-                </div>
             </div>
         </div>
     </div>
