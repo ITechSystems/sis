@@ -36,6 +36,10 @@ Route::patch('/buyers/{buyer}', 'BuyersController@update');
 Route::post('/buyers', 'BuyersController@store');
 Route::delete('/buyers/{buyer}', 'BuyersController@destroy');
 
+Route::get('/aida-maps', 'AidaMapsController@index');
+
+Route::get('/units/locations', 'UnitLocationsController@index');
+
 Route::post('/search/unit', 'InventoryController@search');
 Route::get('/search/getProjectsByLocation', 'InventoryController@getProjectsByLocation');
 Route::get('/search/getBlocksByProject', 'InventoryController@getBlocksByProject');

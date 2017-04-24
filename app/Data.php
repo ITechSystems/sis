@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Downpayment;
-use App\Loan;
 use Illuminate\Database\Eloquent\Model;
 
 class Data extends Model
@@ -15,36 +13,37 @@ class Data extends Model
     public $timestamps = false;
 
     protected $fillable = [
-    	'title',
-    	'location',
-    	'block',
-    	'number',
-    	'block_lot',
-    	'lot_area',
-    	'lot_type',
-    	'floor_area',
-    	'house_model',
-    	'total_contract_price',
-    	'reservation_fee'
+        'title',
+        'location',
+        'block',
+        'number',
+        'block_lot',
+        'lot_area',
+        'lot_type',
+        'floor_area',
+        'house_model',
+        'total_contract_price',
+        'reservation_fee',
     ];
 
-    public function getInstance(){
-    	return new static;
-    }	
+    public function getInstance()
+    {
+        return new static;
+    }
 
-    public function downpayment(){
+    public function downpayment()
+    {
         return $this->hasOne(Downpayment::class);
-    }	
+    }
 
     public function loans()
     {
-        return $this->hasMany(Loan::class);    
+        return $this->hasMany(Loan::class);
     }
 
     public function getHeaders()
     {
-        return 
-        [
+        return [
             'date',
             'location',
             'project',
@@ -65,7 +64,7 @@ class Data extends Model
             'loan_percentage',
             'description',
             'monthly_percentage',
-            'years'
+            'years',
         ];
     }
 

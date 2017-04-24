@@ -39,6 +39,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="/inventory"><i class="fa fa-circle-o"></i> Horizontal</a></li>
+                        <li><a href="/aida-maps"><i class="fa fa-circle-o"></i> AIDA Map</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
