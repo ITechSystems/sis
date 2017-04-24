@@ -12,6 +12,9 @@
 */
 
 Route::get('/', function () {
+    if (auth()->user()) {
+        return view('home');
+    }
     return view('welcome');
 });
 
