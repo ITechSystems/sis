@@ -11,6 +11,10 @@ const { mix } = require('laravel-mix');
  |
  */
 
+// if (mix.inProduction) {
+//     mix.options({ purifyCss: true });
+// }
+
 mix.styles([
         'resources/assets/css/libs/AdminLTE.min.css',
         'resources/assets/css/libs/skins/_all-skins.min.css'
@@ -28,5 +32,5 @@ mix.styles([
         'resources/assets/js/libs/axios.min.js'
     ], 'public/js/app.js')
     .js('resources/assets/js/inventory.js', 'public/js')
-    .js('resources/assets/js/buyer.js', 'public/js');
-    // .options({ purifyCss: true })
+    .js('resources/assets/js/buyer.js', 'public/js')
+    .js('resources/assets/js/aida-map.js', 'public/js');
