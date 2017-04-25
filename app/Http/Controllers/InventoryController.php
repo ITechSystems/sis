@@ -150,7 +150,9 @@ class InventoryController extends ApiController
         //if $house_model is set
         if ($house_model != '') {
             $units = $units->filter(function ($item) use ($house_model) {
-                return $item->house_model == $house_model;
+                if(strtolower($item->house_model) ==  strtolower($house_model)){
+                    return $item;
+                }
             });
         }
 
