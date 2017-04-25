@@ -3,7 +3,7 @@
         <h4 slot="header" class="modal-title">
             {{ title }}
         </h4>
-        <div class="alert alert-success" v-if="message != ''">
+        <div class="alert alert-success" v-if="message">
             {{ message }}
         </div>
         <form id="buyerForm" class="container" @submit.prevent="save" @keydown="form.errors.clear($event.target.name)">
@@ -122,7 +122,7 @@
             </div>
         </form>
         <span slot="footer">
-            <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+            <button class="btn btn-default" type="button" data-dismiss="modal" @click="message = ''">Close</button>
             <button class="btn btn-primary" type="submit" form="buyerForm" v-show="action != 'show'" :disabled="form.errors.any()">Save</button>
         </span>
     </modal>
@@ -141,6 +141,7 @@
 
         data() {
             return {
+                message: '',
                 form: new Form({
                     last_name: '',
                     first_name: '',
@@ -154,8 +155,7 @@
                     financing_type: '',
                     country: '',
                     equity_type: '',
-                }),
-                message: '',
+                })
             }
         },
 

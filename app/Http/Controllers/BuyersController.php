@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Buyer;
+use App\Http\Requests\BuyerRequest;
 
 class BuyersController extends ApiController
 {
@@ -11,23 +12,10 @@ class BuyersController extends ApiController
         return view('buyers.index');
     }
 
-    public function store()
+    public function store(BuyerRequest $request)
     {
-        $this->validate(request(), [
-            'last_name' => 'required',
-            'first_name' => 'required',
-            'contact_number' => 'required',
-            'marital_status' => 'required',
-            'email' => 'required|email',
-            'work_location' => 'required',
-            'facebook_url' => 'required',
-            'financing_type' => 'required',
-            'country' => 'required',
-            'equity_type' => 'required',
-        ]);
-
         $buyer = Buyer::create(
-            request()->all() + ['status' => 1, 'user_id' => auth()->user()->id]
+            $request->all() + ['status' => 1, 'user_id' => auth()->user()->id]
         );
 
         return $this->respond([
@@ -41,21 +29,9 @@ class BuyersController extends ApiController
         return $buyer;
     }
 
-    public function update(Buyer $buyer)
+    public function update(Buyer $buyer, BuyerRequest $request)
     {
-        $this->validate(request(), [
-            'last_name' => 'required',
-            'first_name' => 'required',
-            'marital_status' => 'required',
-            'email' => 'required',
-            'work_location' => 'required',
-            'facebook_url' => 'required',
-            'financing_type' => 'required',
-            'country' => 'required',
-            'equity_type' => 'required',
-        ]);
-
-        $buyer->update(request()->all());
+        $buyer->update($request->all());
 
         return $this->respond([
             'buyer' => $buyer,
