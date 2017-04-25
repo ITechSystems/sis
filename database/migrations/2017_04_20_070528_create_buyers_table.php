@@ -17,7 +17,11 @@ class CreateBuyersTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->increments('id');
-            $table->string('name', 100);
+            $table->integer('user_id')->unsigned();
+            $table->string('first_name', 50);
+            $table->string('middle_name', 50);
+            $table->string('last_name', 50);
+            $table->string('extension', 10);
             $table->string('contact_number', 100);
             $table->string('marital_status', 30);
             $table->string('email', 50);

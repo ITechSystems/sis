@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Buyer;
 
-class BuyersController extends Controller
+class BuyersController extends ApiController
 {
     public function index()
     {
@@ -14,10 +14,11 @@ class BuyersController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'name' => 'required',
+            'last_name' => 'required',
+            'first_name' => 'required',
             'contact_number' => 'required',
             'marital_status' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'work_location' => 'required',
             'facebook_url' => 'required',
             'financing_type' => 'required',
@@ -25,7 +26,14 @@ class BuyersController extends Controller
             'equity_type' => 'required',
         ]);
 
-        return Buyer::create(request()->all() + ['status' => 1]);
+        $buyer = Buyer::create(
+            request()->all() + ['status' => 1, 'user_id' => auth()->user()->id]
+        );
+
+        return $this->respond([
+            'buyer' => $buyer,
+            'message' => 'Successfully Added A Buyer',
+        ]);
     }
 
     public function show(Buyer $buyer)
@@ -36,8 +44,8 @@ class BuyersController extends Controller
     public function update(Buyer $buyer)
     {
         $this->validate(request(), [
-            'name' => 'required',
-            'contact_number' => 'required',
+            'last_name' => 'required',
+            'first_name' => 'required',
             'marital_status' => 'required',
             'email' => 'required',
             'work_location' => 'required',
@@ -49,7 +57,10 @@ class BuyersController extends Controller
 
         $buyer->update(request()->all());
 
-        return $buyer;
+        return $this->respond([
+            'buyer' => $buyer,
+            'message' => 'Successfully Updated The Buyer\'s Info',
+        ]);
     }
 
     public function destroy(Buyer $buyer)
@@ -62,13 +73,15 @@ class BuyersController extends Controller
     public function all()
     {
         if (! request('search')) {
-            return Buyer::orderBy('created_at', 'desc')->get();
+            return Buyer::with('agent')->orderBy('created_at', 'desc')->get();
         }
 
-        return Buyer::where(function ($query) {
-            $query->where('id', '%'. request('search'))
-                ->orWhere('name', 'like', '%' . request('search') . '%')
-                ->orWhere('name', 'like', '%' . request('search') . '%')
+        return Buyer::with('agent')->where(function ($query) {
+            $query->where('id', '%' . request('search'))
+                ->orWhere('first_name', 'like', '%' . request('search') . '%')
+                ->orWhere('last_name', 'like', '%' . request('search') . '%')
+                ->orWhere('middle_name', 'like', '%' . request('search') . '%')
+                ->orWhere('extension', 'like', '%' . request('search') . '%')
                 ->orWhere('contact_number', 'like', '%' . request('search') . '%')
                 ->orWhere('marital_status', 'like', '%' . request('search') . '%')
                 ->orWhere('email', 'like', '%' . request('search') . '%')
