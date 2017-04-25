@@ -4,11 +4,11 @@
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
             <div class="box">
-                <form class="form-inline text-center">
+                <form class="form-inline text-center" @submit.prevent="getBuyers">
                     <div class="form-group">
                         <input type="text" class="form-control" v-model="searchTerm" title="Search Term">
                     </div>
-                    <button type="button" class="btn btn-md btn-default" @click="getBuyers">
+                    <button type="submit" class="btn btn-md btn-default">
                         <i class="fa fa-search"></i> SEARCH
                     </button>
                 </form>
@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="row" v-for="buyer in buyers">
-        <div class="col-md-offset-2 col-md-8" v-if="clientSearching == '' || clientSearching.id == buyer.id">
+        <div class="col-md-offset-2 col-md-8">
             <div class="panel panel-default buyer-tile">
                 <div class="panel-heading">
                     <p class="buyer-id">
@@ -27,10 +27,11 @@
                     </p>
                 </div>
                 <div class="panel-body">
-                    <p class="buyer-name">@{{ buyer.name }}</p>
+                    <p class="buyer-name">@{{ buyer.last_name }}, @{{ buyer.first_name }} @{{ buyer.middle_name }} @{{ buyer.extension }}</p>
                     <p class="buyer-contact_number"><i class="fa fa-phone fa-fw"></i> @{{ buyer.contact_number }}</p>
                     <p class="buyer-email"><i class="fa fa-envelope fa-fw"></i> @{{ buyer.email }}</p>
                     <p class="buyer-country"><i class="fa fa-map-marker fa-fw"></i> @{{ buyer.country }}</p>
+                    <p class="buyer-agent"><i class="fa fa-user fa-fw"></i> Added by @{{ buyer.agent.name }}</p>
                 </div>
                 <div class="panel-footer buyer-tile-footer">
                     <div class="text-right">
