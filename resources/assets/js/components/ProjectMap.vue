@@ -1,8 +1,7 @@
 <template>
     <div>
-        <p>Click on the map to place a marker
-        </p>
-        <canvas id="project-map" width="600" height="400" @mousemove="getCoordinates">
+        <p>Click on the map to place a marker</p>
+        <canvas id="project-map" width="600" height="400" @mousemove="getCoordinates" @click="plotMarker">
             <img src="/img/map.png" id="map-image">
         </canvas>
     </div>
@@ -19,6 +18,11 @@
             }
         },
 
+        computed: {
+            divisions() {
+            }
+        },
+
         mounted() {
             this.prepareCanvas();
         },
@@ -29,7 +33,7 @@
                 this.context = this.canvas.getContext('2d');
 
                 this.drawMap();
-                this.drawDivisions();
+                // this.drawDivisions();
             },
 
             drawMap() {
@@ -39,15 +43,32 @@
                     this.context.drawImage(map, 0, 0, this.canvas.width, this.canvas.height);
                 }
 
-                map.src = "/img/map.png";
+                map.src = '/img/map.png';
             },
 
             drawDivisions() {
                 window.onload = () => {
                     let rectangle = this.canvas.getBoundingClientRect();
+                    let divisionWidth = rectangle.width / 4;
+                    let divisionHeight = rectangle.height / 3;
 
-                    this.context.fillStyle = '#FF0000';
-                    this.context.fillRect(0, 0, rectangle.width / 4, rectangle.height / 4);
+                    this.context.globalAlpha = 0.5;
+                    this.context.fillStyle = '#FFFFFF';
+
+                    this.context.fillRect(0, 0, divisionWidth, divisionHeight);
+                    this.context.fillRect(divisionWidth, 0, divisionWidth, divisionHeight);
+                    this.context.fillRect(divisionWidth * 2, 0, divisionWidth, divisionHeight);
+                    this.context.fillRect(divisionWidth * 3, 0, divisionWidth, divisionHeight);
+
+                    this.context.fillRect(0, divisionHeight, divisionWidth, divisionHeight);
+                    this.context.fillRect(divisionWidth, divisionHeight, divisionWidth, divisionHeight);
+                    this.context.fillRect(divisionWidth * 2, divisionHeight, divisionWidth, divisionHeight);
+                    this.context.fillRect(divisionWidth * 3, divisionHeight, divisionWidth, divisionHeight);
+
+                    this.context.fillRect(0, divisionHeight * 2, divisionWidth, divisionHeight);
+                    this.context.fillRect(divisionWidth, divisionHeight * 2, divisionWidth, divisionHeight);
+                    this.context.fillRect(divisionWidth * 2, divisionHeight * 2, divisionWidth, divisionHeight);
+                    this.context.fillRect(divisionWidth * 3, divisionHeight * 2, divisionWidth, divisionHeight);
                 }
             },
 
@@ -56,12 +77,18 @@
 
                 this.mouseX = accounting.formatNumber((mouse.clientX - rectangle.left) / rectangle.width);
                 this.mouseY = accounting.formatNumber((mouse.clientY - rectangle.top) / rectangle.height);
+
+                this.highLightDivision();
+            },
+
+            highLightDivision() {
+
             },
 
             plotMarker() {
                 let rectangle = this.canvas.getBoundingClientRect();
 
-                this.context.fillStyle = "#FF0000";
+                this.context.fillStyle = '#FF0000';
                 this.context.fillRect(
                     rectangle.width * this.mouseX,
                     rectangle.height * this.mouseY,

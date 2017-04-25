@@ -91,7 +91,7 @@
             </div>
         </div>
     </div>
-    {{-- <project-map></project-map> --}}
+    <project-map></project-map>
     <aida-map-modal></aida-map-modal>
 @endsection
 
