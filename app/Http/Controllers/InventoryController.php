@@ -167,4 +167,11 @@ class InventoryController extends ApiController
             ->distinct()
             ->get(['project']);
     }
+
+    public function searchUnitById($id)
+    {
+        $unit = Data::active()->where('id', $id)->first();
+
+        return $unit->load('downpayment', 'loans');
+    }
 }

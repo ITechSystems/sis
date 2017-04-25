@@ -21,4 +21,6 @@
 
 @section("js")
     <script src="{{ asset('js/inventory.js') }}"></script>
+
+    <!-- <script src="{{ asset('js/show_info.js') }}"></script> -->
 @endsection

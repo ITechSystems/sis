@@ -1,16 +1,21 @@
 import './bootstrap.js';
 import AidaMapModal from './components/AidaMapModal.vue';
+import PropertyInfo from './components/PropertyInformation.vue'
 
 new Vue({
     data:{
         location: '',
         project: '',
         projects: [],
-        blocks: []
+        blocks: [],
+        data: [],
+        items: [],
+        unit_id: ''
     },
 
     components: {
         AidaMapModal,
+        PropertyInfo
     },
 
     el: '#app',
@@ -32,6 +37,10 @@ new Vue({
             this.$http.get('/search/getBlocksByProject?project=' + project).then(res => {
                 this.blocks = res.data
             })
+        },
+
+        showInfo(id){
+            this.unit_id = id
         }
     }
 });
