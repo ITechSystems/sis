@@ -3,7 +3,7 @@
         <h4 slot="header" class="modal-title">
             {{ title }}
         </h4>
-        <div class="alert alert-success" v-if="message">
+        <div class="alert alert-success" v-if="message != ''">
             {{ message }}
         </div>
         <form id="buyerForm" class="container" @submit.prevent="save" @keydown="form.errors.clear($event.target.name)">
