@@ -1,11 +1,13 @@
 import './bootstrap.js';
 import HorizontalFilters from './components/HorizontalFilters.vue';
 import AidaMapModal from './components/AidaMapModal.vue';
+// import ProjectMap from './components/ProjectMap.vue';
 
 new Vue({
     components: {
         HorizontalFilters,
         AidaMapModal,
+        // ProjectMap,
     },
 
     data: {

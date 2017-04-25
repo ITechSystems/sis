@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Downpayment extends Model
+class DownPayment extends Model
 {
     protected $table = 'downpayments';
 
@@ -13,14 +13,15 @@ class Downpayment extends Model
     public $timestamps = false;
 
     protected $fillable = [
-    	'data_id',
-    	'percentage',
-    	'total',
-    	'term',
-    	'amount'
+        'data_id',
+        'percentage',
+        'total',
+        'term',
+        'amount',
     ];
 
-    public function getInstance(){
-    	return new static;
+    public function getInstance()
+    {
+        return new static;
     }
 }

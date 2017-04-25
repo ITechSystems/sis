@@ -22,6 +22,7 @@ mix.styles([
     .sass('resources/assets/sass/app.sass', 'public/css')
     .scripts([
         'resources/assets/js/libs/moment.js',
+        'resources/assets/js/libs/accounting.js',
         'resources/assets/js/libs/jquery.min.js',
         // 'resources/assets/js/libs/jquery-ui.min.js',
         // 'resources/assets/js/libs/app.js',

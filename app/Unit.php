@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Data extends Model
+class Unit extends Model
 {
     protected $table = 'data';
 
@@ -33,7 +33,7 @@ class Data extends Model
 
     public function downpayment()
     {
-        return $this->hasOne(Downpayment::class);
+        return $this->hasOne(DownPayment::class);
     }
 
     public function loans()

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Data;
+use App\Unit;
 use Illuminate\Http\Request;
 
 class InventoryController extends ApiController
 {
     public function index()
     {
-        $locations = Data::where('status', 'active')->distinct()->get(['location']);
+        $locations = Unit::where('status', 'active')->distinct()->get(['location']);
 
         return view('inventory.index', compact('locations'));
     }
@@ -18,7 +18,7 @@ class InventoryController extends ApiController
     {
         $data = request()->all();
 
-        $locations = Data::where('status', 'active')->distinct()->get(['location']);
+        $locations = Unit::where('status', 'active')->distinct()->get(['location']);
 
         $location = $data['location_horizontal'];
 
@@ -65,10 +65,10 @@ class InventoryController extends ApiController
 
         $min_price = (float) str_replace(',', '', $min_price);
 
-        $units = Data::active()->get();
+        $units = Unit::active()->get();
 
         if ($project_name != '') {
-            $units = Data::where('project', 'like', '%' . $project_name . '%')
+            $units = Unit::where('project', 'like', '%' . $project_name . '%')
                 ->where('status', 'active')
                 ->get();
         }
@@ -160,7 +160,7 @@ class InventoryController extends ApiController
 
     public function getProjectsByLocation(Request $request)
     {
-        return Data::where('status', 'active')
+        return Unit::where('status', 'active')
             ->where('location', $request->location)
             ->distinct()
             ->get(['project']);

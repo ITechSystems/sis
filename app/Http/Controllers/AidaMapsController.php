@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Data;
+use App\Unit;
 
 class AidaMapsController extends Controller
 {
     public function index()
     {
-        $locations = Data::where('status', 'active')->distinct()->get(['location']);
+        $locations = Unit::where('status', 'active')->distinct()->get(['location']);
 
         return view('aida-maps.index', compact('locations'));
     }

@@ -4,11 +4,11 @@
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
             <div class="box">
-                <form class="form-inline text-center">
+                <form class="form-inline text-center" @submit.prevent="getBuyers">
                     <div class="form-group">
                         <input type="text" class="form-control" v-model="searchTerm" title="Search Term">
                     </div>
-                    <button type="button" class="btn btn-md btn-default" @click="getBuyers">
+                    <button type="submit" class="btn btn-md btn-default">
                         <i class="fa fa-search"></i> SEARCH
                     </button>
                 </form>
@@ -90,6 +90,7 @@
             </div>
         </div>
     </div>
+    {{-- <project-map></project-map> --}}
     <aida-map-modal></aida-map-modal>
 @endsection
 
