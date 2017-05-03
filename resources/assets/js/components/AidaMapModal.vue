@@ -184,15 +184,11 @@
                         <button class="btn btn-primary">
                             <i class="fa fa-print"></i> Print
                         </button>
-                        <button class="btn btn-danger">
+                        <button class="btn btn-danger" @click.prevent="sendEmail">
                             <i class="fa fa-envelope"></i> Email
                         </button>
                         <button class="btn btn-warning" @click.prevent="downloadPdf">
                             <i class="fa fa-file"></i> PDF
-                            <form action="/aida-maps/pdf" method="post" id="pdf-form" target="_blank" style="display:none">
-                                <input type="hidden" name="_token" v-model="$http.defaults.headers.common['X-CSRF-TOKEN']">
-                                <input type="hidden" v-model="serializedData" name="serialized_data">
-                            </form>
                         </button>
                         <button class="btn btn-success">
                             <i class="fa fa-image"></i> JPEG
@@ -201,6 +197,10 @@
                             <i class="fa fa-share"></i> Share
                         </button>
                     </div>
+                    <form action="/aida-maps/pdf" method="post" id="pdf-form" target="_blank" style="display:none">
+                        <input type="hidden" name="_token" v-model="$http.defaults.headers.common['X-CSRF-TOKEN']">
+                        <input type="hidden" v-model="serializedData" name="serialized_data">
+                    </form>
                 </div>
             </div>
         </form>
@@ -232,6 +232,7 @@
         data() {
             return {
                 message: '',
+                download: '',
                 aidaMap: {},
                 buyer: {},
                 unit: {},
@@ -254,9 +255,22 @@
         },
 
         methods: {
+            submitForm() {
+                document.getElementById('pdf-form').submit();
+            },
+
             downloadPdf() {
-                document.getElementById('pdf-form').submit()
+                this.submitForm();
+            },
+
+            sendEmail() {
+                this.downloadPdf();
+
+                this.$http.get(`/aida-maps/send`).then(response => {
+
+                });
             }
+
             // recordPoints(coordinate) {
             //     this.coordinate.x = coordinate.x;
             //     this.coordinate.y = coordinate.y;

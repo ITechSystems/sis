@@ -190,6 +190,7 @@
             </span>
         </p>
     </div>
+    <script>window.close();</script>
 </body>
 </html>
 

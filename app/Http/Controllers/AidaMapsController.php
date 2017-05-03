@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\AidaMap;
+use App\Mail\SendAidaMapToLeads;
 use Barryvdh\DomPDF\PDF;
+use Illuminate\Support\Facades\Mail;
 
 class AidaMapsController extends ApiController
 {
@@ -31,7 +33,9 @@ class AidaMapsController extends ApiController
 
         $pdf->loadView('aida-maps.pdf', compact('data'));
 
-        return $pdf->download('aida-maps.pdf');
+        $pdf->save(storage_path() . '/app/public/aida-map.pdf');
+
+        return $pdf->download('aida-map.pdf');
     }
 
     public function store()
@@ -40,5 +44,10 @@ class AidaMapsController extends ApiController
             'aida_map' => AidaMap::create(request()->all() + ['user_id' => auth()->user()->id]),
             'message' => 'Successfully added an aida map',
         ]);
+    }
+
+    public function send()
+    {
+        Mail::to('paolo.yumul@itechsystemsolutions.com')->send(new SendAidaMapToLeads);
     }
 }

@@ -37,6 +37,7 @@ Route::post('/buyers', 'BuyersController@store');
 Route::delete('/buyers/{buyer}', 'BuyersController@destroy');
 
 Route::get('/aida-maps', 'AidaMapsController@index');
+Route::get('/aida-maps/send', 'AidaMapsController@send');
 Route::get('/aida-maps/{unitId}', 'AidaMapsController@show');
 Route::post('/aida-maps/pdf', 'AidaMapsController@pdf');
 Route::post('/aida-maps', 'AidaMapsController@store');
