@@ -190,7 +190,8 @@
                         <button class="btn btn-warning" @click.prevent="downloadPdf">
                             <i class="fa fa-file"></i> PDF
                             <form action="/aida-maps/pdf" method="post" id="pdf-form" target="_blank" style="display:none">
-                                <input type="text" v-model="serializedData" name="serialized_data">
+                                <input type="hidden" name="_token" v-model="$http.defaults.headers.common['X-CSRF-TOKEN']">
+                                <input type="hidden" v-model="serializedData" name="serialized_data">
                             </form>
                         </button>
                         <button class="btn btn-success">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AidaMap;
+use Barryvdh\DomPDF\PDF;
 
 class AidaMapsController extends ApiController
 {
@@ -24,9 +25,13 @@ class AidaMapsController extends ApiController
         ]);
     }
 
-    public function pdf()
+    public function pdf(PDF $pdf)
     {
-        return view('aida-maps.pdf')->with(['serialized_data' => request('serialized_data')]);
+        $data = json_decode(request('serialized_data'));
+
+        $pdf->loadView('aida-maps.pdf', compact('data'));
+
+        return $pdf->download('aida-maps.pdf');
     }
 
     public function store()
