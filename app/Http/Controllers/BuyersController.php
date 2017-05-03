@@ -26,7 +26,9 @@ class BuyersController extends ApiController
 
     public function show(Buyer $buyer)
     {
-        return $buyer;
+        return $this->respond([
+            'buyer' => $buyer,
+        ]);
     }
 
     public function update(Buyer $buyer, BuyerRequest $request)

@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    <div class="row" v-for="buyer in buyers">
+    <div class="row" v-for="buyer in buyers" v-if="! clientSearching || buyer.id == clientSearching.id">
         <div class="col-md-offset-2 col-md-8">
             <div class="panel panel-default buyer-tile">
                 <div class="panel-heading">
@@ -70,7 +70,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="unit in units">
-                                <td><input type="checkbox" name=""></td>
+                                <td><input type="checkbox" name="" @click="unitId = unit.id"></td>
                                 <td>@{{ unit.block_lot }}</td>
                                 <td>@{{ unit.project }}</td>
                                 <td>@{{ unit.total_contract_price }}</td>
@@ -91,7 +91,7 @@
             </div>
         </div>
     </div>
-    <aida-map-modal></aida-map-modal>
+    <aida-map-modal :unit-id="unitId" :buyer-id="clientSearching.id"></aida-map-modal>
 @endsection
 
 @section("js")

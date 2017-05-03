@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Helpers\Import_Export;
 
-class RecordsDownloader{
-	public static function array_to_csv_to_download(array $data, $filename = "export", $line_headers = [], $delimeter = ",", $enclosure = '"')
+class RecordsDownloader
+{
+    public static function array_to_csv_to_download(array $data, $filename = "export", $line_headers = [], $delimeter = ",", $enclosure = '"')
     {
         $milliseconds = round(microtime(true) * 1000);
 
@@ -11,7 +13,7 @@ class RecordsDownloader{
         //add headers to the start of the file
         fputcsv($f, $line_headers, $delimeter, $enclosure);
 
-        foreach($data as $line){
+        foreach ($data as $line) {
             fputcsv($f, $line, $delimeter, $enclosure);
         }
 

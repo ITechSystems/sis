@@ -15,12 +15,10 @@ new Vue({
         locations: [],
         units: [],
         result_count: 0,
+        unitId: '',
     },
 
     el: '#app',
-
-    mounted() {
-    },
 
     methods: {
         getBuyers() {
@@ -42,4 +40,3 @@ new Vue({
         }
     }
 });
-

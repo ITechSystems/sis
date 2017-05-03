@@ -2,8 +2,8 @@
 
 namespace App\Helpers\Import_Export;
 
-use App\Data;
-use App\Downpayment;
+use App\Unit;
+use App\DownPayment;
 use App\Loan;
 use Illuminate\Support\Collection;
 
@@ -20,7 +20,7 @@ class Importer{
 			if($line[0] == ''){
 				continue;
 			}
-			
+
 			//create Data
 			\DB::transaction(function() use($line, $copied_loans){
 				$data_obj = self::createData($line);
@@ -30,12 +30,12 @@ class Importer{
 
 				$loan = self::createLoan($line, $data_obj, $copied_loans);
 			});
-		}	
+		}
 	}
 
 	public static function createData($line){
 		//search if this parent is active using block_lot
-		$data_active = Data::where('block_lot', $line[3])
+		$data_active = Unit::where('block_lot', $line[3])
 			->where('status', 'active')
 			->first();
 
@@ -55,11 +55,11 @@ class Importer{
 
 	public static function createDownpayment($line, $data_obj){
 		//find Downpayment associated with $data_obj, if not exist create
-		$downpayment_obj = Downpayment::where('data_id', $data_obj->id)->first();
+		$downpayment_obj = DownPayment::where('data_id', $data_obj->id)->first();
 
 		if(! $downpayment_obj){
-			$downpayment0 = new Downpayment;
-			$downpayment = $downpayment0->getInstance();	
+			$downpayment0 = new DownPayment;
+			$downpayment = $downpayment0->getInstance();
 			$downpayment->data_id = $data_obj->id;
 			$downpayment->equity = (float) str_replace(',', '', $line[10]);
 			$downpayment->term = $line[11];
@@ -86,7 +86,7 @@ class Importer{
 
 	public static function createDataObject($line)
 	{
-		$data_obj0 = new Data;
+		$data_obj0 = new Unit;
 		$data_obj = $data_obj0->getInstance();
 		$data_obj->date = $line[0];
 		$data_obj->location = $line[1];
@@ -121,7 +121,7 @@ class Importer{
 
 	public static function getLatestArchived($block_lot)
 	{
-		return Data::archived()
+		return Unit::archived()
 		->where('block_lot', $block_lot)
 		->orderBy('id', 'DESC')
 		->first();

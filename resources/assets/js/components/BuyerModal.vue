@@ -205,18 +205,18 @@
             buyerId() {
                 if (this.buyerId) {
                     this.form.get(`/buyers/${this.buyerId}`).then(data => {
-                        this.form.last_name = data.last_name;
-                        this.form.first_name = data.first_name;
-                        this.form.middle_name = data.middle_name;
-                        this.form.extension = data.extension;
-                        this.form.contact_number = data.contact_number;
-                        this.form.marital_status = data.marital_status;
-                        this.form.email = data.email;
-                        this.form.work_location = data.work_location;
-                        this.form.facebook_url = data.facebook_url;
-                        this.form.financing_type = data.financing_type;
-                        this.form.country = data.country;
-                        this.form.equity_type = data.equity_type;
+                        this.form.last_name = data.buyer.last_name;
+                        this.form.first_name = data.buyer.first_name;
+                        this.form.middle_name = data.buyer.middle_name;
+                        this.form.extension = data.buyer.extension;
+                        this.form.contact_number = data.buyer.contact_number;
+                        this.form.marital_status = data.buyer.marital_status;
+                        this.form.email = data.buyer.email;
+                        this.form.work_location = data.buyer.work_location;
+                        this.form.facebook_url = data.buyer.facebook_url;
+                        this.form.financing_type = data.buyer.financing_type;
+                        this.form.country = data.buyer.country;
+                        this.form.equity_type = data.buyer.equity_type;
                     });
                 } else {
                     this.form.reset();

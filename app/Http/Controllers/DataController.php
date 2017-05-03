@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Data;
+use App\Unit;
 use App\Helpers\Import_Export\CsvMapper;
 use App\Helpers\Import_Export\Importer;
 use App\Helpers\Import_Export\RecordsDownloader;
@@ -25,7 +25,7 @@ class DataController extends Controller
 
     public function export()
     {
-        $data = Data::where('status', 'active')->with('downpayment', 'loans')->get();
+        $data = Unit::where('status', 'active')->with('downpayment', 'loans')->get();
 
         $reformatted_data = $this->reformatThis($data);
 
@@ -71,7 +71,7 @@ class DataController extends Controller
 
     public function template()
     {
-        $headers = (new Data)->getHeaders();
+        $headers = (new Unit)->getHeaders();
 
         RecordsDownloader::array_to_csv_to_download([], 'property_template', $headers);
     }
