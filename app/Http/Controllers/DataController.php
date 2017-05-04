@@ -42,8 +42,11 @@ class DataController extends Controller
             foreach($line->loans as $loan){
                 $combined[] = [
                     'date' => $data[$key]->date,
+                    'developer' => $data[$key]->developer,
                     'location' => $data[$key]->location,
                     'project' => $data[$key]->project,
+                    'zone' => $data[$key]->zone,
+                    'phase' => $data[$key]->phase,
                     'block_lot' => $data[$key]->block_lot,
                     'lot_area' => $data[$key]->lot_area,
                     'lot_type' => $data[$key]->lot_type,

@@ -48,8 +48,11 @@ class Unit extends Model
     {
         return [
             'date',
+            'developer',
             'location',
             'project',
+            'zone',
+            'phase',
             'block_lot',
             'lot_area',
             'lot_type',
