@@ -1,197 +1,170 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>AIDA MAP</title>
-    <link rel="stylesheet" href="/css/libs.css">
-    <link rel="stylesheet" href="/css/app.css">
-</head>
-<body>
-    <div id="aida-map-modal" class="container">
-        <form id="aida-map-form">
-            <div class="row">
-                <p class="heading">Developer's Information</p>
-                <div class="col-md-12">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>Developer Name</td>
-                                <td>Property Company of Friends Inc.</td>
-                            </tr>
-                            <tr>
-                                <td>Project Name</td>
-                                <td>Lancaster New City</td>
-                            </tr>
-                            <tr>
-                                <td>Location</td>
-                                <td>Cavite</td>
-                            </tr>
-                            <tr>
-                                <td>Prepared By</td>
-                                <td>Hervie Fajardo</td>
-                            </tr>
-                            <tr>
-                                <td>Contact No.</td>
-                                <td>+63 917 872 0176</td>
-                            </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td>hervie.fajardo@gmail.com</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="row">
-                <p class="heading">Buyer's Computations For</p>
-                <div class="col-md-6">
-                    <table class="table">
-                        <tbody>
-                            <tr><td>{{ $data->buyer->last_name }}, {{ $data->buyer->first_name }}</td></tr>
-                            <tr><td>{{ $data->buyer->contact_number }}</td></tr>
-                            <tr><td>{{ $data->buyer->email }}</td></tr>
-                            <tr><td>{{ $data->buyer->marital_status }}</td></tr>
-                            <tr><td>{{ $data->buyer->financing_type }}</td></tr>
-                            <tr><td>OFW (Land-Based) Hard-coded</td></tr>
-                            <tr><td>{{ $data->buyer->country }}</td></tr>
-                            <tr><td>DownPayment (Installment) Hard-coded</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-6">
-                </div>
-            </div>
-            <div class="row">
-                <p class="heading">Unit Details</p>
-                <div class="col-md-6">
-                    <img src="/img/house.jpg" alt="" class="unit-full">
-                </div>
-                <div class="col-md-6">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>Block and Lot</td>
-                                <td>{{ $data->unit->block_lot }}</td>
-                            </tr>
-                            <tr>
-                                <td>Lot Area</td>
-                                <td>{{ $data->unit->lot_area }}</td>
-                            </tr>
-                            <tr>
-                                <td>Lot Type</td>
-                                <td>{{ $data->unit->lot_type }}</td>
-                            </tr>
-                            <tr>
-                                <td>Floor Area</td>
-                                <td>{{ $data->unit->floor_area }}</td>
-                            </tr>
-                            <tr>
-                                <td>House Model</td>
-                                <td>{{ $data->unit->house_model }}</td>
-                            </tr>
-                            <tr>
-                                <td>Total Contract Price</td>
-                                <td>{{ number_format($data->unit->total_contract_price, 2) }}</td>
-                            </tr>
-                            <tr>
-                                <td>Reservation Fee</td>
-                                <td>{{ number_format($data->unit->reservation_fee, 2) }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="row">
-                <p class="heading">DownPayment and Loanable Amount</p>
-                <div class="col-md-12">
-                    <table class="table">
-                        <tbody v-if="unit.downpayment">
-                            <tr>
-                                <td rowspan="3">DownPayment</td>
-                                <td>{{ $data->unit->downpayment->percentage }}%</td>
-                                <td>Equity</td>
-                                <td>{{ $data->unit->downpayment->equity }}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">Terms</td>
-                                <td>{{ $data->unit->downpayment->term }}</td>
-                            </tr>
-                            <tr>
-                                <td>Amount / Month</td>
-                                <td>Net Of RF</td>
-                                <td>{{ $data->unit->downpayment->monthly }}</td>
-                            </tr>
-                            <tr>
-                                <td>Percentage</td>
-                                <td>Loanable Amount</td>
-                                <td>MRI</td>
-                                <td>Monthly Amortization</td>
-                            </tr>
-                            @foreach($data->unit->loans as $loan)
-                                <tr>
-                                    <td>{{ $loan->percentage }}</td>
-                                    <td>{{ $loan->total }}</td>
-                                    <td>{{ $loan->mri }}</td>
-                                    <td>{{ $loan->description }} {{ $loan->monthly_percentage }}% {{ $loan->years }} years -- {{ $loan->monthly_amortization }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="row">
-                <p class="heading">Map of the Subdivision</p>
-                <div class="col-md-12 mb-20">
-                    <img src="/img/map.png">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="heading">Document Requirements For</p>
-                    <ul class="requirements">
-                        <li>3pcs. 1x1 ID Picture (Buyer, Spouse & Atty-in-Fact) w/ name &amp; Unit ID at the back</li>
-                        <li>2 Valid ID's with 3 specimen signature (Photocopy only) (Buyer &amp; Spouse)</li>
-                        <li>SSS, GSIS, Driver's License, Voter's, PRC, Passport</li>
-                        <li>Postal ID's are allowed for AIF only (or unemployed spouse)</li>
-                        <li>Passport - validity should not be expired (Buyer)</li>
-                        <li>Must have date of arrival &amp; departure</li>
-                        <li>Residence Certificate for the Current Year (Cedula) (Spouse &amp; Atty-In-Fact)</li>
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <p class="heading">For Reservations, Contact Us At</p>
-                    <address>
-                        <h3 class="name">Mr. Hervie Fajardo</h3>
-                        <span class="mobile">Globe: +63 917 872 0176</span>
-                        <span class="mobile">Smart: +63 917 565 8645</span>
-                        <h5>LANDLINE HOTLINES</h5>
-                        <span class="telephone">Manila Telephone: (02) 256 6574</span>
-                        <span class="telephone">Cavite Telephone: (046) 440 6474</span>
-                    </address>
-                    <address>
-                        <p class="office">Main Office</p>
-                        <span class="barangay">55 Tinio St. Brgy. Addition Hills</span>
-                        <span class="city">Mandaluyong City</span>
-                        <span class="country">Philippines 1552</span>
-                    </address>
-                    <address>
-                        <p class="office">Branch Office</p>
-                        <span class="barangay">55 Gen. Aguinaldo Hi-way Brgy. Tanzang Luma</span>
-                        <span class="city">Imus City, Cavite</span>
-                        <span class="country">Philippines 4103</span>
-                    </address>
-                </div>
-            </div>
-        </form>
-        <p class="footer-note">
-            <span>
-                Date and time generated.
-                <strong>Price are subject to change without prior notice.</strong>
-            </span>
-        </p>
-    </div>
-    <script>window.close();</script>
-</body>
-</html>
+<?php
+
+$pdf = new \App\PDF;
+$pdf->ShowGrid(true);
+
+$pdf->AddPage();
+$pdf->SetFont('Arial');
+
+// Header
+// Red Border on Top
+$pdf->SetFillColor(239, 75, 76);
+$pdf->Rect(0, 0, 210, 5, 'F');
+
+// Background color of header
+$pdf->SetFillColor(231, 232, 234);
+$pdf->Rect(0, 5, 210, 35, 'F');
+
+$pdf->SetFont('Arial', 'B', 9);
+$pdf->SetTextColor(39, 39, 39);
+$pdf->SetXY(10, 15);
+$pdf->Cell(60, 5, 'MAIN OFFICE', 0, 1, 'L');
+
+$pdf->SetFont('Arial', '', 8);
+$pdf->SetTextColor(160, 160, 162);
+$pdf->SetXY(10, 20);
+$pdf->MultiCell(60, 5, '55 Tinio St. Brgy. Addition Hills, Mandaluyong', 0, 'L', false);
+
+$pdf->SetXY(10, 25);
+$pdf->Cell(60, 5, '(02) 256 6574', 0, 1, 'L');
+
+$pdf->SetFont('Arial', 'B', 7);
+$pdf->SetTextColor(39, 39, 39);
+$pdf->SetXY(70, 10);
+$pdf->Cell(70, 5, 'LANCASTER NEW CITY', 0, 1, 'C');
+
+$pdf->SetFont('Arial', 'B', 20);
+$pdf->SetTextColor(239, 75, 76);
+$pdf->SetXY(70, 15);
+$pdf->Cell(70, 15, 'REAL ESTATE', 0, 1, 'C');
+
+$pdf->SetFont('Arial', 'B', 7);
+$pdf->SetTextColor(39, 39, 39);
+$pdf->SetXY(70, 30);
+$pdf->Cell(70, 5, 'AT CAVITE, PHILIPPINES', 0, 1, 'C');
+
+$pdf->SetFont('Arial', 'B', 9);
+$pdf->SetTextColor(39, 39, 39);
+$pdf->SetXY(140, 17);
+$pdf->Cell(60, 5, strtoupper('Company of Friends Realty'), 0, 1, 'R');
+
+$pdf->SetFont('Arial', '', 8);
+$pdf->SetTextColor(160, 160, 162);
+$pdf->SetXY(140, 22);
+$pdf->Cell(60, 5, 'www.companyoffriends.com', 0, 1, 'R');
+// End Header
+
+// Houses
+$pdf->Image('img/house.jpg', 10, 45, 120, 95);
+
+$pdf->SetFont('Arial', 'B', 8);
+$pdf->SetTextColor(255, 255, 255);
+$pdf->SetFillColor(239, 75, 76);
+$pdf->SetXY(0, 50);
+$pdf->MultiCell(45, 7, 'OFFERED AT P' . number_format($data->unit->total_contract_price, 2), 0, 'R', true);
+$pdf->SetXY(0, 60);
+$pdf->MultiCell(45, 7, 'BLOCKLOT ' . $data->unit->block_lot, 0, 'R', true);
+$pdf->SetXY(0, 70);
+$pdf->MultiCell(45, 7, 'LOT AREA ' . $data->unit->lot_area . ' SQM', 0, 'R', true);
+$pdf->SetXY(0, 80);
+$pdf->MultiCell(45, 7, 'FLOOR AREA ' . $data->unit->floor_area . ' SQM', 0, 'R', true);
+$pdf->SetXY(0, 90);
+$pdf->MultiCell(45, 7, 'LOT TYPE ' . $data->unit->lot_type, 0, 'R', true);
+$pdf->SetXY(0, 100);
+$pdf->MultiCell(45, 7, 'HOUSE MODEL ' . $data->unit->house_model, 0, 'R', true);
+$pdf->SetXY(0, 110);
+$pdf->MultiCell(45, 7, 'RESERVATION P' . number_format($data->unit->reservation_fee, 2), 0, 'R', true);
+
+$pdf->Image('img/map.png', 135, 45, 65, 45);
+
+$pdf->Image('img/map.png', 135, 95, 65, 45);
+// End Houses
 
 
+// Payments
+$pdf->SetFillColor(231, 232, 234);
+$pdf->Rect(10, 145, 120, count($data->unit->loans) * 15 + (25), 'F');
+
+$pdf->SetTextColor(239, 75, 76);
+$pdf->SetFontSize(11);
+$pdf->SetXY(10, 145);
+$pdf->Cell(120, 10, 'DownPayment and Loanable Amounts', 0, 1);
+
+// DownPayment
+$pdf->SetTextColor(0, 0, 0);
+$pdf->SetFont('Arial', '', 8);
+$pdf->SetXY(10, 155);
+$pdf->Cell(45, 15, 'DOWNPAYMENT', 1, 1, 'C');
+
+$pdf->SetXY(55, 155);
+$pdf->Cell(50, 5, $data->unit->downpayment->percentage . '% Equity', 1, 1, 'C');
+
+$pdf->SetXY(105, 155);
+$pdf->Cell(25, 5, number_format($data->unit->downpayment->equity, 2), 1, 1, 'R');
+
+$pdf->SetXY(55, 160);
+$pdf->Cell(50, 5, 'Terms', 1, 1, 'C');
+
+$pdf->SetXY(105, 160);
+$pdf->Cell(25, 5, $data->unit->downpayment->term, 1, 1, 'R');
+
+$pdf->SetXY(55, 165);
+$pdf->Cell(50, 5, 'Amount/Month', 1, 1, 'C');
+
+$pdf->SetXY(105, 165);
+$pdf->Cell(25, 5, number_format($data->unit->downpayment->monthly, 2), 1, 1, 'R');
+// End DownPayment
+
+// Loan Amount
+$pdf->SetXY(10, 170);
+$pdf->Cell(45, count($data->unit->loans) * 15, 'LOANABLE AMOUNT', 1, 1, 'C');
+
+foreach ($data->unit->loans as $index => $loan) {
+    $pdf->SetXY(55, 170 + (15 * $index));
+    $pdf->Cell(10, 15, $loan->percentage, 1, 1, 'C');
+
+    $pdf->SetXY(65, 170 + (15 * $index));
+    $pdf->Cell(40, 5, 'Loanable Amount', 1, 1, 'L');
+    $pdf->SetXY(105, 170 + (15 * $index));
+    $pdf->Cell(25, 5, number_format($loan->total, 2), 1, 1, 'R');
+
+    $pdf->SetXY(65, 175 + (15 * $index));
+    $pdf->Cell(40, 5, 'MRI & FIRE', 1, 1, 'L');
+    $pdf->SetXY(105, 175 + (15 * $index));
+    $pdf->Cell(25, 5, number_format($loan->mri, 2), 1, 1, 'R');
+
+    $pdf->SetXY(65, 180 + (15 * $index));
+    $pdf->Cell(40, 5, ucfirst($loan->description) . '-MA ' . $loan->monthly_percentage . '% ' . $loan->years . ' years', 1, 1, 'L');
+    $pdf->SetXY(105, 180 + (15 * $index));
+    $pdf->Cell(25, 5, number_format($loan->monthly_amortization, 2), 1, 1, 'R');
+}
+// End Loan Amount
+// End Payments
+
+// Requirements
+$pdf->SetXY(135, 145);
+$pdf->MultiCell(65, count($data->unit->loans) * 15 + (25), '', 1, 1);
+$pdf->SetFillColor(195, 209, 209);
+//$pdf->Rect(135, 145, 65, count($data->unit->loans) * 15 + (25), 'F');
+
+$pdf->SetXY(135, 145);
+$pdf->Cell(65, 10, 'Requirements', 0, 1);
+
+$pdf->SetXY(135, 155);
+$pdf->Cell(65, 5, '3pcs. 1x1 ID Picture (Buyer, Spouse & Atty-in-Fact) w/ name &amp; Unit ID at the back', 0, 1, 'L');
+$pdf->SetXY(135, 160);
+$pdf->Cell(65, 5, '2 Valid ID\'s with 3 specimen signature (Photocopy only) (Buyer &amp; Spouse)', 0, 1, 'L');
+$pdf->SetXY(135, 165);
+$pdf->Cell(65, 5, 'SSS, GSIS, Driver\'s License, Voter\'s, PRC, Passport', 0, 1, 'L');
+$pdf->SetXY(135, 170);
+$pdf->Cell(65, 5, 'Postal ID\'s are allowed for AIF only (or unemployed spouse)', 0, 1, 'L');
+$pdf->SetXY(135, 175);
+$pdf->Cell(65, 5, 'Passport - validity should not be expired (Buyer)', 0, 1, 'L');
+$pdf->SetXY(135, 180);
+$pdf->Cell(65, 5, 'Must have date of arrival & departure', 0, 1, 'L');
+$pdf->SetXY(135, 185);
+$pdf->Cell(65, 5, 'Residence Certificate for the Current Year (Cedula) (Spouse &amp; Atty-In-Fact)', 0, 1, 'L');
+// End Requirements
+
+$pdf->Output();
+exit;
