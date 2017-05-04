@@ -6,17 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Unit extends Model
 {
-    protected $table = 'data';
+    protected $table = 'units';
 
     protected $primaryKey = 'id';
 
     public $timestamps = false;
 
     protected $fillable = [
-        'title',
+        'date',
+        'developer',
         'location',
-        'block',
-        'number',
+        'project',
+        'zone',
+        'phase',
         'block_lot',
         'lot_area',
         'lot_type',
@@ -24,6 +26,7 @@ class Unit extends Model
         'house_model',
         'total_contract_price',
         'reservation_fee',
+        'status'
     ];
 
     public function getInstance()
