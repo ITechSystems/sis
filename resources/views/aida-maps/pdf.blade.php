@@ -1,7 +1,7 @@
 <?php
 
 $pdf = new \App\PDF;
-$pdf->ShowGrid(true);
+$pdf->ShowGrid(false);
 
 $pdf->AddPage('L', 'Legal');
 $pdf->SetFont('Arial', '', 8);
@@ -26,21 +26,21 @@ $pdf->Cell(60, 5, 'Location: Cavite', 1, 1, 'L');
 $pdf->SetXY(115, 25);
 $pdf->Cell(60, 10, 'BUYER\'S COMPUTATIONS FOR', 1, 1, 'L');
 $pdf->SetXY(115, 35);
-$pdf->Cell(60, 5, 'Ms. Annie Biglang Biliagad', 1, 1, 'L');
+$pdf->Cell(60, 5, $data->buyer->last_name . ', ' . $data->buyer->first_name . ' ' . $data->buyer->middle_name . ', ' . $data->buyer->extension, 1, 1, 'L');
 $pdf->SetXY(115, 40);
-$pdf->Cell(60, 5, '0917-4567890', 1, 1, 'L');
+$pdf->Cell(60, 5, $data->buyer->contact_number, 1, 1, 'L');
 $pdf->SetXY(115, 45);
-$pdf->Cell(60, 5, 'anniebiglabili@gmail.com', 1, 1, 'L');
+$pdf->Cell(60, 5, $data->buyer->email, 1, 1, 'L');
 $pdf->SetXY(115, 50);
-$pdf->Cell(60, 5, 'Married', 1, 1, 'L');
+$pdf->Cell(60, 5, $data->buyer->marital_status, 1, 1, 'L');
 $pdf->SetXY(115, 55);
-$pdf->Cell(60, 5, 'Bank Financing', 1, 1, 'L');
+$pdf->Cell(60, 5, $data->buyer->financing_type, 1, 1, 'L');
 $pdf->SetXY(115, 60);
-$pdf->Cell(60, 5, 'OFW (Land-Based)', 1, 1, 'L');
+$pdf->Cell(60, 5, $data->buyer->work_location, 1, 1, 'L');
 $pdf->SetXY(115, 65);
-$pdf->Cell(60, 5, 'Singapore', 1, 1, 'L');
+$pdf->Cell(60, 5, $data->buyer->country, 1, 1, 'L');
 $pdf->SetXY(115, 70);
-$pdf->Cell(60, 5, 'DownPayment (Installment)', 1, 1, 'L');
+$pdf->Cell(60, 5, $data->buyer->equity_type, 1, 1, 'L');
 
 $pdf->Image('img/map.png', 180, 25, 55, 50);
 $pdf->Image('img/map.png', 115, 80, 120, 95);
@@ -93,83 +93,83 @@ $pdf->Cell(110, 5, 'Branch Office', 1, 1, 'L');
 $pdf->SetXY(240, 160);
 $pdf->Cell(110, 5, '55 Gen. Aguinaldo Hi-way Brgy. Tanzang Luma Imus City, Cavite Philippines 4103', 1, 1, 'L');
 
-$pdf->Image('img/house.jpg', 5, 25, 80, 70);
+$pdf->Image('img/house.jpg', 5, 25, 105, 70);
 
 $pdf->SetXY(5, 100);
-$pdf->Cell(55, 5, 'BLOCK AND LOT', 1, 'L');
-$pdf->SetXY(60, 100);
+$pdf->Cell(80, 5, 'BLOCK AND LOT', 1, 'L');
+$pdf->SetXY(85, 100);
 $pdf->Cell(25, 5, $data->unit->block_lot, 1, 'L');
 
 $pdf->SetXY(5, 105);
-$pdf->Cell(55, 5, 'LOT AREA', 1, 'L');
-$pdf->SetXY(60, 105);
+$pdf->Cell(80, 5, 'LOT AREA', 1, 'L');
+$pdf->SetXY(85, 105);
 $pdf->Cell(25, 5, $data->unit->lot_area . ' SQM', 1, 'L');
 
 $pdf->SetXY(5, 110);
-$pdf->Cell(55, 5, 'LOT TYPE', 1, 'L');
-$pdf->SetXY(60, 110);
+$pdf->Cell(80, 5, 'LOT TYPE', 1, 'L');
+$pdf->SetXY(85, 110);
 $pdf->Cell(25, 5, $data->unit->lot_type, 1, 'L');
 
 $pdf->SetXY(5, 115);
-$pdf->Cell(55, 5, 'FLOOR AREA', 1, 'L');
-$pdf->SetXY(60, 115);
+$pdf->Cell(80, 5, 'FLOOR AREA', 1, 'L');
+$pdf->SetXY(85, 115);
 $pdf->Cell(25, 5, $data->unit->floor_area . ' SQM', 1, 'L');
 
 $pdf->SetXY(5, 120);
-$pdf->Cell(55, 5, 'HOUSE MODEL', 1, 'L');
-$pdf->SetXY(60, 120);
+$pdf->Cell(80, 5, 'HOUSE MODEL', 1, 'L');
+$pdf->SetXY(85, 120);
 $pdf->Cell(25, 5, $data->unit->house_model, 1, 'L');
 
 $pdf->SetXY(5, 125);
-$pdf->Cell(55, 5, 'TOTAL CONTRACT PRICE', 1, 'L');
-$pdf->SetXY(60, 125);
+$pdf->Cell(80, 5, 'TOTAL CONTRACT PRICE', 1, 'L');
+$pdf->SetXY(85, 125);
 $pdf->Cell(25, 5, '3,060,320.00', 1, 1, 'R');
 
 $pdf->SetXY(5, 130);
-$pdf->Cell(55, 5, 'RESERVATION FEE', 1, 'L');
-$pdf->SetXY(60, 130);
+$pdf->Cell(80, 5, 'RESERVATION FEE', 1, 'L');
+$pdf->SetXY(85, 130);
 $pdf->Cell(25, 5, number_format($data->unit->reservation_fee, 2), 1, 1, 'R');
 
 $pdf->SetXY(5, 135);
 $pdf->Cell(30, 15, 'DOWNPAYMENT', 1, 1, 'C');
 
 $pdf->SetXY(35, 135);
-$pdf->Cell(25, 5, $data->unit->downpayment->percentage . '% Equity', 1, 1, 'C');
-$pdf->SetXY(60, 135);
+$pdf->Cell(50, 5, $data->unit->downpayment->percentage . '% Equity', 1, 1, 'C');
+$pdf->SetXY(85, 135);
 $pdf->Cell(25, 5, number_format($data->unit->downpayment->equity, 2), 1, 1, 'R');
 
 $pdf->SetXY(35, 140);
-$pdf->Cell(25, 5, 'Terms', 1, 1, 'C');
-$pdf->SetXY(60, 140);
+$pdf->Cell(50, 5, 'Terms', 1, 1, 'C');
+$pdf->SetXY(85, 140);
 $pdf->Cell(25, 5, $data->unit->downpayment->term, 1, 1, 'R');
 
 $pdf->SetXY(35, 145);
-$pdf->Cell(25, 5, 'Amount/Month', 1, 1, 'C');
-$pdf->SetXY(60, 145);
+$pdf->Cell(50, 5, 'Amount/Month', 1, 1, 'C');
+$pdf->SetXY(85, 145);
 $pdf->Cell(25, 5, number_format($data->unit->downpayment->monthly, 2), 1, 1, 'R');
 
 $pdf->SetXY(5, 150);
 $pdf->Cell(30, 15, 'LOANABLE AMOUNT', 1, 1, 'C');
 
-foreach ($data->unit->loans as $index => $loan) {
-    $pdf->SetXY(35, 150 + (15 * $index));
-    $pdf->Cell(10, 15, $loan->percentage, 1, 1, 'C');
-
-    $pdf->SetXY(45, 150 + (15 * $index));
-    $pdf->Cell(40, 5, 'Loanable Amount', 1, 1, 'L');
-    $pdf->SetXY(85, 150 + (15 * $index));
-    $pdf->Cell(25, 5, number_format($loan->total, 2), 1, 1, 'R');
-
-    $pdf->SetXY(45, 155 + (15 * $index));
-    $pdf->Cell(40, 5, 'MRI & FIRE', 1, 1, 'L');
-    $pdf->SetXY(85, 155 + (15 * $index));
-    $pdf->Cell(25, 5, number_format($loan->mri, 2), 1, 1, 'R');
-
-    $pdf->SetXY(45, 160 + (15 * $index));
-    $pdf->Cell(40, 5, ucfirst($loan->description) . '-MA ' . $loan->monthly_percentage . '% ' . $loan->years . ' years', 1, 1, 'L');
-    $pdf->SetXY(85, 160 + (15 * $index));
-    $pdf->Cell(25, 5, number_format($loan->monthly_amortization, 2), 1, 1, 'R');
-}
+//foreach ($data->unit->loans as $index => $loan) {
+//    $pdf->SetXY(35, 150 + (15 * $index));
+//    $pdf->Cell(10, 15, $loan->percentage, 1, 1, 'C');
+//
+//    $pdf->SetXY(45, 150 + (15 * $index));
+//    $pdf->Cell(40, 5, 'Loanable Amount', 1, 1, 'L');
+//    $pdf->SetXY(85, 150 + (15 * $index));
+//    $pdf->Cell(25, 5, number_format($loan->total, 2), 1, 1, 'R');
+//
+//    $pdf->SetXY(45, 155 + (15 * $index));
+//    $pdf->Cell(40, 5, 'MRI & FIRE', 1, 1, 'L');
+//    $pdf->SetXY(85, 155 + (15 * $index));
+//    $pdf->Cell(25, 5, number_format($loan->mri, 2), 1, 1, 'R');
+//
+//    $pdf->SetXY(45, 160 + (15 * $index));
+//    $pdf->Cell(40, 5, ucfirst($loan->description) . '-MA ' . $loan->monthly_percentage . '% ' . $loan->years . ' years', 1, 1, 'L');
+//    $pdf->SetXY(85, 160 + (15 * $index));
+//    $pdf->Cell(25, 5, number_format($loan->monthly_amortization, 2), 1, 1, 'R');
+//}
 
 $pdf->Output();
 exit;
