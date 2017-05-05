@@ -20,6 +20,8 @@ class InventoryController extends ApiController
 
         $locations = Unit::where('status', 'active')->distinct()->get(['location']);
 
+        $developer = $data['developer'];
+
         $location = $data['location_horizontal'];
 
         $project_name = $data['project_name_horizontal'];
@@ -44,7 +46,11 @@ class InventoryController extends ApiController
 
         $house_model = $data['house_model_horizontal'];
 
-        $units = $this->getSearchQuery($location, $project_name, $block, $lot, $min_price, $max_price, $min_lot, $max_lot, $min_floor, $max_floor, $lot_type, $house_model);
+        $zone = $data['zone_horizontal'];
+
+        $phase = $data['phase_horizontal'];
+
+        $units = $this->getSearchQuery($location, $project_name, $block, $lot, $min_price, $max_price, $min_lot, $max_lot, $min_floor, $max_floor, $lot_type, $house_model, $zone, $phase, $developer);
 
         $result_count = count($units);
 
@@ -59,26 +65,29 @@ class InventoryController extends ApiController
         return view('inventory.index', compact('units', 'result_count', 'locations'));
     }
 
-    public function getSearchQuery($location = '', $project_name = '', $block = '', $lot = '', $min_price = 0, $max_price = 0, $min_lot = 0, $max_lot = 0, $min_floor = 0, $max_floor, $lot_type = '', $house_model = '')
+    public function getSearchQuery($location = '', $project_name = '', $block = '', $lot = '', $min_price = 0, $max_price = 0, $min_lot = 0, $max_lot = 0, $min_floor = 0, $max_floor, $lot_type = '', $house_model = '', $zone = '', $phase = '', $developer = '')
     {
         $max_price = (float) str_replace(',', '', $max_price);
 
         $min_price = (float) str_replace(',', '', $min_price);
 
-        $units = Unit::active()->get();
+        $units = Unit::active()
+        ->select(\DB::raw("ANY_VALUE(block_lot) as block_lot, ANY_VALUE(zone) as zone, ANY_VALUE(phase) as phase, ANY_VALUE(lot_area) as lot_area, ANY_VALUE(floor_area) as floor_area, ANY_VALUE(house_model) as house_model, ANY_VALUE(lot_type) as lot_type"))
+        ->groupBy('block_lot')
+        ->get();
 
         if ($project_name != '') {
             $units = Unit::where('project', 'like', '%' . $project_name . '%')
                 ->where('status', 'active')
+                ->select(\DB::raw("ANY_VALUE(block_lot) as block_lot, ANY_VALUE(zone) as zone, ANY_VALUE(phase) as phase, ANY_VALUE(lot_area) as lot_area, ANY_VALUE(floor_area) as floor_area, ANY_VALUE(house_model) as house_model, ANY_VALUE(lot_type) as lot_type"))
+                ->groupBy('block_lot')
                 ->get();
         }
 
         //if $block is set
         if ($block != '') {
             $units = $units->filter(function ($item) use ($block) {
-                $block_str = explode("-", $item->block_lot)[0];
-
-                return $block_str == $block;
+                return $item->block_lot == $block;
             });
         }
 
@@ -156,6 +165,26 @@ class InventoryController extends ApiController
             });
         }
 
+        //if $zone is set
+        if($zone != ''){
+            $units = $units->filter(function($item) use ($zone){
+                return $item->zone == $zone;
+            });
+        }
+
+        //if $phase is set
+        if($phase != ''){
+            $units = $units->filter(function($item) use($phase){
+                return $item->phase == $phase;
+            });
+        }
+
+        //if $developer
+        if($developer != ''){
+            $units = $units->filter(function($item) use($developer){
+                return $item->developer == $developer;
+            });
+        }
 
         return $units;
     }
@@ -168,10 +197,11 @@ class InventoryController extends ApiController
             ->get(['project']);
     }
 
-    public function searchUnitById($id)
+    public function searchUnitById($blockLot)
     {
-        $unit = Unit::active()->where('id', $id)->first();
-
-        return $unit->load('downpayment', 'loans');
+        return $units = Unit::active()
+            ->where('block_lot', $blockLot)
+            ->with('downpayment', 'loans')
+            ->get();
     }
 }

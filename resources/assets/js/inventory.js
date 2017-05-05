@@ -1,6 +1,7 @@
 import './bootstrap.js';
 import AidaMapModal from './components/AidaMapModal.vue';
 import PropertyInfo from './components/PropertyInformation.vue'
+import HorizontalFilters from './components/HorizontalFilters.vue';
 
 new Vue({
     data:{
@@ -10,12 +11,17 @@ new Vue({
         blocks: [],
         data: [],
         items: [],
-        unit_id: ''
+        unit_id: '',
+        result_count: 0,
+        locations: [],
+        units: [],
+        block_lot: ''
     },
 
     components: {
         AidaMapModal,
-        PropertyInfo
+        PropertyInfo,
+        HorizontalFilters
     },
 
     el: '#app',
@@ -39,8 +45,20 @@ new Vue({
             })
         },
 
-        showInfo(id){
-            this.unit_id = id
+        showInfo(block_lot){
+            this.block_lot = block_lot
+        },
+
+        displayResults(data) {
+            this.result_count = data.result_count;
+            this.units = data.units;
+            this.locations = data.locations;
+        },
+
+        clearResults() {
+            this.result_count = 0;
+            this.units = '';
+            this.locations = '';
         }
     }
 });

@@ -11,35 +11,31 @@
                 </div>
                 <div class="col-md-6">
                     <table class="table">
-                        <tbody>
+                        <tbody v-for="(item, index) in items" v-if="index == 0">
                             <tr>
                                 <td>Unit ID</td>
-                                <td>{{ items.block_lot }}</td>
+                                <td>{{ item.block_lot }}</td>
                             </tr>
                             <tr>
                                 <td>Lot Area</td>
-                                <td>{{ items.lot_area }}</td>
+                                <td>{{ item.lot_area }}</td>
                             </tr>
 
                             <tr>
                                 <td>Lot Type</td>
-                                <td>{{ items.lot_type }}</td>
+                                <td>{{ item.lot_type }}</td>
                             </tr>
                             <tr>
                                 <td>Floor Area</td>
-                                <td>{{ items.floor_area }}</td>
+                                <td>{{ item.floor_area }}</td>
                             </tr>
                             <tr>
                                 <td>House Model</td>
-                                <td>{{ items.house_model }}</td>
-                            </tr>
-                            <tr>
-                                <td>Total Contract Price</td>
-                                <td>{{ items.total_contract_price }}</td>
+                                <td>{{ item.house_model }}</td>
                             </tr>
                             <tr>
                                 <td>Reservation Fee</td>
-                                <td>{{ items.reservation_fee }}</td>
+                                <td>{{ item.reservation_fee | currency }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -48,10 +44,11 @@
             <div class="row">
                 <p class="heading">Loan</p>
                 <div class="col-md-12">
-                    <table class="table">
+                    <table class="table" v-for="(item, index) in items">
                         <thead>
                             <tr>
-                                <th>Total</th>
+                                <th>Price</th>
+                                <th>Loan Total</th>
                                 <th>MRI</th>
                                 <th>Monthly Amortization</th>
                                 <th>Loan Percentage</th>
@@ -61,14 +58,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="loan in items.loans">
-                                <td>{{ loan.total }}</td>
-                                <td>{{ loan.mri }}</td>
-                                <td>{{ loan.monthly_amortization }}</td>
+                            <tr v-for="loan in item.loans">
+                                <td>{{ item.total_contract_price | currency }}</td>
+                                <td>{{ loan.total | currency }}</td>
+                                <td>{{ loan.mri | currency }}</td>
+                                <td>{{ loan.monthly_amortization | currency }}</td>
                                 <td>{{ loan.percentage }}</td>
                                 <td>{{ loan.description }}</td>
-                                <td>{{ loan.monthly_percentage }}</td>
+                                <td>{{ loan.monthly_percentage | currency }}</td>
                                 <td>{{ loan.years }}</td>
+                            </tr>
+                            <tr>
+                                
                             </tr>
                         </tbody>
                     </table>
@@ -90,7 +91,7 @@
         },
 
         props: [
-            'unitId'
+            'blockLot'
         ],
 
         data(){
@@ -100,9 +101,9 @@
         },
 
         watch: {
-            unitId(){
+            blockLot(){
                 this.items = []
-                this.$http.get(`/search/unitById/${this.unitId}`).then(res => {
+                this.$http.get(`/search/unitById/${this.blockLot}`).then(res => {
                     this.items = res.data
                 });
             }
