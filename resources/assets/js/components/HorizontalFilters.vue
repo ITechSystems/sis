@@ -37,14 +37,14 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="block_horizontal">Block</label>
+                                                <label for="block_horizontal">Block and Lot</label>
                                                 <input type="text" class="form-control" name="block_horizontal" id="block_horizontal" v-model="form.block_horizontal">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="lot_horizontal">Lot</label>
-                                                <input type="text" class="form-control" name="lot_horizontal" id="lot_horizontal" v-model="form.lot_horizontal">
+                                                <label for="lot_horizontal">Zone</label>
+                                                <input type="text" class="form-control" name="zone_horizontal" id="zone_horizontal" v-model="form.zone_horizontal">
                                             </div>
                                         </div>
                                     </div>
@@ -63,6 +63,17 @@
                                             <div class="form-group">
                                                 <label for="price_maximum">&nbsp;</label>
                                                 <input class="form-control" name="price_maximum_horizontal" id="price_maximum_horizontal" placeholder="Max" v-model="form.price_maximum_horizontal">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="phase_horizontal">Phase</label>
+                                                <input class="form-control" type="text" name="phase_horizontal" id="phase_horizontal" placeholder="Phase" v-model="form.phase_horizontal">
                                             </div>
                                         </div>
                                     </div>
@@ -150,6 +161,8 @@
                     floor_area_max_horizontal: '',
                     lot_type_horizontal: '',
                     house_model_horizontal: '',
+                    zone_horizontal: '',
+                    phase_horizontal: ''
                 }),
                 projects: [],
                 units: [],
