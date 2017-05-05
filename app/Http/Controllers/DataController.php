@@ -66,7 +66,8 @@ class DataController extends Controller
                     'loan_percentage' => $loan->percentage,
                     'description' => $loan->description,
                     'monthly_percentage' => $loan->monthly_percentage,
-                    'years' => $loan->years
+                    'years' => $loan->years,
+                    'finance_type' => $loan->finance_type
                 ];
             }
         }

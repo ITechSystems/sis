@@ -71,6 +71,7 @@ class Unit extends Model
             'description',
             'monthly_percentage',
             'years',
+            'finance_type'
         ];
     }
 

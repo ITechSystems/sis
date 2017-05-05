@@ -72,14 +72,14 @@ class InventoryController extends ApiController
         $min_price = (float) str_replace(',', '', $min_price);
 
         $units = Unit::active()
-        ->select(\DB::raw("ANY_VALUE(block_lot) as block_lot, ANY_VALUE(zone) as zone, ANY_VALUE(phase) as phase, ANY_VALUE(lot_area) as lot_area, ANY_VALUE(floor_area) as floor_area, ANY_VALUE(house_model) as house_model, ANY_VALUE(lot_type) as lot_type"))
+        ->select(\DB::raw("ANY_VALUE(date) AS date, ANY_VALUE(block_lot) as block_lot, ANY_VALUE(zone) as zone, ANY_VALUE(phase) as phase, ANY_VALUE(lot_area) as lot_area, ANY_VALUE(floor_area) as floor_area, ANY_VALUE(house_model) as house_model, ANY_VALUE(lot_type) as lot_type"))
         ->groupBy('block_lot')
         ->get();
 
         if ($project_name != '') {
             $units = Unit::where('project', 'like', '%' . $project_name . '%')
                 ->where('status', 'active')
-                ->select(\DB::raw("ANY_VALUE(block_lot) as block_lot, ANY_VALUE(zone) as zone, ANY_VALUE(phase) as phase, ANY_VALUE(lot_area) as lot_area, ANY_VALUE(floor_area) as floor_area, ANY_VALUE(house_model) as house_model, ANY_VALUE(lot_type) as lot_type"))
+                ->select(\DB::raw("ANY_VALUE(date) AS date, ANY_VALUE(block_lot) as block_lot, ANY_VALUE(zone) as zone, ANY_VALUE(phase) as phase, ANY_VALUE(lot_area) as lot_area, ANY_VALUE(floor_area) as floor_area, ANY_VALUE(house_model) as house_model, ANY_VALUE(lot_type) as lot_type"))
                 ->groupBy('block_lot')
                 ->get();
         }

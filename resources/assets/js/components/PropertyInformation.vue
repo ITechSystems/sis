@@ -47,6 +47,7 @@
                     <table class="table" v-for="(item, index) in items">
                         <thead>
                             <tr>
+                                <th>Finance Type</th>
                                 <th>Price</th>
                                 <th>Loan Total</th>
                                 <th>MRI</th>
@@ -59,6 +60,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="loan in item.loans">
+                                <td>{{ loan.finance_type }}</td>
                                 <td>{{ item.total_contract_price | currency }}</td>
                                 <td>{{ loan.total | currency }}</td>
                                 <td>{{ loan.mri | currency }}</td>
@@ -67,9 +69,6 @@
                                 <td>{{ loan.description }}</td>
                                 <td>{{ loan.monthly_percentage | currency }}</td>
                                 <td>{{ loan.years }}</td>
-                            </tr>
-                            <tr>
-                                
                             </tr>
                         </tbody>
                     </table>

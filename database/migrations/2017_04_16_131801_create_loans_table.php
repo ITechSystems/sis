@@ -25,6 +25,7 @@ class CreateLoansTable extends Migration
             $table->string('description');
             $table->string('monthly_percentage');
             $table->string('years');
+            $table->string('finance_type');
         });
     }
 

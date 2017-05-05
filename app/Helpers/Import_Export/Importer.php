@@ -40,7 +40,7 @@ class Importer{
 		$data_active = Unit::where('block_lot', $line[6])
 			->where('status', 'active')
 			->join('loans', 'units.id', '=', 'unit_id')
-			->where('loans.percentage', $percentage_data)
+			->where('loans.finance_type', $line[28])
 			->first();
 
 		if(! $data_active){
@@ -137,6 +137,7 @@ class Importer{
 		$loan->description = 'MONTHLY AMORTIZATION 7.75% INTEREST + INSURANCES';
 		$loan->monthly_percentage = '7.75%';
 		$loan->years = $years;
+		$loan->finance_type = $line[28];
 		$loan->save();
 	}
 
@@ -153,6 +154,7 @@ class Importer{
 		$loan->description = 'MONTHLY AMORTIZATION = INTEREST + INSURANCES';
 		$loan->monthly_percentage = $percentage;
 		$loan->years = $years;
+		$loan->finance_type = $line[28];
 		$loan->save();
 	}
 
