@@ -36,12 +36,12 @@ class Unit extends Model
 
     public function downpayment()
     {
-        return $this->hasOne(DownPayment::class, 'data_id');
+        return $this->hasOne(DownPayment::class, 'unit_id');
     }
 
     public function loans()
     {
-        return $this->hasMany(Loan::class, 'data_id');
+        return $this->hasMany(Loan::class, 'unit_id');
     }
 
     public function getHeaders()

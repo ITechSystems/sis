@@ -21,8 +21,8 @@ class Importer{
 				continue;
 			}
 
-			//create Data
 			\DB::transaction(function() use($line, $copied_loans){
+				//create Data
 				$data_obj = self::createData($line);
 
 				//create Downpayment
@@ -34,33 +34,35 @@ class Importer{
 	}
 
 	public static function createData($line){
+		$percentage_data = self::getLoanPercentage($line);
+
 		//search if this parent is active using block_lot
-		$data_active = Unit::where('block_lot', $line[3])
+		$data_active = Unit::where('block_lot', $line[6])
 			->where('status', 'active')
+			->join('loans', 'units.id', '=', 'unit_id')
+			->where('loans.percentage', $percentage_data)
 			->first();
 
 		if(! $data_active){
 			return self::createDataObject($line);
 		}
 
-		if($data_active->date == $line[0]){
-			return $data_active;
-		}
-
 		//this $data_active must be archived
-		$data_active->archive();
+		$to_be_archived = Unit::find($data_active->unit_id);
+		
+		$to_be_archived->archive();
 
 		return self::createDataObject($line);
 	}
 
 	public static function createDownpayment($line, $data_obj){
 		//find Downpayment associated with $data_obj, if not exist create
-		$downpayment_obj = DownPayment::where('data_id', $data_obj->id)->first();
+		$downpayment_obj = DownPayment::where('unit_id', $data_obj->id)->first();
 
 		if(! $downpayment_obj){
 			$downpayment0 = new DownPayment;
 			$downpayment = $downpayment0->getInstance();
-			$downpayment->data_id = $data_obj->id;
+			$downpayment->unit_id = $data_obj->id;
 			$downpayment->percentage = self::getDownpaymentPercentage($line);
 			$downpayment->equity = (float) str_replace(',', '', $line[15]);
 			$downpayment->term = $line[16];
@@ -113,35 +115,6 @@ class Importer{
 		return $data_obj;
 	}
 
-	public static function getLatestArchived($block_lot)
-	{
-		return Unit::archived()
-		->where('block_lot', $block_lot)
-		->orderBy('id', 'DESC')
-		->first();
-	}
-
-	public static function doesNotExistInArchives($line, $latest_archived, &$copied_loans)
-	{
-		foreach($latest_archived->loans as $loan){
-			if($copied_loans == null){
-				return false;
-			}
-
-			if($copied_loans->contains($loan->id)){
-				continue;
-			}
-
-			if($loan->description == $line[18]){
-				continue;
-			}
-
-			return $loan->id;
-		}
-
-		return false;
-	}
-
 	public static function getDownpaymentPercentage($line)
 	{
 		if($line[13] != ''){
@@ -155,7 +128,7 @@ class Importer{
 	{
 		$loan0 = new Loan;
 		$loan = $loan0->getInstance();
-		$loan->data_id = $data_id;
+		$loan->unit_id = $data_id;
 		$loan->percentage = self::getLoanPercentage($line);
 		$loan->total = (float) str_replace(',', '', $line[18]);
 		$loan->mri = (float) str_replace(',', '', $line[19]);
@@ -171,7 +144,7 @@ class Importer{
 	{
 		$loan0 = new Loan;
 		$loan = $loan0->getInstance();
-		$loan->data_id = $data_id;
+		$loan->unit_id = $data_id;
 		$loan->percentage = self::getLoanPercentage($line);
 		$loan->total = (float) str_replace(',', '', $line[18]);
 		$loan->mri = (float) str_replace(',', '', $line[19]);

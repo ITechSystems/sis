@@ -16,7 +16,8 @@ class CreateLoansTable extends Migration
         Schema::create('loans', function(Blueprint $table){
             $table->engine = "InnoDB";
             $table->increments('id');
-            $table->integer('data_id');
+            $table->integer('unit_id')->unsigned();
+            $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
             $table->float('total', 10, 2);
             $table->float('mri', 10, 2);
             $table->float('monthly_amortization', 10, 2);
