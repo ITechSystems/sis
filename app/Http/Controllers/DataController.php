@@ -20,6 +20,8 @@ class DataController extends Controller
 
         Importer::import($data);
 
+        session()->flash('message', 'Successfully imported data.');
+
         return redirect()->back();
     }
 

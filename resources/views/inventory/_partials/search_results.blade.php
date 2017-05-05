@@ -14,8 +14,8 @@
                         <th>Lot(sqm)</th>
                         <th>Floor(sqm)</th>
                         <th>Model</th>
-                        <th>House Type</th>
                         <th>Lot Orientation</th>
+                        <th>Last Update</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,8 +28,8 @@
                         <td>@{{ unit.lot_area }}</td>
                         <td>@{{ unit.floor_area }}</td>
                         <td>@{{ unit.house_model }}</td>
-                        <td>@{{ unit.house_type }}</td>
                         <td>@{{ unit.lot_type }}</td>
+                        <td>@{{ unit.date }}</td>
                     </tr>
                 </tbody>
             </table>
