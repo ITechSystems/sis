@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\AidaMap;
 use App\Mail\SendAidaMapToLeads;
-use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\Mail;
 
 class AidaMapsController extends ApiController
@@ -27,15 +26,11 @@ class AidaMapsController extends ApiController
         ]);
     }
 
-    public function pdf(PDF $pdf)
+    public function pdf()
     {
         $data = json_decode(request('serialized_data'));
 
-        $pdf->loadView('aida-maps.pdf', compact('data'));
-
-        $pdf->save(storage_path() . '/app/public/aida-map.pdf');
-
-        return $pdf->download('aida-map.pdf');
+        return view('aida-maps.pdf', compact('data'));
     }
 
     public function store()
