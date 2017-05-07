@@ -137,6 +137,84 @@ class RecordHandler{
 		$loans = Loan::createLoansMoveInAfter6($unit_lncBank2->id, $line);
 	}
 
+	public static function createZone2EquityTerm($line)
+	{
+		$unit_active = self::getUnitActive($line[6], $line[22]);
+
+		if(! $unit_active){
+			$unit_inHouse2 = Unit::createUnitObject($line);
+
+			$dowpayment_inHouse2 = DownPayment::createZone2EquityTerm($unit_inHouse2, $line);
+
+			$loans = Loan::createLoansZone2EquityTerm($unit_inHouse2->id, $line);
+
+			return;
+		}
+
+		//this $unit_active must be archived
+		$to_be_archived = Unit::find($unit_active->unit_id);
+		
+		$to_be_archived->archive();
+		
+		$unit_lncBank2 = Unit::createUnitObject($line);
+		
+		$dowpayment_inHouse2 = Downpayment::createZone2EquityTerm($unit_lncBank2, $line);
+
+		$loans = Loan::createLoansZone2EquityTerm($unit_lncBank2->id, $line);
+	}
+
+	public static function createZone2Bank2($line)
+	{
+		$unit_active = self::getUnitActive($line[6], $line[22]);
+
+		if(! $unit_active){
+			$unit_inHouse2 = Unit::createUnitObject($line);
+
+			$dowpayment_inHouse2 = DownPayment::createZone2Bank2($unit_inHouse2, $line);
+
+			$loans = Loan::createLoansZone2Bank2($unit_inHouse2->id, $line);
+
+			return;
+		}
+
+		//this $unit_active must be archived
+		$to_be_archived = Unit::find($unit_active->unit_id);
+		
+		$to_be_archived->archive();
+		
+		$unit_lncBank2 = Unit::createUnitObject($line);
+		
+		$dowpayment_inHouse2 = Downpayment::createZone2Bank2($unit_lncBank2, $line);
+
+		$loans = Loan::createLoansZone2Bank2($unit_lncBank2->id, $line);
+	}
+
+	public static function createZone2Inhouse2($line)
+	{
+		$unit_active = self::getUnitActive($line[6], $line[22]);
+
+		if(! $unit_active){
+			$unit_inHouse2 = Unit::createUnitObject($line);
+
+			$dowpayment_inHouse2 = DownPayment::createZone2Inhouse2($unit_inHouse2, $line);
+
+			$loans = Loan::createLoansZone2Inhouse2($unit_inHouse2->id, $line);
+
+			return;
+		}
+
+		//this $unit_active must be archived
+		$to_be_archived = Unit::find($unit_active->unit_id);
+		
+		$to_be_archived->archive();
+		
+		$unit_lncBank2 = Unit::createUnitObject($line);
+		
+		$dowpayment_inHouse2 = Downpayment::createZone2Inhouse2($unit_lncBank2, $line);
+
+		$loans = Loan::createLoansZone2Inhouse2($unit_lncBank2->id, $line);
+	}
+
 	public static function getUnitActive($block_lot, $finance_type)
 	{
 		return Unit::active()

@@ -49,6 +49,18 @@ class Importer{
 		if(trim($finance_type) == 'MOVE-IN AFTER 6'){
 			RecordHandler::createMoveInAfter6($line);
 		}
+
+		if(trim($finance_type) == 'ZONE 2 10% EQUITY TERM'){
+			RecordHandler::createZone2EquityTerm($line);
+		}
+
+		if(trim($finance_type) == 'ZONE 2 - BANK2 12.5% DP'){
+			RecordHandler::createZone2Bank2($line);
+		}
+
+		if(trim($finance_type) == 'ZONE 2 - INHOUSE2'){
+			RecordHandler::createZone2Inhouse2($line);
+		}
 	}
 
 	// public static function createDownpayment($line, $data_obj){
