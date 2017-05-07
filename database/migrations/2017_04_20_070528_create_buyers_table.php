@@ -27,9 +27,10 @@ class CreateBuyersTable extends Migration
             $table->string('email', 50);
             $table->string('work_location', 100);
             $table->string('facebook_url', 100);
-            $table->string('financing_type', 30);
+            $table->string('financing_type', 50);
             $table->string('country', 30);
-            $table->string('equity_type', 30);
+            $table->string('equity_type', 50);
+            $table->date('birth_date');
             $table->unsignedTinyInteger('status');
             $table->timestamps();
         });

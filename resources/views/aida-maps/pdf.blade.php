@@ -172,6 +172,5 @@ foreach ($data->unit->loans as $index => $loan) {
         $pdf->Cell(25, 5, number_format($loan->monthly_amortization, 2), 1, 1, 'R');
     }
 }
-
 $pdf->Output();
 exit;

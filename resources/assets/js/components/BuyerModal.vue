@@ -72,6 +72,13 @@
                             <div class="form-group">
                                 <label for="work_location">Work Location</label>
                                 <span class="text-danger" v-if="form.errors.has('work_location')">{{ form.errors.get('work_location') }}</span>
+                                <select class="form-control" name="work_location" id="work_location" v-model="form.work_location" :disabled="action == 'show'">
+                                    <option value="Local (Private)">Local (Private)</option>
+                                    <option value="Local (Government)">Local (Government)</option>
+                                    <option value="OFW (Land-Based)">OFW (Land-Based)</option>
+                                    <option value="OFW (Sea-Based)">OFW (Sea-Based)</option>
+                                    <option value="Self-Employed">Self-Employed</option>
+                                </select>
                                 <input type="text" class="form-control" name="work_location" id="work_location" v-model="form.work_location" :disabled="action == 'show'">
                             </div>
                         </div>
@@ -90,9 +97,10 @@
                                 <span class="text-danger" v-if="form.errors.has('financing_type')">{{ form.errors.get('financing_type') }}</span>
                                 <select class="form-control" name="financing_type" id="financing_type" v-model="form.financing_type" :disabled="action == 'show'">
                                     <option value="">Choose</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
+                                    <option value="Bank">Bank</option>
+                                    <option value="In-House">In-House</option>
+                                    <option value="Deferred">Deferred</option>
+                                    <option value="Full Payment">Full Payment</option>
                                 </select>
                             </div>
                         </div>
@@ -111,10 +119,18 @@
                                 <span class="text-danger" v-if="form.errors.has('equity_type')">{{ form.errors.get('equity_type') }}</span>
                                 <select class="form-control" name="equity_type" id="equity_type" v-model="form.equity_type" :disabled="action == 'show'">
                                     <option value="">Choose</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
+                                    <option value="Full">Full</option>
+                                    <option value="Installment">Installment</option>
                                 </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="birth_date">Birthdate</label>
+                                <span class="text-danger" v-if="form.errors.has('birth_date')">{{ form.errors.get('birth_date') }}</span>
+                                <input type="date" class="form-control" name="birth_date" id="birth_date" v-model="form.birth_date" :disabled="action == 'show'">
                             </div>
                         </div>
                     </div>

@@ -20,6 +20,7 @@ class Buyer extends Model
         'financing_type',
         'country',
         'equity_type',
+        'birth_date',
         'status',
     ];
 
