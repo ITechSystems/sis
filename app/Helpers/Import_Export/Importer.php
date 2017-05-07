@@ -12,7 +12,6 @@ class Importer{
 	public static function import($data)
 	{
 		foreach($data as $key => $line){
-			\Log::info('key: ' . $key);
 			if($key < 2){
 				continue;
 			}
@@ -41,6 +40,14 @@ class Importer{
 
 		if(trim($finance_type) == 'IN-HOUSE 2'){
 			RecordHandler::createUnitInHouse2($line);
+		}
+
+		if(trim($finance_type) == 'MOVE IN-12 @ 12% INTERIM RATE'){
+			RecordHandler::createUnitMoveIn12($line);
+		}
+
+		if(trim($finance_type) == 'MOVE-IN AFTER 6'){
+			RecordHandler::createMoveInAfter6($line);
 		}
 	}
 

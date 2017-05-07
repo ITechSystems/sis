@@ -46,4 +46,37 @@ class DownPayment extends Model
         
         return $downpayment->save();
     }
+
+    public static function createInHouse2($unit_obj, $line){
+        $downpayment = self::getInstance();
+        $downpayment->unit_id = $unit_obj->id;
+        $downpayment->percentage = 20;
+        $downpayment->equity = (float) str_replace(',', '', $line[13]);
+        $downpayment->term = $line[14];
+        $downpayment->monthly = (float) str_replace(',', '', $line[15]);
+        
+        return $downpayment->save();
+    }
+
+    public static function createMoveIn12($unit_obj, $line){
+        $downpayment = self::getInstance();
+        $downpayment->unit_id = $unit_obj->id;
+        $downpayment->percentage = 5.5;
+        $downpayment->equity = (float) str_replace(',', '', $line[13]);
+        $downpayment->term = $line[14];
+        $downpayment->monthly = (float) str_replace(',', '', $line[15]);
+        
+        return $downpayment->save();
+    }
+
+    public static function createMoveInAfter6($unit_obj, $line){
+        $downpayment = self::getInstance();
+        $downpayment->unit_id = $unit_obj->id;
+        $downpayment->percentage = 5.5;
+        $downpayment->equity = (float) str_replace(',', '', $line[13]);
+        $downpayment->term = $line[14];
+        $downpayment->monthly = (float) str_replace(',', '', $line[15]);
+        
+        return $downpayment->save();
+    }
 }
