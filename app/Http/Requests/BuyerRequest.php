@@ -26,7 +26,6 @@ class BuyerRequest extends FormRequest
         return [
             'last_name' => 'required',
             'first_name' => 'required',
-            'contact_number' => 'required',
             'marital_status' => 'required',
             'email' => 'required',
             'work_location' => 'required',
@@ -34,6 +33,8 @@ class BuyerRequest extends FormRequest
             'financing_type' => 'required',
             'country' => 'required',
             'equity_type' => 'required',
+            'birth_date' => 'required',
+            'contact_number_one' => 'required',
         ];
     }
 }

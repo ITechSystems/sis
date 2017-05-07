@@ -42,9 +42,9 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="contact_number">Contact Number/s</label>
-                                <span class="text-danger" v-if="form.errors.has('contact_number')">{{ form.errors.get('contact_number') }}</span>
-                                <input type="text" class="form-control" name="contact_number" id="contact_number" v-model="form.contact_number" :disabled="action == 'show'">
+                                <label for="birth_date">Birthdate</label>
+                                <span class="text-danger" v-if="form.errors.has('birth_date')">{{ form.errors.get('birth_date') }}</span>
+                                <input type="date" class="form-control" name="birth_date" id="birth_date" v-model="form.birth_date" :disabled="action == 'show'">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -73,13 +73,13 @@
                                 <label for="work_location">Work Location</label>
                                 <span class="text-danger" v-if="form.errors.has('work_location')">{{ form.errors.get('work_location') }}</span>
                                 <select class="form-control" name="work_location" id="work_location" v-model="form.work_location" :disabled="action == 'show'">
+                                    <option value="">Choose</option>
                                     <option value="Local (Private)">Local (Private)</option>
                                     <option value="Local (Government)">Local (Government)</option>
                                     <option value="OFW (Land-Based)">OFW (Land-Based)</option>
                                     <option value="OFW (Sea-Based)">OFW (Sea-Based)</option>
                                     <option value="Self-Employed">Self-Employed</option>
                                 </select>
-                                <input type="text" class="form-control" name="work_location" id="work_location" v-model="form.work_location" :disabled="action == 'show'">
                             </div>
                         </div>
                     </div>
@@ -128,9 +128,25 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="birth_date">Birthdate</label>
-                                <span class="text-danger" v-if="form.errors.has('birth_date')">{{ form.errors.get('birth_date') }}</span>
-                                <input type="date" class="form-control" name="birth_date" id="birth_date" v-model="form.birth_date" :disabled="action == 'show'">
+                                <label for="contact_number_one">Contact Number 1</label>
+                                <span class="text-danger" v-if="form.errors.has('contact_number_one')">{{ form.errors.get('contact_number_one') }}</span>
+                                <input type="text" class="form-control" name="contact_number_one" id="contact_number_one" v-model="form.contact_number_one" :disabled="action == 'show'">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="contact_number_two">Contact Number 2</label>
+                                <span class="text-danger" v-if="form.errors.has('contact_number_two')">{{ form.errors.get('contact_number_two') }}</span>
+                                <input type="text" class="form-control" name="contact_number_two" id="contact_number_two" v-model="form.contact_number_two" :disabled="action == 'show'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="contact_number_three">Contact Number 3</label>
+                                <span class="text-danger" v-if="form.errors.has('contact_number_three')">{{ form.errors.get('contact_number_three') }}</span>
+                                <input type="text" class="form-control" name="contact_number_three" id="contact_number_three" v-model="form.contact_number_three" :disabled="action == 'show'">
                             </div>
                         </div>
                     </div>
@@ -163,7 +179,9 @@
                     first_name: '',
                     middle_name: '',
                     extension: '',
-                    contact_number: '',
+                    contact_number_one: '',
+                    contact_number_two: '',
+                    contact_number_three: '',
                     marital_status: '',
                     email: '',
                     work_location: '',
@@ -171,6 +189,7 @@
                     financing_type: '',
                     country: '',
                     equity_type: '',
+                    birth_date: '',
                 })
             }
         },
@@ -225,14 +244,17 @@
                         this.form.first_name = data.buyer.first_name;
                         this.form.middle_name = data.buyer.middle_name;
                         this.form.extension = data.buyer.extension;
-                        this.form.contact_number = data.buyer.contact_number;
                         this.form.marital_status = data.buyer.marital_status;
                         this.form.email = data.buyer.email;
                         this.form.work_location = data.buyer.work_location;
                         this.form.facebook_url = data.buyer.facebook_url;
                         this.form.financing_type = data.buyer.financing_type;
                         this.form.country = data.buyer.country;
+                        this.form.birth_date = data.buyer.birth_date;
                         this.form.equity_type = data.buyer.equity_type;
+                        this.form.contact_number_one = data.buyer.contact_number_one;
+                        this.form.contact_number_two = data.buyer.contact_number_two;
+                        this.form.contact_number_three = data.buyer.contact_number_three;
                     });
                 } else {
                     this.form.reset();

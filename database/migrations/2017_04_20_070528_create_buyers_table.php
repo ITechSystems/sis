@@ -22,7 +22,7 @@ class CreateBuyersTable extends Migration
             $table->string('middle_name', 50)->nullable();
             $table->string('last_name', 50);
             $table->string('extension', 10)->nullable();
-            $table->string('contact_number', 100);
+            $table->date('birth_date');
             $table->string('marital_status', 30);
             $table->string('email', 50);
             $table->string('work_location', 100);
@@ -30,7 +30,9 @@ class CreateBuyersTable extends Migration
             $table->string('financing_type', 50);
             $table->string('country', 30);
             $table->string('equity_type', 50);
-            $table->date('birth_date');
+            $table->string('contact_number_one', 50);
+            $table->string('contact_number_two', 50)->nullable()->default(null);
+            $table->string('contact_number_three', 50)->nullable()->default(null);
             $table->unsignedTinyInteger('status');
             $table->timestamps();
         });
