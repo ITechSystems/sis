@@ -28,13 +28,13 @@ class BuyerRequest extends FormRequest
             'first_name' => 'required',
             'marital_status' => 'required',
             'email' => 'required',
-            'work_location' => 'required',
+            'work_type' => 'required',
             'facebook_url' => 'required',
             'financing_type' => 'required',
             'country' => 'required',
             'equity_type' => 'required',
             'birth_date' => 'required',
-            'contact_number_one' => 'required',
+            'mobile' => 'required',
         ];
     }
 }

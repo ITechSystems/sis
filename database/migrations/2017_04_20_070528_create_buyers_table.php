@@ -25,14 +25,14 @@ class CreateBuyersTable extends Migration
             $table->date('birth_date');
             $table->string('marital_status', 30);
             $table->string('email', 50);
-            $table->string('work_location', 100);
+            $table->string('work_type', 50);
             $table->string('facebook_url', 100);
             $table->string('financing_type', 50);
             $table->string('country', 30);
             $table->string('equity_type', 50);
-            $table->string('contact_number_one', 50);
-            $table->string('contact_number_two', 50)->nullable()->default(null);
-            $table->string('contact_number_three', 50)->nullable()->default(null);
+            $table->string('mobile', 50);
+            $table->string('landline', 50)->nullable()->default(null);
+            $table->string('others', 50)->nullable()->default(null);
             $table->unsignedTinyInteger('status');
             $table->timestamps();
         });

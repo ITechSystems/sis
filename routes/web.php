@@ -50,3 +50,6 @@ Route::get('/search/getBlocksByProject', 'InventoryController@getBlocksByProject
 Route::get('/search/unitById/{blockLot}', 'InventoryController@searchUnitById');
 
 Route::get('/buyer-statuses', 'BuyerStatusesController@index');
+
+Route::get('/countries', 'CountriesController@index');
+Route::get('/cities', 'CitiesController@index');

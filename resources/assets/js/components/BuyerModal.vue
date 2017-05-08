@@ -70,9 +70,9 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="work_location">Work Location</label>
-                                <span class="text-danger" v-if="form.errors.has('work_location')">{{ form.errors.get('work_location') }}</span>
-                                <select class="form-control" name="work_location" id="work_location" v-model="form.work_location" :disabled="action == 'show'">
+                                <label for="work_type">Work Type</label>
+                                <span class="text-danger" v-if="form.errors.has('work_type')">{{ form.errors.get('work_type') }}</span>
+                                <select class="form-control" name="work_type" id="work_type" v-model="form.work_type" :disabled="action == 'show'">
                                     <option value="">Choose</option>
                                     <option value="Local (Private)">Local (Private)</option>
                                     <option value="Local (Government)">Local (Government)</option>
@@ -110,7 +110,15 @@
                             <div class="form-group">
                                 <label for="country">Country(If OFW), City(If Local)</label>
                                 <span class="text-danger" v-if="form.errors.has('country')">{{ form.errors.get('country') }}</span>
-                                <input type="text" class="form-control" name="country" id="country" v-model="form.country" :disabled="action == 'show'">
+                                <select class="form-control" name="country" id="country" v-model="form.country" :disabled="action == 'show'">
+                                    <option value="">Choose</option>
+                                    <option v-for="country in countries" :value="country" v-if="form.work_type.includes('OFW')">
+                                        {{ country }}
+                                    </option>
+                                    <option v-for="city in cities" :value="city" v-if="form.work_type.includes('Local')">
+                                        {{ city }}
+                                    </option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -128,25 +136,25 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="contact_number_one">Contact Number 1</label>
-                                <span class="text-danger" v-if="form.errors.has('contact_number_one')">{{ form.errors.get('contact_number_one') }}</span>
-                                <input type="text" class="form-control" name="contact_number_one" id="contact_number_one" v-model="form.contact_number_one" :disabled="action == 'show'">
+                                <label for="mobile">Mobile</label>
+                                <span class="text-danger" v-if="form.errors.has('mobile')">{{ form.errors.get('mobile') }}</span>
+                                <input type="text" class="form-control" name="mobile" id="mobile" v-model="form.mobile" :disabled="action == 'show'">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="contact_number_two">Contact Number 2</label>
-                                <span class="text-danger" v-if="form.errors.has('contact_number_two')">{{ form.errors.get('contact_number_two') }}</span>
-                                <input type="text" class="form-control" name="contact_number_two" id="contact_number_two" v-model="form.contact_number_two" :disabled="action == 'show'">
+                                <label for="landline">LandLine</label>
+                                <span class="text-danger" v-if="form.errors.has('landline')">{{ form.errors.get('landline') }}</span>
+                                <input type="text" class="form-control" name="landline" id="landline" v-model="form.landline" :disabled="action == 'show'">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="contact_number_three">Contact Number 3</label>
-                                <span class="text-danger" v-if="form.errors.has('contact_number_three')">{{ form.errors.get('contact_number_three') }}</span>
-                                <input type="text" class="form-control" name="contact_number_three" id="contact_number_three" v-model="form.contact_number_three" :disabled="action == 'show'">
+                                <label for="others">Other Contacts</label>
+                                <span class="text-danger" v-if="form.errors.has('others')">{{ form.errors.get('others') }}</span>
+                                <input type="text" class="form-control" name="others" id="others" v-model="form.others" :disabled="action == 'show'">
                             </div>
                         </div>
                         <div class="col-md-6" v-if="action != 'create'">
@@ -186,17 +194,19 @@
             return {
                 message: '',
                 buyerStatuses: [],
+                countries: [],
+                cities: [],
                 form: new Form({
                     last_name: '',
                     first_name: '',
                     middle_name: '',
                     extension: '',
-                    contact_number_one: '',
-                    contact_number_two: '',
-                    contact_number_three: '',
+                    mobile: '',
+                    landline: '',
+                    others: '',
                     marital_status: '',
                     email: '',
-                    work_location: '',
+                    work_type: '',
                     facebook_url: '',
                     financing_type: '',
                     country: '',
@@ -239,6 +249,8 @@
 
         mounted() {
             this.getBuyerStatuses();
+            this.getCountries();
+            this.getCities();
         },
 
         methods: {
@@ -256,6 +268,18 @@
                 this.$http.get('/buyer-statuses').then(response => {
                     this.buyerStatuses = response.data.buyer_statuses;
                 });
+            },
+
+            getCountries() {
+                this.$http.get('/countries').then(response => {
+                    this.countries = response.data.countries;
+                });
+            },
+
+            getCities() {
+                this.$http.get('/cities').then(response => {
+                    this.cities = response.data.cities;
+                });
             }
         },
 
@@ -269,15 +293,15 @@
                         this.form.extension = data.buyer.extension;
                         this.form.marital_status = data.buyer.marital_status;
                         this.form.email = data.buyer.email;
-                        this.form.work_location = data.buyer.work_location;
+                        this.form.work_type = data.buyer.work_type;
                         this.form.facebook_url = data.buyer.facebook_url;
                         this.form.financing_type = data.buyer.financing_type;
                         this.form.country = data.buyer.country;
                         this.form.birth_date = data.buyer.birth_date;
                         this.form.equity_type = data.buyer.equity_type;
-                        this.form.contact_number_one = data.buyer.contact_number_one;
-                        this.form.contact_number_two = data.buyer.contact_number_two;
-                        this.form.contact_number_three = data.buyer.contact_number_three;
+                        this.form.mobile = data.buyer.mobile;
+                        this.form.landline = data.buyer.landline;
+                        this.form.others = data.buyer.others;
                         this.form.status = data.buyer.status.id;
                     });
                 } else {
