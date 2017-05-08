@@ -48,3 +48,5 @@ Route::post('/search/unit', 'InventoryController@search');
 Route::get('/search/getProjectsByLocation', 'InventoryController@getProjectsByLocation');
 Route::get('/search/getBlocksByProject', 'InventoryController@getBlocksByProject');
 Route::get('/search/unitById/{blockLot}', 'InventoryController@searchUnitById');
+
+Route::get('/buyer-statuses', 'BuyerStatusesController@index');

@@ -149,6 +149,17 @@
                                 <input type="text" class="form-control" name="contact_number_three" id="contact_number_three" v-model="form.contact_number_three" :disabled="action == 'show'">
                             </div>
                         </div>
+                        <div class="col-md-6" v-if="action != 'create'">
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <span class="text-danger" v-if="form.errors.has('status')">{{ form.errors.get('status') }}</span>
+                                <select class="form-control" name="status" id="status" v-model="form.status" :disabled="action == 'show'">
+                                    <option v-for="buyerStatus in buyerStatuses" :value="buyerStatus.id">
+                                        {{ buyerStatus.name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -174,6 +185,7 @@
         data() {
             return {
                 message: '',
+                buyerStatuses: [],
                 form: new Form({
                     last_name: '',
                     first_name: '',
@@ -190,6 +202,7 @@
                     country: '',
                     equity_type: '',
                     birth_date: '',
+                    status: '1',
                 })
             }
         },
@@ -224,6 +237,10 @@
             }
         },
 
+        mounted() {
+            this.getBuyerStatuses();
+        },
+
         methods: {
             save() {
                 this.form[this.requestType](this.url)
@@ -234,6 +251,12 @@
                     })
                     .catch(error => {});
             },
+
+            getBuyerStatuses() {
+                this.$http.get('/buyer-statuses').then(response => {
+                    this.buyerStatuses = response.data.buyer_statuses;
+                });
+            }
         },
 
         watch: {
@@ -255,6 +278,7 @@
                         this.form.contact_number_one = data.buyer.contact_number_one;
                         this.form.contact_number_two = data.buyer.contact_number_two;
                         this.form.contact_number_three = data.buyer.contact_number_three;
+                        this.form.status = data.buyer.status.id;
                     });
                 } else {
                     this.form.reset();
