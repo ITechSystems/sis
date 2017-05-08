@@ -21,6 +21,15 @@ class CreateBuyerStatusesTable extends Migration
         DB::table('buyer_statuses')->insert([
             'name' => 'New',
         ]);
+        DB::table('buyer_statuses')->insert([
+            'name' => 'Leads',
+        ]);
+        DB::table('buyer_statuses')->insert([
+            'name' => 'Prospect',
+        ]);
+        DB::table('buyer_statuses')->insert([
+            'name' => 'Closed',
+        ]);
     }
 
     /**
