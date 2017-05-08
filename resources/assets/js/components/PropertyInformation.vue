@@ -48,10 +48,14 @@
                         <tr v-for="(loan, index1) in item.loans">
                             <th v-if="index1 == 0" colspan="3">Finance Type</th>
                             <th v-if="index1 == 0">Price</th>
+                            <th v-if="index1 == 0">Loan<br> Percentage</th>
+                            <th v-if="index1 == 0">Monthly<br> Percentage</th>
                         </tr>
                         <tr v-for="(loan, index1) in item.loans">
                             <td v-if="index1 == 0" colspan="3">{{ loan.finance_type }}</td>
                             <td v-if="index1 == 0">{{ item.total_contract_price | currency }}</td>
+                            <td v-if="index1 == 0">{{ loan.percentage }}</td>
+                            <td v-if="index1 == 0">{{ loan.monthly_percentage | currency }}</td>
                         </tr>
                         <tr>
                             <td><br></td>
@@ -63,25 +67,15 @@
                             <td><br></td>
                         </tr>
                         <tr>
-                            <th>Loan Total</th>
-                            <th>MRI</th>
-                            <th>Monthly Amortization</th>
-                            <th>Loan Percentage</th>
-                            <th>Description</th>
-                            <th>Monthly Percentage</th>
-                            <th>Years</th>
+                            <th>Loanable<br> Amount</th>
+                            <th>MRI and Fire</th>
+                            <th v-for="loan in item.loans">{{ loan.years }} years</th>
                         </tr>
-                        <tbody>
-                            <tr v-for="loan in item.loans">
-                                <td>{{ loan.total | currency }}</td>
-                                <td>{{ loan.mri | currency }}</td>
-                                <td>{{ loan.monthly_amortization | currency }}</td>
-                                <td>{{ loan.percentage }}</td>
-                                <td>{{ loan.description }}</td>
-                                <td>{{ loan.monthly_percentage | currency }}</td>
-                                <td>{{ loan.years }}</td>
-                            </tr>
-                        </tbody>
+                        <tr>
+                            <td v-for="(loan, t_index) in item.loans" v-if="t_index == 0">{{ loan.total | currency }}</td>
+                            <td v-for="(loan, m_index) in item.loans" v-if="m_index == 0">{{ loan.mri | currency }}</td>
+                            <td v-for="loan in item.loans">{{ loan.monthly_amortization | currency }}</td>
+                        </tr>
                         <tr>
                             <td colspan="7"><hr></td>
                         </tr>
