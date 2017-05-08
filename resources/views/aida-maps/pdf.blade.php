@@ -167,7 +167,7 @@ foreach ($data->unit->loans as $index => $loan) {
         $pdf->Cell(25, 5, number_format($loan->mri, 2), 1, 1, 'R');
 
         $pdf->SetXY(45, 160 + (15 * $index));
-        $pdf->Cell(40, 5, $loan->years . ' years / ' . $loan->monthly_percentage . '% ', 1, 1, 'L');
+        $pdf->Cell(40, 5, $loan->years . ' years / ' . $loan->monthly_percentage . '%', 1, 1, 'L');
         $pdf->SetXY(85, 160 + (15 * $index));
         $pdf->Cell(25, 5, number_format($loan->monthly_amortization, 2), 1, 1, 'R');
     }

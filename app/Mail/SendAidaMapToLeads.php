@@ -11,14 +11,16 @@ class SendAidaMapToLeads extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
+    public $name;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($name)
     {
-        //
+        $this->name = $name;
     }
 
     /**
@@ -28,9 +30,9 @@ class SendAidaMapToLeads extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->from(auth()->user()->email)
+        return $this->from(['address' => auth()->user()->email, 'name' => auth()->user()->name])
             ->subject('AIDA Map')
-            ->view('emails.aida-map')
-            ->attach(storage_path() . '/app/public/aida-map.pdf');
+            ->view('emails.aida-map', ['name', $this->name]);
+            // ->attach(storage_path() . '/app/public/aida-map.pdf');
     }
 }

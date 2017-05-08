@@ -43,7 +43,7 @@ class AidaMapsController extends ApiController
 
     public function send()
     {
-        Mail::to(request('email'))->send(new SendAidaMapToLeads);
+        Mail::to(request('email'))->send(new SendAidaMapToLeads(request('name')));
 
         return 'Email sent successfully';
     }

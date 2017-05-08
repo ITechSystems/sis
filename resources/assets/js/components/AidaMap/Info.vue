@@ -219,6 +219,12 @@
             ProjectMap,
 		},
 
+        data() {
+            return {
+                download: 0,
+            }
+        },
+
 		computed: {
 			serializedData() {
                 let data = {};
@@ -226,6 +232,7 @@
                 data['unit'] = this.unit;
                 data['buyer'] = this.buyer;
                 data['financing_type'] = this.financingType;
+                data['download'] = this.download;
 
                 return JSON.stringify(data);
             },
@@ -245,7 +252,7 @@
             sendEmail() {
                 this.downloadPdf();
 
-                this.$http.get(`/aida-maps/send?email=${this.buyer.email}`).then(response => {
+                this.$http.get(`/aida-maps/send?email=${this.buyer.email}&name=${this.buyer.first_name}`).then(response => {
                     console.log(response.data);
                 });
             }
