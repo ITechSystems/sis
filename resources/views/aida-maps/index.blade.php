@@ -68,7 +68,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="unit in units">
-                                <td><input type="checkbox" name="" @click="unitId = unit.block_lot"></td>
+                                <td><input type="radio" name="unit_id" @click="unitId = unit.block_lot"></td>
                                 <td>@{{ unit.block_lot }}</td>
                                 <td>@{{ unit.phase }}</td>
                                 <td>@{{ unit.lot_area }}</td>
