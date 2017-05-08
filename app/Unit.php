@@ -101,4 +101,27 @@ class Unit extends Model
     {
         return $query->where('status', $this->getArchiveStatus());
     }
+
+    public static function createUnitObject($line)
+    {
+        $unit_obj0 = new Unit;
+        $unit_obj = $unit_obj0->getInstance();
+        $unit_obj->date = $line[0];
+        $unit_obj->developer = $line[1];
+        $unit_obj->location = $line[2];
+        $unit_obj->project = $line[3];
+        $unit_obj->zone = $line[4];
+        $unit_obj->phase = $line[5];
+        $unit_obj->block_lot = $line[6];
+        $unit_obj->lot_area = (float) str_replace(',', '', $line[7]);
+        $unit_obj->lot_type = $line[8];
+        $unit_obj->floor_area = (float) str_replace(',', '', $line[9]);
+        $unit_obj->house_model = $line[10];
+        $unit_obj->total_contract_price = (float) str_replace(',', '', $line[11]);
+        $unit_obj->reservation_fee = (float) str_replace(',', '', $line[12]);
+        $unit_obj->status = 'active';
+        $unit_obj->save();
+
+        return $unit_obj;
+    }
 }
