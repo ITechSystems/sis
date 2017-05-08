@@ -2,7 +2,7 @@
 
 @section("content")
     <buyer-modal :buyer-id="buyerId" :action="action" @saved="getBuyers"></buyer-modal>
-    <div class="container">
+    <div class="container" v-cloak>
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
                 <div class="box">

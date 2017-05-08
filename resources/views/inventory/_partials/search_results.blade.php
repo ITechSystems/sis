@@ -1,4 +1,4 @@
-<div class="row" v-if="result_count > 0">
+<div class="row" v-if="result_count > 0" v-cloak>
     <div class="col-md-12">
         <div class="panel panel-default mb-0">
             <div class="panel-heading">

@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    <div class="row" v-for="buyer in buyers" v-if="! clientSearching || buyer.id == clientSearching.id">
+    <div class="row" v-for="buyer in buyers" v-if="! clientSearching || buyer.id == clientSearching.id" v-cloak>
         <div class="col-md-offset-2 col-md-8">
             <div class="panel panel-default buyer-tile">
                 <div class="panel-heading">
@@ -47,7 +47,7 @@
         </div>
     </div>
     <horizontal-filters v-if="clientSearching" @search="displayResults" @reset="clearResults"></horizontal-filters>
-    <div class="row" v-if="clientSearching && result_count">
+    <div class="row" v-if="clientSearching && result_count" v-cloak>
         <div class="col-md-12">
             <div class="panel panel-default mb-0">
                 <div class="panel-heading">
