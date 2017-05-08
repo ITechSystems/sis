@@ -60,18 +60,20 @@ class Unit extends Model
             'house_model',
             'total_contract_price',
             'reservation_fee',
-            'equity',
-            'term',
-            'downpayment_monthly',
+            '',
             'downpayment_percentage',
-            'loan_total',
+            'downpayment_equity',
+            'downpayment_term',
+            'downpayment_monthly',
+            '',
+            'finance_type',
+            'total',
             'mri',
-            'monthly_amortization',
+            'monthly amortization',
             'loan_percentage',
             'description',
             'monthly_percentage',
-            'years',
-            'finance_type'
+            'years'
         ];
     }
 
