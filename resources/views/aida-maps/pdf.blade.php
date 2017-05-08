@@ -28,7 +28,7 @@ $pdf->Cell(60, 10, 'BUYER\'S COMPUTATIONS FOR', 1, 1, 'L');
 $pdf->SetXY(115, 35);
 $pdf->Cell(60, 5, $data->buyer->last_name . ', ' . $data->buyer->first_name . ' ' . $data->buyer->middle_name . ', ' . $data->buyer->extension, 1, 1, 'L');
 $pdf->SetXY(115, 40);
-$pdf->Cell(60, 5, $data->buyer->contact_number, 1, 1, 'L');
+$pdf->Cell(60, 5, $data->buyer->contact_number_one, 1, 1, 'L');
 $pdf->SetXY(115, 45);
 $pdf->Cell(60, 5, $data->buyer->email, 1, 1, 'L');
 $pdf->SetXY(115, 50);

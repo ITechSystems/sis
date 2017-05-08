@@ -101,7 +101,7 @@
                             <td rowspan="3">DownPayment</td>
                             <td>{{ unit.downpayment.percentage }}%</td>
                             <td>Equity</td>
-                            <td>{{ unit.downpayment.equity | currency }}</td>
+                            <td style="text-align:right">{{ unit.downpayment.equity | currency }}</td>
                         </tr>
                         <tr>
                             <td colspan="2">Terms</td>
@@ -110,19 +110,25 @@
                         <tr>
                             <td>Amount / Month</td>
                             <td>Net Of RF</td>
-                            <td>{{ unit.downpayment.monthly | currency }}</td>
+                            <td style="text-align:right">{{ unit.downpayment.monthly | currency }}</td>
                         </tr>
                         <tr>
                             <td>Percentage</td>
                             <td>Loanable Amount</td>
                             <td>MRI</td>
+                            <td>Description</td>
+                            <td>Monthly Percentage</td>
+                            <td>Terms</td>
                             <td>Monthly Amortization</td>
                         </tr>
                         <tr v-for="loan in unit.loans" v-if="loan.finance_type == financingType">
                             <td>{{ loan.percentage }}</td>
-                            <td>{{ loan.total | currency }}</td>
-                            <td>{{ loan.mri | currency }}</td>
-                            <td>{{ loan.description }} {{ loan.monthly_percentage }}% {{ loan.years }} years -- {{ loan.monthly_amortization | currency }}</td>
+                            <td style="text-align:right">{{ loan.total | currency }}</td>
+                            <td style="text-align:right">{{ loan.mri | currency }}</td>
+                            <td>{{ loan.description }}</td>
+                            <td>{{ loan.monthly_percentage }}%
+                            <td>{{ loan.years }} years</td>
+                            <td style="text-align:right">{{ loan.monthly_amortization | currency }}</td>
                         </tr>
                     </tbody>
                 </table>
