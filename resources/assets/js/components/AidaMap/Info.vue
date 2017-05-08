@@ -39,7 +39,7 @@
                 <table class="table">
                     <tbody>
                         <tr><td>{{ buyer.last_name }}, {{ buyer.first_name }}</td></tr>
-                        <tr><td>{{ buyer.contact_number }}</td></tr>
+                        <tr><td>{{ buyer.contact_number_one }}</td></tr>
                         <tr><td>{{ buyer.email }}</td></tr>
                         <tr><td>{{ buyer.marital_status }}</td></tr>
                         <tr><td>{{ buyer.financing_type }}</td></tr>
@@ -96,22 +96,24 @@
             <p class="heading">DownPayment and Loanable Amount</p>
             <div class="col-md-12">
                 <table class="table">
+                    <thead v-if="unit.downpayment">
+                        <tr>
+                            <th>Equity {{ unit.downpayment.percentage }}%</th>
+                            <th>Terms (Years)</th>
+                            <th>Amount/Month</th>
+                        </tr>
+                    </thead>
                     <tbody v-if="unit.downpayment">
                         <tr>
-                            <td rowspan="3">DownPayment</td>
-                            <td>{{ unit.downpayment.percentage }}%</td>
-                            <td>Equity</td>
                             <td style="text-align:right">{{ unit.downpayment.equity | currency }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">Terms</td>
-                            <td>{{ unit.downpayment.term }}</td>
-                        </tr>
-                        <tr>
-                            <td>Amount / Month</td>
-                            <td>Net Of RF</td>
+                            <td style="text-align:right">{{ unit.downpayment.term | currency }}</td>
                             <td style="text-align:right">{{ unit.downpayment.monthly | currency }}</td>
                         </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <table class="table">
+                    <thead>
                         <tr>
                             <td>Percentage</td>
                             <td>Loanable Amount</td>
@@ -121,6 +123,8 @@
                             <td>Terms</td>
                             <td>Monthly Amortization</td>
                         </tr>
+                    </thead>
+                    <tbody>
                         <tr v-for="loan in unit.loans" v-if="loan.finance_type == financingType">
                             <td>{{ loan.percentage }}</td>
                             <td style="text-align:right">{{ loan.total | currency }}</td>
@@ -241,8 +245,8 @@
             sendEmail() {
                 this.downloadPdf();
 
-                this.$http.get(`/aida-maps/send`).then(response => {
-
+                this.$http.get(`/aida-maps/send?email=${this.buyer.email}`).then(response => {
+                    console.log(response.data);
                 });
             }
 		}

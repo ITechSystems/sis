@@ -42,7 +42,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="birth_date">Birthdate</label>
+                                <label for="birth_date">BirthDate</label>
                                 <span class="text-danger" v-if="form.errors.has('birth_date')">{{ form.errors.get('birth_date') }}</span>
                                 <input type="date" class="form-control" name="birth_date" id="birth_date" v-model="form.birth_date" :disabled="action == 'show'">
                             </div>
@@ -53,9 +53,9 @@
                                 <span class="text-danger" v-if="form.errors.has('marital_status')">{{ form.errors.get('marital_status') }}</span>
                                 <select class="form-control" name="marital_status" id="marital_status" v-model="form.marital_status" :disabled="action == 'show'">
                                     <option value="">Choose</option>
-                                    <option value="single">Single</option>
-                                    <option value="married">Married</option>
-                                    <option value="widowed">Widowed</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Widowed">Widowed</option>
                                 </select>
                             </div>
                         </div>
