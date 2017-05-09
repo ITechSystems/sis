@@ -1,5 +1,5 @@
 <template>
-	<form id="aida-map-form">
+    <form>
         <div class="row">
             <p class="heading">Developer's Information</p>
             <div class="col-md-12">
@@ -39,7 +39,7 @@
                 <table class="table">
                     <tbody>
                         <tr><td>{{ buyer.last_name }}, {{ buyer.first_name }}</td></tr>
-                        <tr><td>{{ buyer.contact_number_one }}</td></tr>
+                        <tr><td>{{ buyer.mobile }}</td></tr>
                         <tr><td>{{ buyer.email }}</td></tr>
                         <tr><td>{{ buyer.marital_status }}</td></tr>
                         <tr><td>{{ buyer.financing_type }}</td></tr>
@@ -142,7 +142,6 @@
             <p class="heading">Map of the Subdivision</p>
             <div class="col-md-12 mb-20">
                 <img src="/img/map.png" alt="">
-                <!-- <project-map @plotted="recordPoints" :x="coordinate.x" :y="coordinate.y"></project-map> -->
             </div>
         </div>
         <div class="row">
@@ -195,12 +194,6 @@
                     <button class="btn btn-warning" @click.prevent="downloadPdf">
                         <i class="fa fa-file"></i> PDF
                     </button>
-                    <button class="btn btn-success">
-                        <i class="fa fa-image"></i> JPEG
-                    </button>
-                    <button class="btn btn-info">
-                        <i class="fa fa-share"></i> Share
-                    </button>
                 </div>
                 <form action="/aida-maps/pdf" method="post" id="pdf-form" target="_blank" style="display:none">
                     <input type="hidden" name="_token" v-model="$http.defaults.headers.common['X-CSRF-TOKEN']">
@@ -214,34 +207,27 @@
 <script>
     import ProjectMap from '../../components/ProjectMap.vue';
 
-	export default {
-		components: {
+    export default {
+        components: {
             ProjectMap,
-		},
-
-        data() {
-            return {
-                download: 0,
-            }
         },
 
-		computed: {
-			serializedData() {
+        computed: {
+            serializedData() {
                 let data = {};
 
                 data['unit'] = this.unit;
                 data['buyer'] = this.buyer;
                 data['financing_type'] = this.financingType;
-                data['download'] = this.download;
 
                 return JSON.stringify(data);
             },
-		},
+        },
 
-		props: ['unit', 'buyer', 'financingType'],
+        props: ['unit', 'buyer', 'financingType'],
 
-		methods: {
-			submitForm() {
+        methods: {
+            submitForm() {
                 document.getElementById('pdf-form').submit();
             },
 
@@ -255,7 +241,7 @@
                 this.$http.get(`/aida-maps/send?email=${this.buyer.email}&name=${this.buyer.first_name}`).then(response => {
                     console.log(response.data);
                 });
-            }
-		}
-	}
+            },
+        }
+    }
 </script>

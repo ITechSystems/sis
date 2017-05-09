@@ -20,36 +20,39 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', 'HomeController@index');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/dashboard', 'HomeController@index');
 
-Route::get('/inventory', 'InventoryController@index');
+    Route::get('/inventory', 'InventoryController@index');
 
-Route::get('/data/upload', 'DataController@index');
-Route::post('/data/import', 'DataController@import');
-Route::get('/data/export', 'DataController@export');
-Route::get('/data/template', 'DataController@template');
+    Route::get('/data/upload', 'DataController@index');
+    Route::post('/data/import', 'DataController@import');
+    Route::get('/data/export', 'DataController@export');
+    Route::get('/data/template', 'DataController@template');
 
-Route::get('/buyers', 'BuyersController@index');
-Route::get('/buyers/all', 'BuyersController@all');
-Route::get('/buyers/{buyer}', 'BuyersController@show');
-Route::patch('/buyers/{buyer}', 'BuyersController@update');
-Route::post('/buyers', 'BuyersController@store');
-Route::delete('/buyers/{buyer}', 'BuyersController@destroy');
+    Route::get('/buyers', 'BuyersController@index');
+    Route::get('/buyers/all', 'BuyersController@all');
+    Route::get('/buyers/{buyer}', 'BuyersController@show');
+    Route::patch('/buyers/{buyer}', 'BuyersController@update');
+    Route::post('/buyers', 'BuyersController@store');
+    Route::delete('/buyers/{buyer}', 'BuyersController@destroy');
 
-Route::get('/aida-maps', 'AidaMapsController@index');
-Route::get('/aida-maps/send', 'AidaMapsController@send');
-Route::get('/aida-maps/{unitId}', 'AidaMapsController@show');
-Route::post('/aida-maps/pdf', 'AidaMapsController@pdf');
-Route::post('/aida-maps', 'AidaMapsController@store');
+    Route::get('/aida-maps', 'AidaMapsController@index');
+    Route::get('/aida-maps/create', 'AidaMapsController@create');
+    Route::get('/aida-maps/send', 'AidaMapsController@send');
+    Route::get('/aida-maps/{unitId}', 'AidaMapsController@show');
+    Route::post('/aida-maps/pdf', 'AidaMapsController@pdf');
+    Route::post('/aida-maps', 'AidaMapsController@store');
 
-Route::get('/units/locations', 'UnitLocationsController@index');
+    Route::get('/units/locations', 'UnitLocationsController@index');
 
-Route::post('/search/unit', 'InventoryController@search');
-Route::get('/search/getProjectsByLocation', 'InventoryController@getProjectsByLocation');
-Route::get('/search/getBlocksByProject', 'InventoryController@getBlocksByProject');
-Route::get('/search/unitById/{blockLot}', 'InventoryController@searchUnitById');
+    Route::post('/search/unit', 'InventoryController@search');
+    Route::get('/search/getProjectsByLocation', 'InventoryController@getProjectsByLocation');
+    Route::get('/search/getBlocksByProject', 'InventoryController@getBlocksByProject');
+    Route::get('/search/unitById/{blockLot}', 'InventoryController@searchUnitById');
 
-Route::get('/buyer-statuses', 'BuyerStatusesController@index');
+    Route::get('/buyer-statuses', 'BuyerStatusesController@index');
 
-Route::get('/countries', 'CountriesController@index');
-Route::get('/cities', 'CitiesController@index');
+    Route::get('/countries', 'CountriesController@index');
+    Route::get('/cities', 'CitiesController@index');
+});

@@ -14,7 +14,7 @@
             <span>
                 <button class="btn btn-default" type="button" data-dismiss="modal" @click="message = ''">Close</button>
                 <button class="btn btn-default" type="button" @click="financingType = ''" v-if="financingType">Back</button>
-                <button class="btn btn-primary" type="submit" form="aida-map-form" v-if="financingType">Save</button>
+                <button class="btn btn-primary" type="button" @click="save" v-if="financingType">Save</button>
             </span>
         </p>
     </modal>
@@ -42,10 +42,6 @@
                 buyer: {},
                 units: [],
                 financingType: '',
-                coordinate: {
-                    x: '',
-                    y: '',
-                },
             }
         },
 
@@ -76,20 +72,15 @@
                 this.financingType = payload;
             },
 
-            // recordPoints(coordinate) {
-            //     this.coordinate.x = coordinate.x;
-            //     this.coordinate.y = coordinate.y;
-            // },
-
-            // save() {
-            //     this.$http.post(`/aida-maps`, {
-            //         'point_x': this.coordinate.x,
-            //         'point_y': this.coordinate.y,
-            //         'unit_id': this.unitId,
-            //     }).then(response => {
-            //         this.message = response.data.message
-            //     });
-            // }
+            save() {
+                this.$http.post(`/aida-maps`, {
+                    'unit_id': this.unitId,
+                    'buyer_id': this.buyerId,
+                    'finance_type': this.financingType,
+                }).then(response => {
+                    this.message = response.data.message
+                });
+            }
         },
 
         watch: {
@@ -99,14 +90,6 @@
                     }).catch(error => {
                         console.log(error);
                     });
-
-                // this.$http.get(`/aida-maps/${this.unitId}`).then(response => {
-                //         this.aidaMap = response.data.aida_map;
-                //         this.coordinate.x = response.data.aida_map.point_x;
-                //         this.coordinate.y = response.data.aida_map.point_y;
-                //     }).catch(error => {
-                //         console.log(error);
-                //     });
             },
 
             buyerId() {
@@ -115,7 +98,7 @@
                     }).catch(error => {
                         console.log(error);
                     });
-            }
+            },
         }
     }
 </script>

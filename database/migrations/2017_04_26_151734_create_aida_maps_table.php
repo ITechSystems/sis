@@ -16,9 +16,9 @@ class CreateAidaMapsTable extends Migration
         Schema::create('aida_maps', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('buyer_id');
             $table->string('unit_id');
-            $table->decimal('point_x', 5, 4);
-            $table->decimal('point_y', 5, 4);
+            $table->string('finance_type', 50);
             $table->timestamps();
         });
     }

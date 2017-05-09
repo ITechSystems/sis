@@ -10,7 +10,9 @@ class AidaMapsController extends ApiController
 {
     public function index()
     {
-        return view('aida-maps.index');
+        $aidaMaps = AidaMap::with('buyer', 'user')->get();
+
+        return view('aida-maps.index', compact('aidaMaps'));
     }
 
     public function show($unitId)
@@ -31,6 +33,11 @@ class AidaMapsController extends ApiController
         $data = json_decode(request('serialized_data'));
 
         return view('aida-maps.pdf', compact('data'));
+    }
+
+    public function create()
+    {
+        return view('aida-maps.create');
     }
 
     public function store()
