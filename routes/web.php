@@ -53,3 +53,8 @@ Route::get('/buyer-statuses', 'BuyerStatusesController@index');
 
 Route::get('/countries', 'CountriesController@index');
 Route::get('/cities', 'CitiesController@index');
+//for image upload
+Route::get('/pictures/upload', function() {
+  return View::make('multimedia.pictures.index');
+});
+Route::post('/apply/upload', 'ApplyController@upload');

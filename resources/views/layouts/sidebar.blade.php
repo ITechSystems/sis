@@ -65,7 +65,7 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Pictures</a>
+                        <li><a href="/pictures/upload"><i class="fa fa-circle-o"></i> Pictures</a>
                         </li>
                         <li><a href="#"><i class="fa fa-circle-o"></i> Videos</a></li>
                         <li><a href="#"><i class="fa fa-circle-o"></i> Audio</a>
