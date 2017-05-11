@@ -16,9 +16,12 @@ class CreatePhotosTable extends Migration
         Schema::create('photos', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->string('developer');
             $table->string('house_model_name');
             $table->string('description');
-            $table->string('image');
+            $table->string('filename');
+            $table->string('mime');
+            $table->string('original_filename');
             $table->timestamps();
         });
     }

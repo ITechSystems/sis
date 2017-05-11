@@ -34,9 +34,21 @@
 							    		<div class="controls">
 							    			<div class="row">
 							    				<div class="col-md-6">
+							    					<label for="developer">Developer</label>
+
+							    					<input type="text" name="developer">
+							    				</div>
+							    			</div>
+							    			<div class="row">
+							    				<div class="col-md-6">
 							    					<label for="house_model_name">House Model Name</label>
 
-							    					<input type="text" name="house_model_name" class="form-control" required>
+							    					<select name="house_model_name" class="form-control" required>
+							    						<option value="">Choose</option>
+							    						@foreach($names as $n)
+							    							<option>{{ $n->house_model }}</option>
+							    						@endforeach
+							    					</select>
 							    				</div>
 							    			</div>
 
@@ -72,6 +84,22 @@
 						      		</ul>
 						      	</div>
 						      @endif
+
+						      <h1> Pictures list</h1>
+							 <div class="row">
+							        <ul class="thumbnails">
+							 @foreach($entries as $entry)
+							            <div class="col-md-2">
+							                <div class="thumbnail">
+							                    <img src="{{ route('getentry', $entry->filename) }}" alt="ALT NAME" class="img-responsive" />
+							                    <div class="caption">
+							                        <p>{{$entry->original_filename}}</p>
+							                    </div>
+							                </div>
+							            </div>
+							 @endforeach
+							 </ul>
+							 </div>
 						   </div>
 						</div>
 					</div>

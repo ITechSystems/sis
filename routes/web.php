@@ -51,8 +51,10 @@ Route::get('/search/unitById/{blockLot}', 'InventoryController@searchUnitById');
 
 Route::get('/buyer-statuses', 'BuyerStatusesController@index');
 
-//for image upload
-Route::get('/pictures/upload', function() {
-  return View::make('multimedia.pictures.index');
-});
 Route::post('/apply/upload', 'ApplyController@upload');
+
+Route::get('/pictures/upload', 'ApplyController@index');
+
+Route::get('fileentry/get/{filename}', [
+	'as' => 'getentry', 'uses' => 'ApplyController@get']);
+Route::get('/load/model/image', 'ApplyController@loadModelImage');
