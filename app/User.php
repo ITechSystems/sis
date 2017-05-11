@@ -31,4 +31,17 @@ class User extends Authenticatable
     {
         return $this->hasMany(Buyer::class, 'user_id');
     }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    public function hasPermission($permission, $access)
+    {
+        return !! $this->role->permissions
+            ->where('name', $permission)
+            ->where('pivot.access', $access)
+            ->count();
+    }
 }

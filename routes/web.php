@@ -56,8 +56,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/countries', 'CountriesController@index');
     Route::get('/cities', 'CitiesController@index');
     //for image upload
-    Route::get('/pictures/upload', function() {
+    Route::get('/pictures/upload', function () {
         return View::make('multimedia.pictures.index');
     });
     Route::post('/apply/upload', 'ApplyController@upload');
+
+    Route::get('/roles', 'RolesController@index');
+    Route::get('/roles/{role}', 'RolesController@show');
+
+    Route::get('/permissions', 'PermissionsController@index');
+
+    Route::post('/roles/{role}/permissions', 'RolesPermissionsController@store');
 });

@@ -11,11 +11,15 @@ class DataController extends Controller
 {
     public function index()
     {
+        $this->authorize('index', Unit::class);
+
         return view('data.index');
     }
 
     public function import()
     {
+        $this->authorize('import', Unit::class);
+
         $data = CsvMapper::map(file(request()->data));
 
         Importer::import($data);

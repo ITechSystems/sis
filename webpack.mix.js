@@ -34,4 +34,5 @@ mix.styles([
     ], 'public/js/app.js')
     .js('resources/assets/js/inventory.js', 'public/js')
     .js('resources/assets/js/buyer.js', 'public/js')
-    .js('resources/assets/js/aida-map.js', 'public/js');
+    .js('resources/assets/js/aida-map.js', 'public/js')
+    .js('resources/assets/js/permission.js', 'public/js');
