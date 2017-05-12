@@ -61,3 +61,6 @@ Route::get('/load/model/image', 'ApplyController@loadModelImage');
 
 Route::get('/pictures/units/upload', 'ApplyController@unitsIndex');
 Route::post('/apply/units/upload', 'ApplyController@unitsUpload');
+
+Route::get('/view/image/{filename}', 'ApplyController@viewImage');
+Route::delete('/delete/photo/{filename}', 'ApplyController@deletePhoto');

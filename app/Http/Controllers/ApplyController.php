@@ -34,7 +34,7 @@ class ApplyController extends Controller {
 
     $model = $entry->house_model_name;
 
-    $path = "/$developer/models/$model/";
+    $path = "public/$developer/models/$model/";
 
     return $file = \Storage::disk('local')->get($path . $entry->filename);
 
@@ -73,38 +73,36 @@ class ApplyController extends Controller {
     return redirect()->back();
   }
 
-  // public function uploadOld(Request $request) { FOR REMOVAL
-  //   $data = $request->all();
+  public function viewImage($filename)
+  {
+    $image_src = Photo::getImage($filename);
 
-  //   if(! $this->validate($request, Photo::$rules)){
+    $photo = Photo::getPhotoByFilename($filename);
 
-  //   }
+    return view('multimedia.pictures.view_image', compact('image_src', 'photo'));
+  }
 
-  //   $image = $data['file'];
+  public function deletePhoto($filename)
+  {
+    $photo = Photo::getPhotoByFilename($filename);
 
-  //   $filename  = time() . '.' . $image->getClientOriginalExtension();
+    $image_src = Photo::getImagePath($filename);
 
-  //   $path = public_path('img/' . $filename);
+    try{
+      unlink($image_src);
 
-  //   $uploaded_image = Image::make($image->getRealPath())
-  //       ->resize(468, 249)
-  //       ->save($path);
+      $photo->delete();
+    }catch(\Exception $e){
+      echo 'file not found';
+    }
 
-  //   $house_model_name = trim($data['house_model_name']);
+    $entries = Photo::all();
 
-  //   $description = trim($data['description']);
+    $names = Unit::distinct()->get(['house_model']);
 
-  //   $image = $path;
+    session()->flash('success', 'Successfully deleted file.');
 
-  //   Photo::create([
-  //       'house_model_name' => $house_model_name,
-  //       'description' => $description,
-  //       'image' => '/img//' . $filename
-  //   ]);
-
-  //   session()->flash('success', 'Successfully uploaded photo.');
-
-  //   return redirect()->back();
-  // }
+    return view('multimedia.pictures.index', compact('entries', 'names'));
+  }
   
 }

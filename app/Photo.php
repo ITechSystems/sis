@@ -56,4 +56,40 @@ class Photo extends Model
             $photo->save();
         });
     }
+
+    public static function getImage($filename)
+    {
+        $photo = self::getPhotoByFilename($filename);
+
+        $developer = $photo->developer;
+
+        $model = $photo->house_model_name;
+
+        $base_url = self::getBaseUrl();
+
+        $image_src = "storage/$developer/models/$model/" . $photo->filename;
+
+        return $base_url . $image_src;
+    }
+
+    public static function getBaseUrl()
+    {
+        return 'http://www.sis.local/';
+    }
+
+    public static function getPhotoByFilename($filename)
+    {
+        return Photo::where('filename', $filename)->firstOrFail();
+    }
+
+    public static function getImagePath($filename)
+    {
+        $photo = self::getPhotoByFilename($filename);
+
+        $developer = $photo->developer;
+
+        $model = $photo->house_model_name;
+
+        return "storage/$developer/models/$model/" . $photo->filename;
+    }
 }
