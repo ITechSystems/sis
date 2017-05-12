@@ -89,12 +89,18 @@
 							 <div class="row">
 							        <ul class="thumbnails">
 							 @foreach($entries as $entry)
-							            <div class="col-md-2">
+							            <div class="col-md-3">
 							                <div class="thumbnail">
-							                    <img src="{{ route('getentry', $entry->filename) }}" alt="ALT NAME" class="img-responsive" />
-							                    <div class="caption">
-							                        <p>{{$entry->original_filename}}</p>
-							                    </div>
+							                	<p>
+								                    <img src="{{ route('getentry', $entry->filename) }}" alt="ALT NAME" class="img-responsive" height="200" width="200" />
+								                    <div class="caption">
+								                        <p>
+								                        	<a href="/view/image/{{ $entry->filename }}">
+								                        		{{$entry->house_model_name}}
+								                        	</a>
+								                        </p>
+								                    </div>
+							                    </p>
 							                </div>
 							            </div>
 							 @endforeach

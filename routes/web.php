@@ -71,6 +71,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/pictures/units/upload', 'ApplyController@unitsIndex');
 	Route::post('/apply/units/upload', 'ApplyController@unitsUpload');
 
+	Route::get('/pictures/units/upload', 'ApplyController@unitsIndex');
+
+	Route::get('/view/image/{filename}', 'ApplyController@viewImage');
+	Route::delete('/delete/photo/{filename}', 'ApplyController@deletePhoto');
+
     Route::get('/roles', 'RolesController@index');
     Route::get('/roles/{role}', 'RolesController@show');
 
