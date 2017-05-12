@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 use App\Photo;
 use App\Unit;
+use App\UnitPhoto;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Redirect;
@@ -18,15 +19,11 @@ class ApplyController extends Controller {
 
   public function upload()
   {
-    $file = request()->file;
+    Photo::saveImage(request()->all());
 
-    $data = request()->all();
+    session()->flash('success', 'Successfully uploaded photo.');
 
-    return Photo::saveImage($file, $data);
-
-    
-
-    dd('storage');
+    return redirect()->back();
   }
 
   public function get($filename)
@@ -41,7 +38,7 @@ class ApplyController extends Controller {
 
     return $file = \Storage::disk('local')->get($path . $entry->filename);
 
-    return (new Response($file, 200))->header('Content-Type', $entry->mime);
+    // return (new Response($file, 200))->header('Content-Type', $entry->mime);
   }
 
   public function loadModelImage()
@@ -58,38 +55,56 @@ class ApplyController extends Controller {
     return $path . $entry->filename;
   }
 
-  public function uploadOld(Request $request) {
-    $data = $request->all();
+  public function unitsIndex()
+  {
+    // $entries = Photo::all();
 
-    if(! $this->validate($request, Photo::$rules)){
+    $names = Unit::distinct()->get(['block_lot']);
 
-    }
+    return view('multimedia.pictures.units_index', compact('names'));
+  }
 
-    $image = $data['file'];
-
-    $filename  = time() . '.' . $image->getClientOriginalExtension();
-
-    $path = public_path('img/' . $filename);
-
-    $uploaded_image = Image::make($image->getRealPath())
-        ->resize(468, 249)
-        ->save($path);
-
-    $house_model_name = trim($data['house_model_name']);
-
-    $description = trim($data['description']);
-
-    $image = $path;
-
-    Photo::create([
-        'house_model_name' => $house_model_name,
-        'description' => $description,
-        'image' => '/img//' . $filename
-    ]);
+  public function unitsUpload()
+  {
+    UnitPhoto::saveImage(request()->all());
 
     session()->flash('success', 'Successfully uploaded photo.');
 
     return redirect()->back();
   }
+
+  // public function uploadOld(Request $request) { FOR REMOVAL
+  //   $data = $request->all();
+
+  //   if(! $this->validate($request, Photo::$rules)){
+
+  //   }
+
+  //   $image = $data['file'];
+
+  //   $filename  = time() . '.' . $image->getClientOriginalExtension();
+
+  //   $path = public_path('img/' . $filename);
+
+  //   $uploaded_image = Image::make($image->getRealPath())
+  //       ->resize(468, 249)
+  //       ->save($path);
+
+  //   $house_model_name = trim($data['house_model_name']);
+
+  //   $description = trim($data['description']);
+
+  //   $image = $path;
+
+  //   Photo::create([
+  //       'house_model_name' => $house_model_name,
+  //       'description' => $description,
+  //       'image' => '/img//' . $filename
+  //   ]);
+
+  //   session()->flash('success', 'Successfully uploaded photo.');
+
+  //   return redirect()->back();
+  // }
   
 }

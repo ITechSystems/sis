@@ -21,36 +21,39 @@ class Photo extends Model
     	'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
     ];
 
-    public static function saveImage($file, $data)
+    public static function saveImage($data)
     {
-        $developer = $data['developer'];
+        \DB::transaction(function()use($data){
+            $file = request()->file;
 
-        $model = $data['house_model_name'];
+            $developer = $data['developer'];
 
-        $description = $data['description'];
+            $model = $data['house_model_name'];
 
-        $path = "public/$developer/models/$model/";
+            $description = $data['description'];
 
-        $extension = $file->getClientOriginalExtension();
+            $path = "public/$developer/models/$model/";
 
-        \Storage::disk('local')->put($path . $file->getFilename() . '.' . $extension, \File::get($file));
-        // \Storage::disk('local')->put($file->getFilename() . '.' . $extension, \File::get($file));
+            $extension = $file->getClientOriginalExtension();
 
-        //save to the database
-        $photo = new Photo;
+            \Storage::disk('local')->put($path . $file->getFilename() . '.' . $extension, \File::get($file));
 
-        $photo->developer = $developer;
+            //save to the database
+            $photo = new Photo;
 
-        $photo->house_model_name = $model;
+            $photo->developer = $developer;
 
-        $photo->description = $description;
+            $photo->house_model_name = $model;
 
-        $photo->mime = $file->getClientMimeType();
+            $photo->description = $description;
 
-        $photo->original_filename = $file->getClientOriginalName();
+            $photo->mime = $file->getClientMimeType();
 
-        $photo->filename = $file->getFilename() . '.' . $extension;
+            $photo->original_filename = $file->getClientOriginalName();
 
-        $photo->save();
+            $photo->filename = $file->getFilename() . '.' . $extension;
+
+            $photo->save();
+        });
     }
 }
