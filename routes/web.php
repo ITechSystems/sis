@@ -53,6 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/buyer-statuses', 'BuyerStatusesController@index');
 
+
     Route::get('/countries', 'CountriesController@index');
     Route::get('/cities', 'CitiesController@index');
     //for image upload
@@ -60,6 +61,15 @@ Route::group(['middleware' => 'auth'], function () {
         return View::make('multimedia.pictures.index');
     });
     Route::post('/apply/upload', 'ApplyController@upload');
+
+	Route::get('/pictures/upload', 'ApplyController@index');
+
+	Route::get('fileentry/get/{filename}', [
+		'as' => 'getentry', 'uses' => 'ApplyController@get']);
+	Route::get('/load/model/image', 'ApplyController@loadModelImage');
+
+	Route::get('/pictures/units/upload', 'ApplyController@unitsIndex');
+	Route::post('/apply/units/upload', 'ApplyController@unitsUpload');
 
     Route::get('/roles', 'RolesController@index');
     Route::get('/roles/{role}', 'RolesController@show');

@@ -65,8 +65,28 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/pictures/upload"><i class="fa fa-circle-o"></i> Pictures</a>
+                        <!-- <li>
+                            <a href="/pictures/upload"><i class="fa fa-circle-o"></i> Pictures</a>
+                        </li> -->
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-file-text" aria-hidden="true"></i>
+                                    <span>Pictures</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li>
+                                    <a href="/pictures/upload"><i class="fa fa-circle-o"></i> House Models</a>
+                                </li>
+                                <li>
+                                    <a href="/pictures/units/upload"><i class="fa fa-circle-o"></i> Units</a>
+                                </li>
+                            </ul>
                         </li>
+
+
                         <li><a href="#"><i class="fa fa-circle-o"></i> Videos</a></li>
                         <li><a href="#"><i class="fa fa-circle-o"></i> Audio</a>
                         </li>
