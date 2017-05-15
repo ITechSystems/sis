@@ -4,7 +4,7 @@
 	<thead>
 		<tr>
 			<td>Developer</td>
-			<td>Model</td>
+			<td>Unit</td>
 			<td>Picture</td>
 			<td>Action</td>
 		</tr>
@@ -15,21 +15,21 @@
 				<td>{{ $entry->developer }}</td>
 
 				<td>
-					<a href="/view/image/{{ $entry->filename }}">
-                		{{$entry->house_model_name}}
+					<a href="/view/unit/{{ $entry->filename }}">
+                		{{ $entry->unit }}
                 	</a>
 	            </td>
 
 				<td>
-					<img src="{{ route('getentry', $entry->filename) }}" alt="ALT NAME" class="img-responsive" height="200" width="200" />
+					<img src="{{ $entry->picture_file }}" alt="{{ 'Photo of ' . $entry->unit }}" class="img-responsive" height="200" width="200">
 				</td>
 
 				<td>
-					<a href="/view/image/{{ $entry->filename }}" class="btn btn-success btn-xs">View</a>
+					<a href="/view/unit/{{ $entry->filename }}" class="btn btn-success btn-xs">View</a>
 
-					<a href="/house_models/{{ $entry->id }}/edit" class="btn btn-info btn-xs">Edit</a>
+					<a href="/unit_photo/{{ $entry->id }}/edit" class="btn btn-info btn-xs">Edit</a>
 
-					<form method="post" action="/delete/photo/{{ $entry->filename }}">
+					<form method="post" action="/delete/unit_photo/{{ $entry->filename }}">
 						{{ csrf_field() }}
 						{{ method_field("DELETE")}}
 

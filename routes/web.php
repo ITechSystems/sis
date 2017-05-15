@@ -71,12 +71,15 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/pictures/units/upload', 'ApplyController@unitsIndex');
 	Route::post('/apply/units/upload', 'ApplyController@unitsUpload');
 
-	Route::get('/pictures/units/upload', 'ApplyController@unitsIndex');
-
 	Route::get('/view/image/{filename}', 'ApplyController@viewImage');
 	Route::delete('/delete/photo/{filename}', 'ApplyController@deletePhoto');
     Route::get('/house_models/{id}/edit', 'ApplyController@editHouseModel');
     Route::patch('/photo/house_model/{id}', 'ApplyController@updateHouseModel');
+
+    Route::get('/view/unit/{filename}', 'ApplyController@viewUnit');
+    Route::delete('/delete/unit_photo/{filename}', 'ApplyController@deleteUnitPhoto');
+    Route::get('/unit_photo/{id}/edit', 'ApplyController@editUnitPhoto');
+    Route::patch('/photo/unit/{id}', 'ApplyController@updateUnitPhoto');
 
     Route::get('/roles', 'RolesController@index');
     Route::get('/roles/{role}', 'RolesController@show');

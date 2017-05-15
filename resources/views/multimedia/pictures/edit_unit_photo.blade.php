@@ -27,8 +27,9 @@
 						          </div>
 						        @endif
 
-							    <form action="/apply/units/upload" method="post" enctype="multipart/form-data">
+							    <form action="/photo/unit/{{ $photo->id }}" method="post" enctype="multipart/form-data">
 							    	{{ csrf_field() }}
+							    	{{ method_field("PATCH") }}
 
 							    	<div class="control-group">
 							    		<div class="controls">
@@ -36,17 +37,22 @@
 							    				<div class="col-md-6">
 							    					<label for="developer">Developer</label>
 
-							    					<input type="text" name="developer" class="form-control">
+							    					<input type="text" name="developer" class="form-control" value="{{ $photo->developer }}">
 							    				</div>
 							    			</div>
 							    			<div class="row">
 							    				<div class="col-md-6">
-							    					<label for="unit">Unit</label>
+							    					<label for="unit">House Model Name</label>
 
 							    					<select name="unit" class="form-control" required>
 							    						<option value="">Choose</option>
 							    						@foreach($names as $n)
-							    							<option>{{ $n->block_lot }}</option>
+							    							@if($n->block_lot == $photo->unit)
+							    								<option selected>{{ $n->block_lot }}</option>
+							    							@else
+							    								<option>{{ $n->block_lot }}</option>
+							    							@endif
+							    							
 							    						@endforeach
 							    					</select>
 							    				</div>
@@ -56,13 +62,23 @@
 							    				<div class="col-md-6">
 								    				<label for="description">Description</label>
 
-								    				<input type="text" name="description" class="form-control" required>
+								    				<input type="text" name="description" class="form-control" value="{{ $photo->description }}" required>
+							    				</div>
+							    			</div>
+							    			<div class="row">
+							    				<div class="col-md-6">
+							    					<b>Uploaded Image:</b>
+							    				</div>
+							    			</div>
+							    			<div class="row">
+							    				<div class="col-md-6">
+							    					<img src="{{ $photo->picture_file }}" height="300" width="300">
 							    				</div>
 							    			</div>
 							    			<div class="row">
 							    				<div class="col-md-6">
 								    				<label>File to upload:</label>
-								    				<input type="file" name="file" id="file" required>
+								    				<input type="file" name="file" id="file">
 							    				</div>
 							    			</div><br>
 							    			<div class="row">
@@ -84,8 +100,6 @@
 						      		</ul>
 						      	</div>
 						      @endif
-
-						      @include('multimedia.pictures._partials.unit_pictures_list')
 						   </div>
 						</div>
 					</div>
@@ -94,4 +108,3 @@
 		</div>
 	</div>
 @endsection
-

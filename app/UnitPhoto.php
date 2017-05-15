@@ -21,6 +21,10 @@ class UnitPhoto extends Model
     	'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
     ];
 
+    protected $appends = [
+        'picture_file'
+    ];
+
     public static function saveImage($data)
     {
     	\DB::transaction(function()use($data){
@@ -55,5 +59,46 @@ class UnitPhoto extends Model
 
 	        $photo->save();
     	});
+    }
+
+    public function getPictureFileAttribute()
+    {
+        return $this->attributes['picture_file'] = self::getImage($this->filename);
+    }
+
+    public static function getImage($filename)
+    {
+        $photo = self::getPhotoByFilename($filename);
+
+        $developer = $photo->developer;
+
+        $unit = $photo->unit;
+
+        $base_url = self::getBaseUrl();
+
+        $image_src = "storage/$developer/units/$unit/" . $photo->filename;
+
+        return $base_url . '/' . $image_src;
+    }
+
+    public static function getBaseUrl()
+    {
+        return env('APP_URL');
+    }
+
+    public static function getPhotoByFilename($filename)
+    {
+        return UnitPhoto::where('filename', $filename)->firstOrFail();
+    }
+
+    public static function getImagePath($filename)
+    {
+        $photo = self::getPhotoByFilename($filename);
+
+        $developer = $photo->developer;
+
+        $unit = $photo->unit;
+
+        return "storage/$developer/units/$unit/" . $photo->filename;
     }
 }

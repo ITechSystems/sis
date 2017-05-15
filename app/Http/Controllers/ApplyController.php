@@ -49,9 +49,11 @@ class ApplyController extends Controller {
 
   public function unitsIndex()
   {
+    $entries = UnitPhoto::all();
+
     $names = Unit::distinct()->get(['block_lot']);
 
-    return view('multimedia.pictures.units_index', compact('names'));
+    return view('multimedia.pictures.units_index', compact('names', 'entries'));
   }
 
   public function unitsUpload()
@@ -90,7 +92,7 @@ class ApplyController extends Controller {
 
     session()->flash('success', 'Successfully deleted file.');
 
-    return view('multimedia.pictures.index', compact('entries', 'names'));
+    return redirect('/pictures/upload');
   }
 
   public function editHouseModel($id)
@@ -118,6 +120,80 @@ class ApplyController extends Controller {
 
     if($file){
       $path = "public/" . $data['developer'] . "/models/" . $data['house_model_name'] . "/";
+
+      $extension = $file->getClientOriginalExtension();
+
+      \Storage::disk('local')->put($path . $file->getFilename() . '.' . $extension, \File::get($file));
+
+      $photo->mime = $file->getClientMimeType();
+
+      $photo->original_filename = $file->getClientOriginalName();
+
+      $photo->filename = $file->getFilename() . '.' . $extension;
+    }
+
+    $photo->save();
+
+    session()->flash('success', 'Successfully updated photo');
+
+    return redirect()->back();
+  }
+
+  public function viewUnit($filename)
+  {
+    $photo = UnitPhoto::getPhotoByFilename($filename);
+
+    return view('multimedia.pictures.view_unit', compact('photo'));
+  }
+
+  public function deleteUnitPhoto($filename)
+  {
+    $photo = UnitPhoto::getPhotoByFilename($filename);
+
+    $image_src = UnitPhoto::getImagePath($filename);
+
+    try{
+      unlink($image_src);
+
+      $photo->delete();
+    }catch(\Exception $e){
+      echo 'file not found';
+    }
+
+    $entries = UnitPhoto::all();
+
+    $names = Unit::distinct()->get(['block_lot']);
+
+    session()->flash('success', 'Successfully deleted file.');
+
+    return redirect('/pictures/units/upload');
+  }
+
+  public function editUnitPhoto($id)
+  {
+    $photo = UnitPhoto::find($id);
+
+    $names = Unit::distinct()->get(['block_lot']);
+
+    return view('multimedia.pictures.edit_unit_photo', compact('photo', 'names'));
+  }
+
+  public function updateUnitPhoto($id)
+  {
+    $file = request()->file;
+
+    $data = request()->all();
+
+    $photo = UnitPhoto::find($id);
+
+    $photo->developer = $data['developer'];
+
+    $photo->unit = $data['unit'];
+
+    $photo->description = $data['description'];
+
+    if($file){
+      $path = "public/" . $data['developer'] . "/units/" . $data['unit'] . "/";
 
       $extension = $file->getClientOriginalExtension();
 
