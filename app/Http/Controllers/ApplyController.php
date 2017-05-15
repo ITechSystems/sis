@@ -12,9 +12,9 @@ class ApplyController extends Controller {
   {
     $entries = Photo::all();
 
-    $names = Unit::distinct()->get(['house_model']);
+    $developers = Unit::distinct()->get(['developer']);
 
-    return view('multimedia.pictures.index', compact('entries', 'names'));
+    return view('multimedia.pictures.index', compact('entries', 'developers'));
   }
 
   public function upload()
@@ -101,7 +101,9 @@ class ApplyController extends Controller {
 
     $names = Unit::distinct()->get(['house_model']);
 
-    return view('multimedia.pictures.edit_photo', compact('photo', 'names'));
+    $developers = Unit::distinct()->get(['developer']);
+
+    return view('multimedia.pictures.edit_photo', compact('photo', 'names', 'developers'));
   }
 
   public function updateHouseModel($id)
@@ -211,6 +213,13 @@ class ApplyController extends Controller {
     session()->flash('success', 'Successfully updated photo');
 
     return redirect()->back();
+  }
+
+  public function getModelNames()
+  {
+    $developer = request()->developer;
+
+    return Unit::distinct()->where('developer', $developer)->get(['house_model']);
   }
   
 }
