@@ -10,15 +10,15 @@ class UnitPhoto extends Model
 
     protected $fillable = [
         'developer',
-    	'unit',
-    	'description',
+        'unit',
+        'description',
     ];
 
     public static $rules = [
-    	'unit' => 'required|min:2',
+        'unit' => 'required|min:2',
         'developer' => 'required|min:2',
-    	'description' => 'required|min:3',
-    	'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        'description' => 'required|min:3',
+        'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
     ];
 
     protected $appends = [
@@ -27,38 +27,38 @@ class UnitPhoto extends Model
 
     public static function saveImage($data)
     {
-    	\DB::transaction(function()use($data){
-	        $file = request()->file;
+        \DB::transaction(function () use ($data) {
+            $file = request()->file;
 
-	        $developer = $data['developer'];
+            $developer = $data['developer'];
 
-	        $unit = $data['unit'];
+            $unit = $data['unit'];
 
-	        $description = $data['description'];
+            $description = $data['description'];
 
-	        $path = "public/$developer/units/$unit/";
+            $path = "public/$developer/units/$unit/";
 
-	        $extension = $file->getClientOriginalExtension();
+            $extension = $file->getClientOriginalExtension();
 
-	        \Storage::disk('local')->put($path . $file->getFilename() . '.' . $extension, \File::get($file));
+            \Storage::disk('local')->put($path . $file->getFilename() . '.' . $extension, \File::get($file));
 
-	        //save to the database
-	        $photo = new UnitPhoto;
+            //save to the database
+            $photo = new UnitPhoto;
 
-	        $photo->developer = $developer;
+            $photo->developer = $developer;
 
-	        $photo->unit = $unit;
+            $photo->unit = $unit;
 
-	        $photo->description = $description;
+            $photo->description = $description;
 
-	        $photo->mime = $file->getClientMimeType();
+            $photo->mime = $file->getClientMimeType();
 
-	        $photo->original_filename = $file->getClientOriginalName();
+            $photo->original_filename = $file->getClientOriginalName();
 
-	        $photo->filename = $file->getFilename() . '.' . $extension;
+            $photo->filename = $file->getFilename() . '.' . $extension;
 
-	        $photo->save();
-    	});
+            $photo->save();
+        });
     }
 
     public function getPictureFileAttribute()
