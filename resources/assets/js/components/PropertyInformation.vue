@@ -106,7 +106,6 @@
                 items: [],
                 house_model_name: '',
                 image_src: '',
-                base_url: ''
             }
         },
 
@@ -127,8 +126,7 @@
         methods: {
             getModel(house_model){
                 this.$http.get('/load/model/image?house_model=' + house_model).then(res => {
-                    this.image_src = this.base_url.concat(res.data)
-                    console.log(this.image_src)
+                    this.image_src = res.data
                 })
             }
         }

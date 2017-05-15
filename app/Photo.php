@@ -73,15 +73,12 @@ class Photo extends Model
 
         $image_src = "storage/$developer/models/$model/" . $photo->filename;
 
-        return $base_url . $image_src;
+        return $base_url . '/' . $image_src;
     }
 
     public static function getBaseUrl()
     {
-        // dd(url());  
-        // return echo url();
-        // return app_path('public/');
-        return 'http://www.sis.local/';
+        return env('APP_URL');
     }
 
     public static function getPhotoByFilename($filename)
