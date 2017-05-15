@@ -44,6 +44,11 @@ class Unit extends Model
         return $this->hasMany(Loan::class, 'unit_id');
     }
 
+    public function photos()
+    {
+        return $this->hasMany(Photo::class, 'house_model_name', 'house_model')->latest('id');
+    }
+
     public function getHeaders()
     {
         return [

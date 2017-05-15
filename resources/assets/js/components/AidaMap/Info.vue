@@ -55,7 +55,7 @@
         <div class="row">
             <p class="heading">Unit Details</p>
             <div class="col-md-6">
-                <img src="/img/house.jpg" alt="" class="unit-full">
+                <img :src="path" alt="" class="unit-full">
             </div>
             <div class="col-md-6">
                 <table class="table">
@@ -197,6 +197,12 @@
                 </div>
                 <form action="/aida-maps/pdf" method="post" id="pdf-form" target="_blank" style="display:none">
                     <input type="hidden" name="_token" v-model="$http.defaults.headers.common['X-CSRF-TOKEN']">
+                    <input type="hidden" value="0" name="download">
+                    <input type="hidden" v-model="serializedData" name="serialized_data">
+                </form>
+                <form action="/aida-maps/pdf" method="post" id="pdf-form-email" target="_blank" style="display:none">
+                    <input type="hidden" name="_token" v-model="$http.defaults.headers.common['X-CSRF-TOKEN']">
+                    <input type="hidden" value="1" name="download">
                     <input type="hidden" v-model="serializedData" name="serialized_data">
                 </form>
             </div>
@@ -222,6 +228,16 @@
 
                 return JSON.stringify(data);
             },
+
+            photo() {
+                return this.unit.photos.find(photo => {
+                    return photo.developer == this.unit.developer
+                });
+            },
+
+            path() {
+                return `/storage/${this.photo.developer}/models/${this.photo.house_model_name}/${this.photo.filename}`;
+            }
         },
 
         props: ['unit', 'buyer', 'financingType'],
@@ -236,11 +252,11 @@
             },
 
             sendEmail() {
-                this.downloadPdf();
+                document.getElementById('pdf-form-email').submit();
 
-                this.$http.get(`/aida-maps/send?email=${this.buyer.email}&name=${this.buyer.first_name}`).then(response => {
-                    console.log(response.data);
-                });
+                // this.$http.get(`/aida-maps/send?email=${this.buyer.email}&name=${this.buyer.first_name}`).then(response => {
+                //     console.log(response.data);
+                // });
             },
         }
     }
