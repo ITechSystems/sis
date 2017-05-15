@@ -37,24 +37,15 @@
 							    				<div class="col-md-6">
 							    					<label for="developer">Developer</label>
 
-							    					<input type="text" name="developer" class="form-control" value="{{ $photo->developer }}">
+
+							    					<input type="text" name="developer" class="form-control" value="{{ $photo->developer }}" readonly>
 							    				</div>
 							    			</div>
 							    			<div class="row">
 							    				<div class="col-md-6">
 							    					<label for="house_model_name">House Model Name</label>
 
-							    					<select name="house_model_name" class="form-control" required>
-							    						<option value="">Choose</option>
-							    						@foreach($names as $n)
-							    							@if($n->house_model == $photo->house_model_name)
-							    								<option selected>{{ $n->house_model }}</option>
-							    							@else
-							    								<option>{{ $n->house_model }}</option>
-							    							@endif
-							    							
-							    						@endforeach
-							    					</select>
+							    					<input type="text" name="house_model_name" class="form-control" value="{{ $photo->house_model_name }}" readonly>
 							    				</div>
 							    			</div>
 
@@ -107,4 +98,8 @@
 			</div>
 		</div>
 	</div>
+@endsection
+
+@section('js')
+	<script src="/js/upload-photo.js"></script>
 @endsection

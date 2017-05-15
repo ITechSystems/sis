@@ -36,7 +36,12 @@
 							    				<div class="col-md-6">
 							    					<label for="developer">Developer</label>
 
-							    					<input type="text" name="developer" class="form-control">
+							    					<select name="developer" class="form-control" @change="getModelNames(developer)" v-model="developer">
+							    						<option>Choose</option>
+							    						@foreach($developers as $d)
+							    							<option>{{ $d->developer }}</option>
+							    						@endforeach
+							    					</select>
 							    				</div>
 							    			</div>
 							    			<div class="row">
@@ -45,9 +50,7 @@
 
 							    					<select name="house_model_name" class="form-control" required>
 							    						<option value="">Choose</option>
-							    						@foreach($names as $n)
-							    							<option>{{ $n->house_model }}</option>
-							    						@endforeach
+							    						<option v-for="model in model_names">@{{ model.house_model }}</option>
 							    					</select>
 							    				</div>
 							    			</div>
@@ -95,3 +98,6 @@
 	</div>
 @endsection
 
+@section('js')
+	<script src="/js/upload-photo.js"></script>
+@endsection
