@@ -8,7 +8,7 @@
 </div>
 <div class="row">
 	<div class="col-md-6">
-		<img src="{{ $image_src }}" height="290" width="400">
+		<img src="{{ $photo->picture_file }}" height="290" width="400">
 	</div>
 
 	<div class="col-md-6">

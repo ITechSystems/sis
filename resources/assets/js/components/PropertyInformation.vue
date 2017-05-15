@@ -105,7 +105,7 @@
             return {
                 items: [],
                 house_model_name: '',
-                image_src: ''
+                image_src: '',
             }
         },
 
@@ -125,10 +125,8 @@
 
         methods: {
             getModel(house_model){
-                let base_url = 'http://www.sis.local/'//need to fix this
-
                 this.$http.get('/load/model/image?house_model=' + house_model).then(res => {
-                    this.image_src = base_url.concat(res.data)
+                    this.image_src = res.data
                 })
             }
         }
