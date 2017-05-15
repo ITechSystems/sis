@@ -82,6 +82,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/delete/unit_photo/{filename}', 'ApplyController@deleteUnitPhoto');
     Route::get('/unit_photo/{id}/edit', 'ApplyController@editUnitPhoto');
     Route::patch('/photo/unit/{id}', 'ApplyController@updateUnitPhoto');
+    Route::get('/units/getBlockLots', 'ApplyController@getBlockLots');
 
     Route::get('/roles', 'RolesController@index');
     Route::get('/roles/{role}', 'RolesController@show');

@@ -51,9 +51,9 @@ class ApplyController extends Controller {
   {
     $entries = UnitPhoto::all();
 
-    $names = Unit::distinct()->get(['block_lot']);
+    $developers = Unit::distinct()->get(['developer']);
 
-    return view('multimedia.pictures.units_index', compact('names', 'entries'));
+    return view('multimedia.pictures.units_index', compact('entries', 'developers'));
   }
 
   public function unitsUpload()
@@ -220,6 +220,13 @@ class ApplyController extends Controller {
     $developer = request()->developer;
 
     return Unit::distinct()->where('developer', $developer)->get(['house_model']);
+  }
+
+  public function getBlockLots()
+  {
+    $developer = request()->developer;
+
+    return Unit::distinct()->where('developer', $developer)->get(['block_lot']);
   }
   
 }
