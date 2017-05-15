@@ -67,4 +67,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/permissions', 'PermissionsController@index');
 
     Route::post('/roles/{role}/permissions', 'RolesPermissionsController@store');
+
+    Route::get('/users', 'UsersController@index');
+    Route::get('/users/{user}/edit', 'UsersController@edit');
+    Route::patch('/users/{user}', 'UsersController@patch');
+    Route::post('/users', 'UsersController@store');
 });

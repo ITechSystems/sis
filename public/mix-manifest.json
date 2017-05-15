@@ -1,8 +1,10 @@
 {
   "/js/aida-map.js": "/js/aida-map.js",
   "/js/inventory.js": "/js/inventory.js",
+  "/js/user.js": "/js/user.js",
   "/js/buyer.js": "/js/buyer.js",
   "/js/permission.js": "/js/permission.js",
+  "/js/user-edit.js": "/js/user-edit.js",
   "/mix.js": "/mix.js",
   "/css/app.css": "/css/app.css",
   "/css/libs.css": "/css/libs.css",
