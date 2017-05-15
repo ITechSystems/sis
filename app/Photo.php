@@ -21,6 +21,10 @@ class Photo extends Model
     	'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
     ];
 
+    protected $appends = [
+        'picture_file'
+    ];
+
     public static function saveImage($data)
     {
         \DB::transaction(function()use($data){
@@ -74,6 +78,9 @@ class Photo extends Model
 
     public static function getBaseUrl()
     {
+        // dd(url());  
+        // return echo url();
+        // return app_path('public/');
         return 'http://www.sis.local/';
     }
 
@@ -91,5 +98,10 @@ class Photo extends Model
         $model = $photo->house_model_name;
 
         return "storage/$developer/models/$model/" . $photo->filename;
+    }
+
+    public function getPictureFileAttribute()
+    {
+        return $this->attributes['picture_file'] = self::getImage($this->filename);
     }
 }
