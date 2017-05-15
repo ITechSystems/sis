@@ -7,7 +7,7 @@
             <div class="row">
                 <p class="heading">Unit Details</p>
                 <div class="col-md-8">
-                    <img src="/img/house.jpg" alt="" class="unit-full">
+                    <img :src="image_src" height="290" width="400"/>
                 </div>
                 <div class="col-md-4">
                     <table class="table">
@@ -103,16 +103,33 @@
 
         data(){
             return {
-                items: []
+                items: [],
+                house_model_name: '',
+                image_src: ''
             }
         },
 
         watch: {
             blockLot(){
                 this.items = []
+
                 this.$http.get(`/search/unitById/${this.blockLot}`).then(res => {
                     this.items = res.data
+
+                    this.house_model_name = this.items[0].house_model
+
+                    this.getModel(this.house_model_name)
                 });
+            }
+        },
+
+        methods: {
+            getModel(house_model){
+                let base_url = 'http://www.sis.local/'//need to fix this
+
+                this.$http.get('/load/model/image?house_model=' + house_model).then(res => {
+                    this.image_src = base_url.concat(res.data)
+                })
             }
         }
     }

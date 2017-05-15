@@ -27,7 +27,7 @@
 						          </div>
 						        @endif
 
-							    <form action="/apply/upload" method="post" enctype="multipart/form-data">
+							    <form action="/apply/units/upload" method="post" enctype="multipart/form-data">
 							    	{{ csrf_field() }}
 
 							    	<div class="control-group">
@@ -41,12 +41,12 @@
 							    			</div>
 							    			<div class="row">
 							    				<div class="col-md-6">
-							    					<label for="house_model_name">House Model Name</label>
+							    					<label for="unit">Unit</label>
 
-							    					<select name="house_model_name" class="form-control" required>
+							    					<select name="unit" class="form-control" required>
 							    						<option value="">Choose</option>
 							    						@foreach($names as $n)
-							    							<option>{{ $n->house_model }}</option>
+							    							<option>{{ $n->block_lot }}</option>
 							    						@endforeach
 							    					</select>
 							    				</div>
@@ -84,28 +84,6 @@
 						      		</ul>
 						      	</div>
 						      @endif
-
-						      <h1> Pictures list</h1>
-							 <div class="row">
-							        <ul class="thumbnails">
-							 @foreach($entries as $entry)
-							            <div class="col-md-3">
-							                <div class="thumbnail">
-							                	<p>
-								                    <img src="{{ route('getentry', $entry->filename) }}" alt="ALT NAME" class="img-responsive" height="200" width="200" />
-								                    <div class="caption">
-								                        <p>
-								                        	<a href="/view/image/{{ $entry->filename }}">
-								                        		{{$entry->house_model_name}}
-								                        	</a>
-								                        </p>
-								                    </div>
-							                    </p>
-							                </div>
-							            </div>
-							 @endforeach
-							 </ul>
-							 </div>
 						   </div>
 						</div>
 					</div>
