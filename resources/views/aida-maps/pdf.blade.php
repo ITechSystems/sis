@@ -28,7 +28,7 @@ $pdf->Cell(60, 10, 'BUYER\'S COMPUTATIONS FOR', 1, 1, 'L');
 $pdf->SetXY(115, 35);
 $pdf->Cell(60, 5, $data->buyer->last_name . ', ' . $data->buyer->first_name . ' ' . $data->buyer->middle_name . ', ' . $data->buyer->extension, 1, 1, 'L');
 $pdf->SetXY(115, 40);
-$pdf->Cell(60, 5, $data->buyer->contact_number_one, 1, 1, 'L');
+$pdf->Cell(60, 5, $data->buyer->mobile, 1, 1, 'L');
 $pdf->SetXY(115, 45);
 $pdf->Cell(60, 5, $data->buyer->email, 1, 1, 'L');
 $pdf->SetXY(115, 50);
@@ -36,7 +36,7 @@ $pdf->Cell(60, 5, $data->buyer->marital_status, 1, 1, 'L');
 $pdf->SetXY(115, 55);
 $pdf->Cell(60, 5, $data->buyer->financing_type, 1, 1, 'L');
 $pdf->SetXY(115, 60);
-$pdf->Cell(60, 5, $data->buyer->work_location, 1, 1, 'L');
+$pdf->Cell(60, 5, $data->buyer->work_type, 1, 1, 'L');
 $pdf->SetXY(115, 65);
 $pdf->Cell(60, 5, $data->buyer->country, 1, 1, 'L');
 $pdf->SetXY(115, 70);
@@ -172,5 +172,15 @@ foreach ($data->unit->loans as $index => $loan) {
         $pdf->Cell(25, 5, number_format($loan->monthly_amortization, 2), 1, 1, 'R');
     }
 }
-$pdf->Output();
+
+if (isset($download)) {
+    $pdf->Output($filePath, 'F');
+?>
+<script>
+    window.close();
+</script>
+<?php
+} else {
+    $pdf->Output();
+}
 exit;

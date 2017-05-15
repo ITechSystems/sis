@@ -6,5 +6,5 @@
 
 <p>Many thanks,</p>
 
-<p>{{ auth()->user()->name }}</p>
+<p>{{ auth()->user()->first_name }}</p>
 <p>Next Level</p>

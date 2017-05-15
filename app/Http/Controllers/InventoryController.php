@@ -201,7 +201,7 @@ class InventoryController extends ApiController
     {
         return $units = Unit::active()
             ->where('block_lot', $blockLot)
-            ->with('downpayment', 'loans')
+            ->with('downpayment', 'loans', 'photos')
             ->get();
     }
 }
