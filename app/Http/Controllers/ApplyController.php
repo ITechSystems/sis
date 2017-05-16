@@ -10,7 +10,7 @@ use Validator;
 class ApplyController extends Controller {
   public function index()
   {
-    $entries = Photo::all();
+    $entries = Photo::getLatestAndUniqueRecords();
 
     $developers = Unit::distinct()->get(['developer']);
 
@@ -49,7 +49,7 @@ class ApplyController extends Controller {
 
   public function unitsIndex()
   {
-    $entries = UnitPhoto::all();
+    $entries = UnitPhoto::getLatestAndUniqueRecords();
 
     $developers = Unit::distinct()->get(['developer']);
 

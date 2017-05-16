@@ -101,4 +101,19 @@ class Photo extends Model
     {
         return $this->attributes['picture_file'] = self::getImage($this->filename);
     }
+
+    public static function getLatestAndUniqueRecords()
+    {
+        $ids = Photo::distinct()
+        ->select(\DB::raw('max(id) AS id, ANY_VALUE(house_model_name) as house_model_name, ANY_VALUE(filename) as filename'))
+        ->groupBy('house_model_name')
+        ->orderBy('id', 'asc')
+        ->get();
+
+        $unique_ids = array_unique(array_map(function($e){
+          return $e['id'];
+        }, $ids->toArray()));
+
+        return Photo::whereIn('id', $unique_ids)->get();
+    }
 }
