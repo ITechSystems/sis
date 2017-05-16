@@ -37,24 +37,14 @@
 							    				<div class="col-md-6">
 							    					<label for="developer">Developer</label>
 
-							    					<input type="text" name="developer" class="form-control" value="{{ $photo->developer }}">
+							    					<input type="text" name="developer" class="form-control" value="{{ $photo->developer }}" readonly>
 							    				</div>
 							    			</div>
 							    			<div class="row">
 							    				<div class="col-md-6">
 							    					<label for="unit">House Model Name</label>
 
-							    					<select name="unit" class="form-control" required>
-							    						<option value="">Choose</option>
-							    						@foreach($names as $n)
-							    							@if($n->block_lot == $photo->unit)
-							    								<option selected>{{ $n->block_lot }}</option>
-							    							@else
-							    								<option>{{ $n->block_lot }}</option>
-							    							@endif
-							    							
-							    						@endforeach
-							    					</select>
+							    					<input type="text" name="unit" class="form-control" value="{{ $photo->unit }}" readonly>
 							    				</div>
 							    			</div>
 

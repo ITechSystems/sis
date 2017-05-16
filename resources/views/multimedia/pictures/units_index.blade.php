@@ -36,7 +36,13 @@
 							    				<div class="col-md-6">
 							    					<label for="developer">Developer</label>
 
-							    					<input type="text" name="developer" class="form-control">
+							    					<select name="developer" class="form-control" @change="getUnits(developer)" v-model="developer">
+							    						<option>Choose</option>
+							    						@foreach($developers as $d)
+							    							<option>{{ $d->developer }}</option>
+							    						@endforeach
+							    					</select>
+
 							    				</div>
 							    			</div>
 							    			<div class="row">
@@ -44,10 +50,8 @@
 							    					<label for="unit">Unit</label>
 
 							    					<select name="unit" class="form-control" required>
-							    						<option value="">Choose</option>
-							    						@foreach($names as $n)
-							    							<option>{{ $n->block_lot }}</option>
-							    						@endforeach
+							    						<option>Choose</option>
+							    						<option v-for="unit in units">@{{ unit.block_lot }}</option>
 							    					</select>
 							    				</div>
 							    			</div>
@@ -95,3 +99,6 @@
 	</div>
 @endsection
 
+@section('js')
+	<script src="/js/upload-unit.js"></script>
+@endsection

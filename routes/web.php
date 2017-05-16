@@ -75,11 +75,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::delete('/delete/photo/{filename}', 'ApplyController@deletePhoto');
     Route::get('/house_models/{id}/edit', 'ApplyController@editHouseModel');
     Route::patch('/photo/house_model/{id}', 'ApplyController@updateHouseModel');
+    Route::get('/house_model_photos/getModelNames', 'ApplyController@getModelNames');
+
 
     Route::get('/view/unit/{filename}', 'ApplyController@viewUnit');
     Route::delete('/delete/unit_photo/{filename}', 'ApplyController@deleteUnitPhoto');
     Route::get('/unit_photo/{id}/edit', 'ApplyController@editUnitPhoto');
     Route::patch('/photo/unit/{id}', 'ApplyController@updateUnitPhoto');
+    Route::get('/units/getBlockLots', 'ApplyController@getBlockLots');
 
     Route::get('/roles', 'RolesController@index');
     Route::get('/roles/{role}', 'RolesController@show');
