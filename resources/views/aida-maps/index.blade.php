@@ -32,7 +32,7 @@
                                     <td>{{ $aidaMap->created_at->format('M d, Y') }}</td>
                                     <td>
                                         <button class="btn btn-info btn-xs">View</button>
-                                        <button class="btn btn-warning btn-xs">PDF</button>
+                                        <a href="/aida-maps/{{ $aidaMap->id }}/pdf" target="_blank" class="btn btn-warning btn-xs">PDF</a>
                                         <button class="btn btn-success btn-xs">Email</button>
                                         <button class="btn btn-danger btn-xs">Delete</button>
                                     </td>

@@ -193,16 +193,6 @@
         },
 
         computed: {
-            serializedData() {
-                let data = {};
-
-                data['unit'] = this.unit;
-                data['buyer'] = this.buyer;
-                data['financing_type'] = this.financingType;
-
-                return JSON.stringify(data);
-            },
-
             photo() {
                 return this.unit.photos.find(photo => {
                     return photo.developer == this.unit.developer;

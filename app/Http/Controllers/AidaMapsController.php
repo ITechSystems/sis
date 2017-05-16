@@ -28,17 +28,17 @@ class AidaMapsController extends ApiController
         ]);
     }
 
-    public function pdf()
+    public function pdf(AidaMap $aidaMap)
     {
-        $data = json_decode(request('serialized_data'));
+        $aidaMap->load('buyer', 'user', 'unit.loans');
         $download = request('download');
         $filePath = storage_path() . '/app/public/aida-map-' . time() . '.pdf';
 
         if (! (bool) $download) {
-            return view('aida-maps.pdf', compact('data'));
+            return view('aida-maps.pdf', compact('aidaMap'));
         }
 
-        return view('aida-maps.pdf', compact('data', 'download', 'filePath'));
+        return view('aida-maps.pdf', compact('aidaMap', 'download', 'filePath'));
     }
 
     public function create()

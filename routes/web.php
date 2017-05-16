@@ -41,7 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/aida-maps/create', 'AidaMapsController@create');
     Route::get('/aida-maps/send', 'AidaMapsController@send');
     Route::get('/aida-maps/{unitId}', 'AidaMapsController@show');
-    Route::post('/aida-maps/pdf', 'AidaMapsController@pdf');
+    Route::get('/aida-maps/{aidaMap}/pdf', 'AidaMapsController@pdf');
     Route::post('/aida-maps', 'AidaMapsController@store');
 
     Route::get('/units/locations', 'UnitLocationsController@index');
@@ -62,21 +62,20 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::post('/apply/upload', 'ApplyController@upload');
 
-	Route::get('/pictures/upload', 'ApplyController@index');
+    Route::get('/pictures/upload', 'ApplyController@index');
 
-	Route::get('fileentry/get/{filename}', [
-		'as' => 'getentry', 'uses' => 'ApplyController@get']);
-	Route::get('/load/model/image', 'ApplyController@loadModelImage');
+    Route::get('fileentry/get/{filename}', [
+        'as' => 'getentry', 'uses' => 'ApplyController@get']);
+    Route::get('/load/model/image', 'ApplyController@loadModelImage');
 
-	Route::get('/pictures/units/upload', 'ApplyController@unitsIndex');
-	Route::post('/apply/units/upload', 'ApplyController@unitsUpload');
+    Route::get('/pictures/units/upload', 'ApplyController@unitsIndex');
+    Route::post('/apply/units/upload', 'ApplyController@unitsUpload');
 
-	Route::get('/view/image/{filename}', 'ApplyController@viewImage');
-	Route::delete('/delete/photo/{filename}', 'ApplyController@deletePhoto');
+    Route::get('/view/image/{filename}', 'ApplyController@viewImage');
+    Route::delete('/delete/photo/{filename}', 'ApplyController@deletePhoto');
     Route::get('/house_models/{id}/edit', 'ApplyController@editHouseModel');
     Route::patch('/photo/house_model/{id}', 'ApplyController@updateHouseModel');
     Route::get('/house_model_photos/getModelNames', 'ApplyController@getModelNames');
-
 
     Route::get('/view/unit/{filename}', 'ApplyController@viewUnit');
     Route::delete('/delete/unit_photo/{filename}', 'ApplyController@deleteUnitPhoto');
