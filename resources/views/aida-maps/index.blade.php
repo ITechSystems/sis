@@ -16,6 +16,9 @@
                                 <th>Unit ID</th>
                                 <th>Buyer</th>
                                 <th>Agent</th>
+                                <th>Financing Type</th>
+                                <th>Date Created</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -23,8 +26,16 @@
                                 <tr>
                                     <td>{{ $aidaMap->id }}</td>
                                     <td>{{ $aidaMap->unit_id }}</td>
-                                    <td>{{ $aidaMap->buyer->last_name }}, {{ $aidaMap->buyer->first_name }}</td>
-                                    <td>{{ $aidaMap->user->name }}</td>
+                                    <td>{{ $aidaMap->buyer->first_name }} {{ $aidaMap->buyer->last_name }}</td>
+                                    <td>{{ $aidaMap->user->first_name }} {{ $aidaMap->user->last_name }}</td>
+                                    <td>{{ $aidaMap->finance_type }}</td>
+                                    <td>{{ $aidaMap->created_at->format('M d, Y') }}</td>
+                                    <td>
+                                        <button class="btn btn-info btn-xs">View</button>
+                                        <button class="btn btn-warning btn-xs">PDF</button>
+                                        <button class="btn btn-success btn-xs">Email</button>
+                                        <button class="btn btn-danger btn-xs">Delete</button>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

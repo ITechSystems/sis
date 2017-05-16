@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Scopes\AgentScope;
 use Illuminate\Database\Eloquent\Model;
 
 class AidaMap extends Model
@@ -12,6 +13,13 @@ class AidaMap extends Model
         'buyer_id',
         'finance_type',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new AgentScope);
+    }
 
     public function buyer()
     {

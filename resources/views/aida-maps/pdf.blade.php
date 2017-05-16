@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 $pdf = new \App\PDF;
 $pdf->ShowGrid(false);

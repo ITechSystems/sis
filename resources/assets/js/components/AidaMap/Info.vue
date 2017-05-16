@@ -181,32 +181,6 @@
                 </address>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <p class="heading">Preferred mode of sending to clients</p>
-                <div class="btn-group">
-                    <button class="btn btn-primary">
-                        <i class="fa fa-print"></i> Print
-                    </button>
-                    <button class="btn btn-danger" @click.prevent="sendEmail">
-                        <i class="fa fa-envelope"></i> Email
-                    </button>
-                    <button class="btn btn-warning" @click.prevent="downloadPdf">
-                        <i class="fa fa-file"></i> PDF
-                    </button>
-                </div>
-                <form action="/aida-maps/pdf" method="post" id="pdf-form" target="_blank" style="display:none">
-                    <input type="hidden" name="_token" v-model="$http.defaults.headers.common['X-CSRF-TOKEN']">
-                    <input type="hidden" value="0" name="download">
-                    <input type="hidden" v-model="serializedData" name="serialized_data">
-                </form>
-                <form action="/aida-maps/pdf" method="post" id="pdf-form-email" target="_blank" style="display:none">
-                    <input type="hidden" name="_token" v-model="$http.defaults.headers.common['X-CSRF-TOKEN']">
-                    <input type="hidden" value="1" name="download">
-                    <input type="hidden" v-model="serializedData" name="serialized_data">
-                </form>
-            </div>
-        </div>
     </form>
 </template>
 
@@ -251,23 +225,5 @@
         },
 
         props: ['unit', 'buyer', 'financingType'],
-
-        methods: {
-            submitForm() {
-                document.getElementById('pdf-form').submit();
-            },
-
-            downloadPdf() {
-                this.submitForm();
-            },
-
-            sendEmail() {
-                document.getElementById('pdf-form-email').submit();
-
-                // this.$http.get(`/aida-maps/send?email=${this.buyer.email}&name=${this.buyer.first_name}`).then(response => {
-                //     console.log(response.data);
-                // });
-            },
-        }
     }
 </script>
