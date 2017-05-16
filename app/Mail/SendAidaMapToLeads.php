@@ -11,20 +11,16 @@ class SendAidaMapToLeads extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    public $buyerName;
-
-    public $filePath;
+    public $aidaMap;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($buyerName, $filePath = null)
+    public function __construct($aidaMap)
     {
-        $this->buyerName = $buyerName;
-
-        $this->filePath = $filePath;
+        $this->aidaMap = $aidaMap;
     }
 
     /**
@@ -36,7 +32,9 @@ class SendAidaMapToLeads extends Mailable implements ShouldQueue
     {
         return $this->from(['address' => auth()->user()->email])
             ->subject('AIDA Map')
-            ->view('emails.aida-map', ['name' => $this->buyerName])
-            ->attach(storage_path() . '/app/public/aida-map-1494833193.pdf');
+            ->view('emails.aida-map', ['name' => $this->aidaMap->buyer->first_name])
+            ->attach(storage_path() . '/app/public/' . $this->aidaMap->id . '.pdf', [
+                'as' => 'AIDA Map.pdf',
+            ]);
     }
 }

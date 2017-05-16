@@ -91,5 +91,5 @@
 @endsection
 
 @section("js")
-    <script src="{{ asset('js/aida-map.js') }}"></script>
+    <script src="{{ asset('js/aida-map-create.js') }}"></script>
 @endsection

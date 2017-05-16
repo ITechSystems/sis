@@ -1,5 +1,5 @@
 {
-  "/js/aida-map.js": "/js/aida-map.js",
+  "/js/aida-map-create.js": "/js/aida-map-create.js",
   "/js/inventory.js": "/js/inventory.js",
   "/js/user.js": "/js/user.js",
   "/js/buyer.js": "/js/buyer.js",
@@ -7,6 +7,7 @@
   "/js/user-edit.js": "/js/user-edit.js",
   "/js/upload-unit.js": "/js/upload-unit.js",
   "/js/upload-photo.js": "/js/upload-photo.js",
+  "/js/aida-map.js": "/js/aida-map.js",
   "/mix.js": "/mix.js",
   "/css/app.css": "/css/app.css",
   "/css/libs.css": "/css/libs.css",

@@ -10,9 +10,13 @@ class AidaMapsController extends ApiController
 {
     public function index()
     {
-        $aidaMaps = AidaMap::with('buyer', 'user', 'unit')->latest()->get();
+        if (request()->wantsJson()) {
+            return $this->respond([
+                'aida_maps' => AidaMap::with('buyer', 'user', 'unit')->latest()->get(),
+            ]);
+        }
 
-        return view('aida-maps.index', compact('aidaMaps'));
+        return view('aida-maps.index');
     }
 
     public function show($unitId)
@@ -32,7 +36,7 @@ class AidaMapsController extends ApiController
     {
         $aidaMap->load('buyer', 'user', 'unit.loans');
         $download = request('download');
-        $filePath = storage_path() . '/app/public/aida-map-' . time() . '.pdf';
+        $filePath = storage_path() . '/app/public/' . $aidaMap->id . '.pdf';
 
         if (! (bool) $download) {
             return view('aida-maps.pdf', compact('aidaMap'));
@@ -54,17 +58,21 @@ class AidaMapsController extends ApiController
         ]);
     }
 
-    public function send()
+    public function email(AidaMap $aidaMap)
     {
-        Mail::to(request('email'))->send(new SendAidaMapToLeads(request('name')));
+        Mail::to($aidaMap->buyer->email)->send(new SendAidaMapToLeads($aidaMap));
 
-        return 'Email sent successfully';
+        return $this->respond([
+            'message' => 'Email sent successfully',
+        ]);
     }
 
     public function destroy(AidaMap $aidaMap)
     {
         $aidaMap->delete();
 
-        return back();
+        return $this->respond([
+            'message' => 'Successfully deleted the AIDA Map.',
+        ]);
     }
 }

@@ -35,6 +35,7 @@ mix.styles([
     .js('resources/assets/js/inventory.js', 'public/js')
     .js('resources/assets/js/buyer.js', 'public/js')
     .js('resources/assets/js/aida-map.js', 'public/js')
+    .js('resources/assets/js/aida-map-create.js', 'public/js')
     .js('resources/assets/js/permission.js', 'public/js')
     .js('resources/assets/js/user.js', 'public/js')
     .js('resources/assets/js/user-edit.js', 'public/js')

@@ -1,42 +1,53 @@
 import './bootstrap.js';
-import HorizontalFilters from './components/HorizontalFilters.vue';
-import AidaMapModal from './components/AidaMap/Modal.vue';
 
 new Vue({
-    components: {
-        HorizontalFilters,
-        AidaMapModal,
-    },
-
-    data: {
-        buyers: [],
-        searchTerm: '',
-        clientSearching: '',
-        locations: [],
-        units: [],
-        result_count: 0,
-        unitId: '',
-    },
-
     el: '#app',
 
+    data: {
+        message: '',
+        aidaMaps: [],
+    },
+
+    mounted() {
+        this.getAidaMaps();
+    },
+
     methods: {
-        getBuyers() {
-            this.$http.get(`/buyers/all?search=${this.searchTerm}`).then(response => {
-                this.buyers = response.data;
+        getAidaMaps() {
+            this.$http.get(`/aida-maps`).then(response => {
+                this.aidaMaps = response.data.aida_maps;
             });
         },
 
-        displayResults(data) {
-            this.result_count = data.result_count;
-            this.units = data.units;
-            this.locations = data.locations;
+        pdfLink(id) {
+            return `/aida-maps/${id}/pdf`;
         },
 
-        clearResults() {
-            this.result_count = 0;
-            this.units = '';
-            this.locations = '';
+        destroyLink(id) {
+            return `/aida-maps/${id}`;
+        },
+
+        trash(id) {
+            this.$http.delete(`/aida-maps/${id}`).then(response => {
+                this.message = response.data.message;
+                this.hideMessage();
+                this.getAidaMaps();
+            });
+        },
+
+        sendEmail(id) {
+            document.getElementById('pdf-email').submit();
+
+            this.$http.get(`/aida-maps/${id}/email`).then(response => {
+                this.message = response.data.message;
+                this.hideMessage();
+            });
+        },
+
+        hideMessage() {
+            setTimeout(() => {
+                this.message = '';
+            }, 1500);
         }
     }
 });

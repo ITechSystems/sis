@@ -9,7 +9,10 @@
                     <a  href="/aida-maps/create" class="btn btn-xs btn-primary">Create</a>
                 </div>
                 <div class="panel-body">
-                    <table class="table">
+                    <div class="alert alert-success" v-if="message" v-cloak>
+                        @{{ message }}
+                    </div>
+                    <table class="table" v-cloak>
                         <thead>
                             <tr>
                                 <th>Control #</th>
@@ -22,26 +25,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($aidaMaps as $aidaMap)
-                                <tr>
-                                    <td>{{ $aidaMap->id }}</td>
-                                    <td>{{ $aidaMap->unit->block_lot }}</td>
-                                    <td>{{ $aidaMap->buyer->first_name }} {{ $aidaMap->buyer->last_name }}</td>
-                                    <td>{{ $aidaMap->user->first_name }} {{ $aidaMap->user->last_name }}</td>
-                                    <td>{{ $aidaMap->finance_type }}</td>
-                                    <td>{{ $aidaMap->created_at->format('M d, Y') }}</td>
-                                    <td>
-                                        <button class="btn btn-info btn-xs">View</button>
-                                        <a href="/aida-maps/{{ $aidaMap->id }}/pdf" target="_blank" class="btn btn-warning btn-xs">PDF</a>
-                                        <button class="btn btn-success btn-xs">Email</button>
-                                        <form action="/aida-maps/{{ $aidaMap->id }}" method="POST" class="inline">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-                                            <button type="submit" class="btn btn-danger btn-xs">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
+                            <tr v-for="aidaMap in aidaMaps">
+                                <td>@{{ aidaMap.id }}</td>
+                                <td>@{{ aidaMap.unit.block_lot }}</td>
+                                <td>@{{ aidaMap.buyer.first_name }} @{{ aidaMap.buyer.last_name }}</td>
+                                <td>@{{ aidaMap.user.first_name }} @{{ aidaMap.user.last_name }}</td>
+                                <td>@{{ aidaMap.finance_type }}</td>
+                                <td>@{{ aidaMap.created_at }}</td>
+                                <td>
+                                    <button class="btn btn-info btn-xs">View</button>
+                                    <a :href="pdfLink(aidaMap.id)" target="_blank" class="btn btn-warning btn-xs">PDF</a>
+                                    <form :action="pdfLink(aidaMap.id)" target="_blank" id="pdf-email" style="display:none">
+                                        <input type="hidden" name="download" value="1">
+                                    </form>
+                                    <button type="button" class="btn btn-success btn-xs" @click="sendEmail(aidaMap.id)">Email</button>
+                                    <button type="button" class="btn btn-danger btn-xs" @click="trash(aidaMap.id)">Delete</button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -51,5 +51,5 @@
 @endsection
 
 @section("js")
-
+    <script src="{{ asset('js/aida-map.js') }}"></script>
 @endsection
