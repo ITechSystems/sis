@@ -101,4 +101,19 @@ class UnitPhoto extends Model
 
         return "storage/$developer/units/$unit/" . $photo->filename;
     }
+
+    public static function getLatestAndUniqueRecords()
+    {
+        $ids = UnitPhoto::distinct()
+        ->select(\DB::raw('max(id) AS id, ANY_VALUE(unit) as unit, ANY_VALUE(filename) as filename'))
+        ->groupBy('unit')
+        ->orderBy('id', 'asc')
+        ->get();
+
+        $unique_ids = array_unique(array_map(function($e){
+          return $e['id'];
+        }, $ids->toArray()));
+
+        return UnitPhoto::whereIn('id', $unique_ids)->get();
+    }
 }
