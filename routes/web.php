@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/aida-maps/send', 'AidaMapsController@send');
     Route::get('/aida-maps/{unitId}', 'AidaMapsController@show');
     Route::get('/aida-maps/{aidaMap}/pdf', 'AidaMapsController@pdf');
+    Route::delete('/aida-maps/{aidaMap}', 'AidaMapsController@destroy');
     Route::post('/aida-maps', 'AidaMapsController@store');
 
     Route::get('/units/locations', 'UnitLocationsController@index');

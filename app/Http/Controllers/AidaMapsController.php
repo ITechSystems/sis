@@ -60,4 +60,11 @@ class AidaMapsController extends ApiController
 
         return 'Email sent successfully';
     }
+
+    public function destroy(AidaMap $aidaMap)
+    {
+        $aidaMap->delete();
+
+        return back();
+    }
 }

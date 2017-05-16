@@ -34,7 +34,11 @@
                                         <button class="btn btn-info btn-xs">View</button>
                                         <a href="/aida-maps/{{ $aidaMap->id }}/pdf" target="_blank" class="btn btn-warning btn-xs">PDF</a>
                                         <button class="btn btn-success btn-xs">Email</button>
-                                        <button class="btn btn-danger btn-xs">Delete</button>
+                                        <form action="/aida-maps/{{ $aidaMap->id }}" method="POST" class="inline">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button type="submit" class="btn btn-danger btn-xs">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
