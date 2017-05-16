@@ -10,7 +10,7 @@ class AidaMapsController extends ApiController
 {
     public function index()
     {
-        $aidaMaps = AidaMap::with('buyer', 'user')->get();
+        $aidaMaps = AidaMap::with('buyer', 'user', 'unit')->latest()->get();
 
         return view('aida-maps.index', compact('aidaMaps'));
     }

@@ -25,7 +25,7 @@
                             @foreach($aidaMaps as $aidaMap)
                                 <tr>
                                     <td>{{ $aidaMap->id }}</td>
-                                    <td>{{ $aidaMap->unit_id }}</td>
+                                    <td>{{ $aidaMap->unit->block_lot }}</td>
                                     <td>{{ $aidaMap->buyer->first_name }} {{ $aidaMap->buyer->last_name }}</td>
                                     <td>{{ $aidaMap->user->first_name }} {{ $aidaMap->user->last_name }}</td>
                                     <td>{{ $aidaMap->finance_type }}</td>

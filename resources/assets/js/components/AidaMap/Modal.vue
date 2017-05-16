@@ -74,11 +74,11 @@
 
             save() {
                 this.$http.post(`/aida-maps`, {
-                    'unit_id': this.unitId,
+                    'unit_id': this.unit.id,
                     'buyer_id': this.buyerId,
                     'finance_type': this.financingType,
                 }).then(response => {
-                    this.message = response.data.message
+                    window.location = '/aida-maps';
                 });
             }
         },

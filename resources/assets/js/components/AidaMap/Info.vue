@@ -205,13 +205,13 @@
 
             photo() {
                 return this.unit.photos.find(photo => {
-                    return photo.developer == this.unit.developer
+                    return photo.developer == this.unit.developer;
                 });
             },
 
             mapPhoto() {
                 return this.unit.map_photos.find(photo => {
-                    return photo.developer == this.unit.developer
+                    return photo.developer == this.unit.developer;
                 });
             },
 
