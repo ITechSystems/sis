@@ -36,7 +36,7 @@
                         <p class="buyer-contact_number"><i class="fa fa-phone fa-fw"></i> @{{ buyer.mobile }}</p>
                         <p class="buyer-email"><i class="fa fa-envelope fa-fw"></i> @{{ buyer.email }}</p>
                         <p class="buyer-country"><i class="fa fa-map-marker fa-fw"></i> @{{ buyer.country }}</p>
-                        <p class="buyer-agent"><i class="fa fa-user fa-fw"></i> Added by @{{ buyer.agent.name }}</p>
+                        <p class="buyer-agent"><i class="fa fa-user fa-fw"></i> Added by @{{ buyer.agent.first_name }} @{{ buyer.agent.last_name }}</p>
                     </div>
                     <div class="panel-footer buyer-tile-footer">
                         <div class="text-right">
