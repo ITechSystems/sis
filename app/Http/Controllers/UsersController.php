@@ -31,7 +31,7 @@ class UsersController extends ApiController
         return view('users.index');
     }
 
-    public function store(UserRequest $request)
+    public function store()
     {
         $this->validate(request(), [
             'email' => 'required|email',
@@ -43,7 +43,7 @@ class UsersController extends ApiController
         $user = new User;
         $user->email = request('email');
         $user->role_id = request('role_id');
-        $user->password = bcrypt($password);
+        $user->password = $password;
         $user->save();
 
         Mail::to($user->email)->send(new SendNotificationToUser($user, $password));

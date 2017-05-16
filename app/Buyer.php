@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Scopes\AgentScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Buyer extends Model
@@ -25,6 +26,13 @@ class Buyer extends Model
         'birth_date',
         'status',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new AgentScope);
+    }
 
     public function agent()
     {
