@@ -85,6 +85,7 @@
 
         watch: {
             unitId() {
+                this.financingType = '';
                 this.$http.get(`/search/unitById/${this.unitId}`).then(response => {
                         this.units = response.data;
                     }).catch(error => {
@@ -93,6 +94,7 @@
             },
 
             buyerId() {
+                this.financingType = '';
                 this.$http.get(`/buyers/${this.buyerId}`).then(response => {
                         this.buyer = response.data.buyer;
                     }).catch(error => {

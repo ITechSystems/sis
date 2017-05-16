@@ -149,29 +149,39 @@ $pdf->SetXY(85, 145);
 $pdf->Cell(25, 5, number_format($aidaMap->unit->downpayment->monthly, 2), 1, 1, 'R');
 
 $pdf->SetXY(5, 150);
-$pdf->Cell(30, 15, 'LOANABLE AMOUNT', 1, 1, 'C');
+$pdf->Cell(30, 15, 'LOAN', 1, 1, 'C');
+foreach($aidaMap->unit->loans->unique('total') as $loan) {
+    $pdf->SetXY(35, 150);
+    $pdf->Cell(50, 5, 'Loanable Amount', 1, 1, 'C');
+    $pdf->SetXY(85, 150);
+    $pdf->Cell(25, 5, number_format($loan->total, 2), 1, 1, 'R');
 
-foreach ($aidaMap->unit->loans as $index => $loan) {
-    if ($loan->finance_type == $aidaMap->finance_type) {
-        $pdf->SetXY(35, 150 + (15 * $index));
-        $pdf->Cell(10, 15, $loan->percentage, 1, 1, 'C');
-
-        $pdf->SetXY(45, 150 + (15 * $index));
-        $pdf->Cell(40, 5, 'Loanable Amount', 1, 1, 'L');
-        $pdf->SetXY(85, 150 + (15 * $index));
-        $pdf->Cell(25, 5, number_format($loan->total, 2), 1, 1, 'R');
-
-        $pdf->SetXY(45, 155 + (15 * $index));
-        $pdf->Cell(40, 5, 'MRI & FIRE', 1, 1, 'L');
-        $pdf->SetXY(85, 155 + (15 * $index));
-        $pdf->Cell(25, 5, number_format($loan->mri, 2), 1, 1, 'R');
-
-        $pdf->SetXY(45, 160 + (15 * $index));
-        $pdf->Cell(40, 5, $loan->years . ' years / ' . $loan->monthly_percentage . '%', 1, 1, 'L');
-        $pdf->SetXY(85, 160 + (15 * $index));
-        $pdf->Cell(25, 5, number_format($loan->monthly_amortization, 2), 1, 1, 'R');
-    }
+    $pdf->SetXY(35, 155);
+    $pdf->Cell(50, 5, 'MRI & FIRE', 1, 1, 'C');
+    $pdf->SetXY(85, 155);
+    $pdf->Cell(25, 5, number_format($loan->mri, 2), 1, 1, 'R');
 }
+// foreach ($aidaMap->unit->loans as $index => $loan) {
+//     if ($loan->finance_type == $aidaMap->finance_type) {
+//         $pdf->SetXY(35, 150 + (15 * $index));
+//         $pdf->Cell(10, 15, $loan->percentage, 1, 1, 'C');
+
+//         $pdf->SetXY(45, 150 + (15 * $index));
+//         $pdf->Cell(40, 5, 'Loanable Amount', 1, 1, 'L');
+//         $pdf->SetXY(85, 150 + (15 * $index));
+//         $pdf->Cell(25, 5, number_format($loan->total, 2), 1, 1, 'R');
+
+//         $pdf->SetXY(45, 155 + (15 * $index));
+//         $pdf->Cell(40, 5, 'MRI & FIRE', 1, 1, 'L');
+//         $pdf->SetXY(85, 155 + (15 * $index));
+//         $pdf->Cell(25, 5, number_format($loan->mri, 2), 1, 1, 'R');
+
+//         $pdf->SetXY(45, 160 + (15 * $index));
+//         $pdf->Cell(40, 5, $loan->years . ' years / ' . $loan->monthly_percentage . '%', 1, 1, 'L');
+//         $pdf->SetXY(85, 160 + (15 * $index));
+//         $pdf->Cell(25, 5, number_format($loan->monthly_amortization, 2), 1, 1, 'R');
+//     }
+// }
 
 if (isset($download)) {
     $pdf->Output($filePath, 'F');

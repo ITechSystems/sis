@@ -194,23 +194,35 @@
 
         computed: {
             photo() {
-                return this.unit.photos.find(photo => {
-                    return photo.developer == this.unit.developer;
-                });
+                if (this.unit.photos) {
+                    return this.unit.photos.find(photo => {
+                        return photo.developer == this.unit.developer;
+                    });
+                }
+
+                return '';
             },
 
             mapPhoto() {
-                return this.unit.map_photos.find(photo => {
-                    return photo.developer == this.unit.developer;
-                });
+                if (this.unit.map_photos) {
+                    return this.unit.map_photos.find(photo => {
+                        return photo.developer == this.unit.developer;
+                    });
+                }
+
+                return '';
             },
 
             houseModelPath() {
-                return `/storage/${this.photo.developer}/models/${this.photo.house_model_name}/${this.photo.filename}`;
+                if (this.photo) {
+                    return `/storage/${this.photo.developer}/models/${this.photo.house_model_name}/${this.photo.filename}`;
+                }
             },
 
             unitPath() {
-                return `/storage/${this.mapPhoto.developer}/units/${this.mapPhoto.unit}/${this.mapPhoto.filename}`;
+                if (this.mapPhoto) {
+                    return `/storage/${this.mapPhoto.developer}/units/${this.mapPhoto.unit}/${this.mapPhoto.filename}`;
+                }
             }
         },
 
