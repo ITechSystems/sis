@@ -105,9 +105,9 @@
                     </thead>
                     <tbody v-if="unit.downpayment">
                         <tr>
-                            <td style="text-align:right">{{ unit.downpayment.equity | currency }}</td>
-                            <td style="text-align:right">{{ unit.downpayment.term | currency }}</td>
-                            <td style="text-align:right">{{ unit.downpayment.monthly | currency }}</td>
+                            <td>{{ unit.downpayment.equity | currency }}</td>
+                            <td>{{ unit.downpayment.term | currency }}</td>
+                            <td>{{ unit.downpayment.monthly | currency }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -115,24 +115,36 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <td>Percentage</td>
-                            <td>Loanable Amount</td>
-                            <td>MRI</td>
-                            <td>Description</td>
-                            <td>Monthly Percentage</td>
-                            <td>Terms</td>
-                            <td>Monthly Amortization</td>
+                            <th>Finance Type</th>
+                            <th>Price</th>
+                            <th>Loan Percentage</th>
+                            <th>Monthly Percentage</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="loan in unit.loans" v-if="loan.finance_type == financingType">
-                            <td>{{ loan.percentage }}</td>
-                            <td style="text-align:right">{{ loan.total | currency }}</td>
-                            <td style="text-align:right">{{ loan.mri | currency }}</td>
-                            <td>{{ loan.description }}</td>
-                            <td>{{ loan.monthly_percentage }}%
-                            <td>{{ loan.years }} years</td>
-                            <td style="text-align:right">{{ loan.monthly_amortization | currency }}</td>
+                        <tr>
+                            <td>{{ unit.loans[0].finance_type }}</td>
+                            <td>{{ unit.total_contract_price | currency }}</td>
+                            <td>{{ unit.loans[0].percentage }}</td>
+                            <td>{{ unit.loans[0].monthly_percentage }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Loanable Amount</th>
+                            <th>MRI and FIRE</th>
+                            <th v-for="loan in unit.loans">{{ loan.years }} years</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ unit.loans[0].total | currency }}</td>
+                            <td>{{ unit.loans[0].mri | currency }}</td>
+                            <td v-for="loan in unit.loans" v-if="loan.finance_type == financingType">
+                                {{ loan.monthly_amortization | currency }}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
