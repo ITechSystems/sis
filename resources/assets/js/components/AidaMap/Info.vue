@@ -43,7 +43,7 @@
                         <tr><td>{{ buyer.email }}</td></tr>
                         <tr><td>{{ buyer.marital_status }}</td></tr>
                         <tr><td>{{ buyer.financing_type }}</td></tr>
-                        <tr><td>{{ buyer.work_location }}</td></tr>
+                        <tr><td>{{ buyer.work_type }}</td></tr>
                         <tr><td>{{ buyer.country }}</td></tr>
                         <tr><td>{{ buyer.equity_type }}</td></tr>
                     </tbody>

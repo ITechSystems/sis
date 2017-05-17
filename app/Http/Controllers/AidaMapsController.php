@@ -34,7 +34,7 @@ class AidaMapsController extends ApiController
 
     public function pdf(AidaMap $aidaMap)
     {
-        $aidaMap->load('buyer', 'user', 'unit.loans');
+        $aidaMap->load('buyer', 'user', 'unit.loans', 'unit.photos', 'unit.mapPhotos');
         $download = request('download');
         $filePath = storage_path() . '/app/public/' . $aidaMap->id . '.pdf';
 

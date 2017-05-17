@@ -43,4 +43,9 @@ class Buyer extends Model
     {
         return $this->belongsTo(BuyerStatus::class, 'status');
     }
+
+    public function fullName()
+    {
+        return "{$this->last_name}, {$this->first_name} {$this->middle_name} {$this->extension}";
+    }
 }

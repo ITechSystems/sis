@@ -12,3 +12,13 @@ function randomString($length = 10)
 
     return $string;
 }
+
+function houseModelPhotoPath($developer, $model, $filename)
+{
+    return "storage/{$developer}/models/{$model}/{$filename}";
+}
+
+function unitPhotoPath($developer, $unit, $filename)
+{
+    return "storage/{$developer}/units/{$unit}/{$filename}";
+}
