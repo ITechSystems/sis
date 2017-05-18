@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Buyer;
+use App\Filters\BuyerFilters;
 use App\Http\Requests\BuyerRequest;
 
 class BuyersController extends ApiController
 {
-    public function index()
+    public function index(BuyerFilters $filters)
     {
+        if (request()->wantsJson()) {
+            return Buyer::filter($filters)->with('agent')->get();
+        }
+
         return view('buyers.index');
     }
 

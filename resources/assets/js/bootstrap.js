@@ -1,10 +1,5 @@
-var path = require('path');
 window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-window.storagePath = function () {
-    return path.dirname(__dirname) + '../storage';
-}
 
 Vue.prototype.$http = window.axios;
 
