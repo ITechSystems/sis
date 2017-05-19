@@ -29,7 +29,6 @@ new Vue({
             { column: '', name: 'Action' },
         ],
         filter: new Filter('buyers'),
-        searchTerm: '',
     },
 
     el: '#app',
