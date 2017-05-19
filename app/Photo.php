@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Amenity;
 use Illuminate\Database\Eloquent\Model;
 
 class Photo extends Model
@@ -34,6 +35,18 @@ class Photo extends Model
 
             $model = $data['house_model_name'];
 
+            $lot_size = $data['lot_size'];
+
+            $floor_size = $data['floor_size'];
+
+            $number_of_rooms = $data['number_of_rooms'];
+
+            $number_of_bathrooms = $data['number_of_bathrooms'];
+
+            $storeys = $data['storeys'];
+
+            $with_carport = $data['with_carport'];
+
             $description = $data['description'];
 
             $path = "public/$developer/models/$model/";
@@ -49,6 +62,18 @@ class Photo extends Model
 
             $photo->house_model_name = $model;
 
+            $photo->lot_size = $lot_size;
+
+            $photo->floor_size = $floor_size;
+
+            $photo->number_of_rooms = $number_of_rooms;
+
+            $photo->number_of_bathrooms = $number_of_bathrooms;
+
+            $photo->storeys = $storeys;
+
+            $photo->with_carport = $with_carport;
+
             $photo->description = $description;
 
             $photo->mime = $file->getClientMimeType();
@@ -58,6 +83,13 @@ class Photo extends Model
             $photo->filename = $file->getFilename() . '.' . $extension;
 
             $photo->save();
+
+            //attach amenities
+            foreach($data['amenities'] as $a){
+                $amenity = Amenity::find($a);
+
+                $photo->giveAmenity($amenity);
+            }
         });
     }
 
@@ -79,6 +111,11 @@ class Photo extends Model
     public static function getBaseUrl()
     {
         return env('APP_URL');
+    }
+
+    public function scopeWithFilename($query, $filename)
+    {
+        return $query->where('filename', $filename);
     }
 
     public static function getPhotoByFilename($filename)
@@ -115,5 +152,15 @@ class Photo extends Model
         }, $ids->toArray()));
 
         return Photo::whereIn('id', $unique_ids)->get();
+    }
+
+    public function amenities()
+    {
+        return $this->belongsToMany(Amenity::class);
+    }
+
+    public function giveAmenity($amenity)
+    {
+        return $this->amenities()->attach($amenity);
     }
 }

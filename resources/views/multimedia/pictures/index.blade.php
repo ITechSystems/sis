@@ -27,55 +27,7 @@
 						          </div>
 						        @endif
 
-							    <form action="/apply/upload" method="post" enctype="multipart/form-data">
-							    	{{ csrf_field() }}
-
-							    	<div class="control-group">
-							    		<div class="controls">
-							    			<div class="row">
-							    				<div class="col-md-6">
-							    					<label for="developer">Developer</label>
-
-							    					<select name="developer" class="form-control" @change="getModelNames(developer)" v-model="developer">
-							    						<option>Choose</option>
-							    						@foreach($developers as $d)
-							    							<option>{{ $d->developer }}</option>
-							    						@endforeach
-							    					</select>
-							    				</div>
-							    			</div>
-							    			<div class="row">
-							    				<div class="col-md-6">
-							    					<label for="house_model_name">House Model Name</label>
-
-							    					<select name="house_model_name" class="form-control" required>
-							    						<option value="">Choose</option>
-							    						<option v-for="model in model_names">@{{ model.house_model }}</option>
-							    					</select>
-							    				</div>
-							    			</div>
-
-							    			<div class="row">
-							    				<div class="col-md-6">
-								    				<label for="description">Description</label>
-
-								    				<input type="text" name="description" class="form-control" required>
-							    				</div>
-							    			</div>
-							    			<div class="row">
-							    				<div class="col-md-6">
-								    				<label>File to upload:</label>
-								    				<input type="file" name="file" id="file" required>
-							    				</div>
-							    			</div><br>
-							    			<div class="row">
-							    				<div class="col-md-6">
-							    					<input type="submit" name="submit" value="Upload">
-							    				</div>
-							    			</div>
-							    		</div>
-							    	</div>
-							    </form>
+						        @include('multimedia.pictures._partials.form')
 						      </div>
 
 						      @if(count($errors) > 0)

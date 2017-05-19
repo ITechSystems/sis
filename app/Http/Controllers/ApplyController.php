@@ -1,4 +1,5 @@
 <?php namespace App\Http\Controllers;
+use App\Amenity;
 use App\Photo;
 use App\Unit;
 use App\UnitPhoto;
@@ -14,7 +15,9 @@ class ApplyController extends Controller {
 
     $developers = Unit::distinct()->get(['developer']);
 
-    return view('multimedia.pictures.index', compact('entries', 'developers'));
+    $amenities = Amenity::all();
+
+    return view('multimedia.pictures.index', compact('entries', 'developers', 'amenities'));
   }
 
   public function upload()
@@ -67,7 +70,7 @@ class ApplyController extends Controller {
 
   public function viewImage($filename)
   {
-    $photo = Photo::getPhotoByFilename($filename);
+    $photo = Photo::withFilename($filename)->with('amenities')->first();
 
     return view('multimedia.pictures.view_image', compact('photo'));
   }
