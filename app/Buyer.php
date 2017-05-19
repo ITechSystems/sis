@@ -2,11 +2,14 @@
 
 namespace App;
 
+use App\Filters\Filterable;
 use App\Scopes\AgentScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Buyer extends Model
 {
+    use Filterable;
+
     protected $fillable = [
         'user_id',
         'first_name',
@@ -47,10 +50,5 @@ class Buyer extends Model
     public function fullName()
     {
         return "{$this->last_name}, {$this->first_name} {$this->middle_name} {$this->extension}";
-    }
-
-    public function scopeFilter($query, $filters)
-    {
-        return $filters->apply($query);
     }
 }

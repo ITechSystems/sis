@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\UserFilters;
 use App\Http\Requests\UserRequest;
 use App\Mail\SendNotificationToUser;
 use App\User;
@@ -10,22 +11,12 @@ use Illuminate\Support\Facades\Mail;
 
 class UsersController extends ApiController
 {
-    public function index()
+    public function index(UserFilters $filters)
     {
         if (request()->wantsJson()) {
-            if (! request('search')) {
-                return User::orderBy('created_at', 'desc')->get();
-            }
-
-            return User::where(function ($query) {
-                $query->where('id', '%' . request('search'))
-                    ->orWhere('first_name', 'like', '%' . request('search') . '%')
-                    ->orWhere('last_name', 'like', '%' . request('search') . '%')
-                    ->orWhere('middle_name', 'like', '%' . request('search') . '%')
-                    ->orWhere('extension', 'like', '%' . request('search') . '%')
-                    ->orWhere('contact_number', 'like', '%' . request('search') . '%')
-                    ->orWhere('email', 'like', '%' . request('search') . '%');
-            })->orderBy('created_at', 'desc')->get();
+            return $this->respond([
+                'users' => User::filter($filters)->get(),
+            ]);
         }
 
         return view('users.index');
@@ -33,6 +24,8 @@ class UsersController extends ApiController
 
     public function store()
     {
+        $this->authorize('create', User::class);
+
         $this->validate(request(), [
             'email' => 'required|email',
             'role_id' => 'required',
@@ -55,11 +48,15 @@ class UsersController extends ApiController
 
     public function edit(User $user)
     {
+        $this->authorize('edit', $user);
+
         return view('users.edit', compact('user'));
     }
 
     public function patch(User $user, UserRequest $request)
     {
+        $this->authorize('edit', $user);
+
         $user->update(request()->all());
 
         return $this->respond([
