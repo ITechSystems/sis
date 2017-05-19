@@ -103,6 +103,7 @@
                         <li><a href="/data/upload"><i class="fa fa-circle-o"></i> Import</a></li>
                         <li><a href="/data/export"><i class="fa fa-circle-o"></i> Export</a></li>
                         <li><a href="/data/template"><i class="fa fa-circle-o"></i> Download Template</a></li>
+                        <li><a href="/data/amenities/create"><i class="fa fa-circle-o"></i>Add Amenity</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
