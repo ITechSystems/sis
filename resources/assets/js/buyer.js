@@ -2,11 +2,13 @@ import './bootstrap.js';
 import Filter from './core/Filter.js';
 import BuyerModal from './components/BuyerModal.vue';
 import SortableHeader from './components/Filters/SortableHeader.vue';
+import Search from './components/Filters/Search.vue';
 
 new Vue({
     components: {
         BuyerModal,
         SortableHeader,
+        Search,
     },
 
     data: {
@@ -33,12 +35,6 @@ new Vue({
     el: '#app',
 
     methods: {
-        getBuyers() {
-            this.$http.get(`/buyers`).then(response => {
-                this.buyers = response.data;
-            });
-        },
-
         setForm(buyerId, action) {
             this.action = action;
             this.buyerId = buyerId;
@@ -50,9 +46,19 @@ new Vue({
             });
         },
 
-        applyFilter(payload) {
+        addFilter(payload) {
             this.filter.add(payload);
 
+            this.applyFilter();
+        },
+
+        applyOrder(payload) {
+            this.filter.order(payload);
+
+            this.applyFilter();
+        },
+
+        applyFilter(payload) {
             this.filter.apply().then(response => {
                 this.buyers = response.data;
             });

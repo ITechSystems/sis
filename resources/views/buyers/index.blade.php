@@ -1,22 +1,21 @@
 @extends("layouts.app")
 
 @section("content")
-    <buyer-modal :buyer-id="buyerId" :action="action" @saved="getBuyers"></buyer-modal>
+    <buyer-modal :buyer-id="buyerId" :action="action" @saved=""></buyer-modal>
     <div class="container" v-cloak>
         <div class="row">
             <div class="col-md-12">
                 <div class="box">
-                    <form class="form-inline text-center" @submit.prevent="getBuyers">
-                        <div class="form-group">
-                            <input type="text" class="form-control" v-model="searchTerm" title="Search Term">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <search :searchables="headers" @searched="addFilter"></search>
                         </div>
-                        <button type="submit" class="btn btn-md btn-default">
-                            <i class="fa fa-search"></i> SEARCH
-                        </button>
-                        <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#buyer-modal" @click="setForm('', 'create')">
-                            <i class="fa fa-user-plus"></i> ADD BUYER
-                        </button>
-                    </form>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-md btn-primary btn-block" data-toggle="modal" data-target="#buyer-modal" @click="setForm('', 'create')">
+                                <i class="fa fa-user-plus"></i> ADD BUYER
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -24,10 +23,9 @@
             <div class="col-md-12">
                 <div class="box">
                     <table class="table table-hover table-striped table-bordered mb-0">
-                        <thead is="sortable-header" :headers="headers" @sorted="applyFilter">
-                        </thead>
-                        <tbody v-for="buyer in buyers">
-                            <tr>
+                        <thead is="sortable-header" :headers="headers" @sorted="applyOrder"></thead>
+                        <tbody>
+                            <tr v-for="buyer in buyers">
                                 <td>@{{ buyer.id }}</td>
                                 <td>@{{ buyer.last_name }}</td>
                                 <td>@{{ buyer.first_name }}</td>

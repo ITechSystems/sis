@@ -1,1 +1,191 @@
-!function(e){function t(a){if(n[a])return n[a].exports;var i=n[a]={i:a,l:!1,exports:{}};return e[a].call(i.exports,i,i.exports,t),i.l=!0,i.exports}var n={};t.m=e,t.c=n,t.i=function(e){return e},t.d=function(e,n,a){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:a})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=53)}({1:function(e,t){window.axios.defaults.headers.common["X-CSRF-TOKEN"]=window.Laravel.csrfToken,window.axios.defaults.headers.common["X-Requested-With"]="XMLHttpRequest",Vue.prototype.$http=window.axios,accounting.settings={currency:{symbol:"",format:"%s%v",decimal:".",thousand:",",precision:2},number:{precision:2,thousand:",",decimal:"."}},Vue.filter("diffForHumans",function(e){return moment(e).fromNow()}),Vue.filter("currency",function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:"";return t?accounting.formatMoney(e,{symbol:t,format:"%s %v"}):accounting.formatMoney(e,t)}),Vue.filter("number",function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:2;return accounting.formatNumber(e,t)})},11:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var a=n(1);n.n(a);new Vue({el:"#app",data:{message:"",aidaMaps:[]},mounted:function(){this.getAidaMaps()},methods:{getAidaMaps:function(){var e=this;this.$http.get("/aida-maps").then(function(t){e.aidaMaps=t.data.aida_maps})},pdfLink:function(e){return"/aida-maps/"+e+"/pdf"},destroyLink:function(e){return"/aida-maps/"+e},trash:function(e){var t=this;this.$http.delete("/aida-maps/"+e).then(function(e){t.message=e.data.message,t.hideMessage(),t.getAidaMaps()})},sendEmail:function(e){var t=this;document.getElementById("pdf-email").submit(),this.$http.get("/aida-maps/"+e+"/email").then(function(e){t.message=e.data.message,t.hideMessage()})},hideMessage:function(){var e=this;setTimeout(function(){e.message=""},1500)}}})},53:function(e,t,n){e.exports=n(11)}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 56);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 1:
+/***/ (function(module, exports) {
+
+window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+Vue.prototype.$http = window.axios;
+
+accounting.settings = {
+    currency: {
+        symbol: '',
+        format: '%s%v',
+        decimal: '.',
+        thousand: ',',
+        precision: 2
+    },
+    number: {
+        precision: 2,
+        thousand: ',',
+        decimal: '.'
+    }
+};
+
+Vue.filter('diffForHumans', function (date) {
+    return moment(date).fromNow();
+});
+
+Vue.filter('currency', function (number) {
+    var symbol = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+    if (!symbol) {
+        return accounting.formatMoney(number, symbol);
+    }
+
+    return accounting.formatMoney(number, { symbol: symbol, format: '%s %v' });
+});
+
+Vue.filter('number', function (number) {
+    var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+
+    return accounting.formatNumber(number, precision);
+});
+
+/***/ }),
+
+/***/ 11:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bootstrap_js__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bootstrap_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__bootstrap_js__);
+
+
+new Vue({
+    el: '#app',
+
+    data: {
+        message: '',
+        aidaMaps: []
+    },
+
+    mounted: function mounted() {
+        this.getAidaMaps();
+    },
+
+
+    methods: {
+        getAidaMaps: function getAidaMaps() {
+            var _this = this;
+
+            this.$http.get('/aida-maps').then(function (response) {
+                _this.aidaMaps = response.data.aida_maps;
+            });
+        },
+        pdfLink: function pdfLink(id) {
+            return '/aida-maps/' + id + '/pdf';
+        },
+        destroyLink: function destroyLink(id) {
+            return '/aida-maps/' + id;
+        },
+        trash: function trash(id) {
+            var _this2 = this;
+
+            this.$http.delete('/aida-maps/' + id).then(function (response) {
+                _this2.message = response.data.message;
+                _this2.hideMessage();
+                _this2.getAidaMaps();
+            });
+        },
+        sendEmail: function sendEmail(id) {
+            var _this3 = this;
+
+            document.getElementById('pdf-email').submit();
+
+            this.$http.get('/aida-maps/' + id + '/email').then(function (response) {
+                _this3.message = response.data.message;
+                _this3.hideMessage();
+            });
+        },
+        hideMessage: function hideMessage() {
+            var _this4 = this;
+
+            setTimeout(function () {
+                _this4.message = '';
+            }, 1500);
+        }
+    }
+});
+
+/***/ }),
+
+/***/ 56:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(11);
+
+
+/***/ })
+
+/******/ });

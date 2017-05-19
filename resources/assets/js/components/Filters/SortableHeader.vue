@@ -39,7 +39,7 @@
             },
 
             emitCurrentSorting() {
-                this.$emit('sorted', [{sort_by: this.currentColumn}, {direction: this.direction}]);
+                this.$emit('sorted', {sort_by: this.currentColumn , direction: this.direction});
             },
         }
     }

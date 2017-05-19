@@ -1,20 +1,39 @@
 export default class Filter {
     constructor(resource) {
         this.resource = resource;
+        this.sortBy = '';
+        this.direction = 'desc';
         this.filters = [];
     }
 
-    add(filters) {
-        filters.forEach(filter => {
-            let filterKey = this.key(filter);
-
-            if (this.has(filterKey)) {
-                this.get(filterKey)[filterKey] = filter[filterKey];
-                return;
-            }
-
+    add(filter, appendable = false) {
+        if (! appendable) {
+            this.filters = [];
             this.filters.push(filter);
-        });
+            console.log(this);
+
+            return;
+        }
+
+        // filters.forEach(filter => {
+        //     let filterKey = this.key(filter);
+
+        //     if (this.has(filterKey)) {
+        //         this.get(filterKey)[filterKey] = filter[filterKey];
+        //         return;
+        //     }
+
+        //     this.filters.push(filter);
+        // });
+    }
+
+    order(sort) {
+        this.sortBy = sort.sort_by;
+        this.direction = sort.direction;
+    }
+
+    clear() {
+
     }
 
     has(filterKey) {
@@ -45,12 +64,12 @@ export default class Filter {
         this.filters.forEach(filter => {
             let key = this.key(filter);
 
-            queryString += `&${key}=${filter[key]}`;
+            if (filter[key]) {
+                queryString += `&${key}=${filter[key]}`;
+            }
         });
 
-        queryString = queryString.replace('&', '?');
-
-        return `/${this.resource}${queryString}`;
+        return `/${this.resource}?sort_by=${this.sortBy}&direction=${this.direction}${queryString}`;
     }
 
     key(filterObject) {
