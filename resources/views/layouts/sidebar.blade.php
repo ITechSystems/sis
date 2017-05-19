@@ -105,6 +105,12 @@
                         <li><a href="/data/template"><i class="fa fa-circle-o"></i> Download Template</a></li>
                     </ul>
                 </li>
+                <li class="treeview">
+                    <a href="{{ url('/users') }}"><i class="fa fa-users"></i> <span>Users</span></a>
+                </li>
+                <li class="treeview">
+                    <a href="{{ url('/permissions') }}"><i class="fa fa-check"></i> <span>Permissions</span></a>
+                </li>
                 <li class="header">
                     <span>Settings</span>
                 </li>
