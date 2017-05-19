@@ -42,7 +42,7 @@ new Vue({
 
         trash(userId) {
             this.$http.delete(`/users/${userId}`).then(response => {
-                this.getUsers();
+                this.applyFilter();
             });
         },
 
@@ -58,7 +58,7 @@ new Vue({
             this.applyFilter();
         },
 
-        applyFilter(payload) {
+        applyFilter() {
             this.filter.apply().then(response => {
                 this.users = response.data.users;
             });

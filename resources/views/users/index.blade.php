@@ -39,6 +39,9 @@
                                     <a class="btn btn-default btn-xs" :href="editLink(user.id)">
                                         <i class="fa fa-pencil"></i> Edit
                                     </a>
+                                    <a class="btn btn-danger btn-xs" @click="trash(user.id)">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>

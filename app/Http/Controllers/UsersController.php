@@ -63,4 +63,15 @@ class UsersController extends ApiController
             'message' => 'Successfully updated the profile.',
         ]);
     }
+
+    public function destroy(User $user)
+    {
+        $this->authorize('destroy', User::class);
+
+        // $user->delete();
+
+        // return $this->respond([
+        //     'message' => 'Successfully deleted the user.',
+        // ]);
+    }
 }

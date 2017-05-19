@@ -18,4 +18,9 @@ class UserPolicy
     {
         return $user->id == $profile->id || $user->hasPermission('Agent Management', 'READ/WRITE');
     }
+
+    public function destroy(User $user)
+    {
+        return $user->hasPermission('Agent Management', 'READ/WRITE');
+    }
 }
