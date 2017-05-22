@@ -1,24 +1,44 @@
 import './bootstrap.js';
+import Filter from './core/Filter.js';
+import BuyerModal from './components/BuyerModal.vue';
+import SortableHeader from './components/Filters/SortableHeader.vue';
+import Search from './components/Filters/Search.vue';
+import DeleteButton from './components/Buttons/DeleteButton.vue';
 
 new Vue({
     el: '#app',
 
-    data: {
-        message: '',
-        aidaMaps: [],
+    components: {
+        BuyerModal,
+        SortableHeader,
+        Search,
+        DeleteButton,
     },
 
-    mounted() {
-        this.getAidaMaps();
+    data: {
+        message: '',
+        headers: [
+            {column: 'id', name: 'Control #'},
+            {column: '', name: 'Unit ID'},
+            {column: '', name: 'Buyer'},
+            {column: '', name: 'Agent'},
+            {column: 'finance_type', name: 'Financing Type'},
+            {column: 'created_at', name: 'Date Created'},
+            {column: '', name: 'Actions'},
+        ],
+        searchables: [
+            {column: 'id', name: 'Control #'},
+            {column: 'unit', name: 'Unit ID'},
+            {column: 'buyer', name: 'Buyer'},
+            {column: 'agent', name: 'Agent'},
+            {column: 'finance_type', name: 'Financing Type'},
+            {column: 'created_at', name: 'Date Created'},
+        ],
+        aidaMaps: [],
+        filter: new Filter('aida-maps'),
     },
 
     methods: {
-        getAidaMaps() {
-            this.$http.get(`/aida-maps`).then(response => {
-                this.aidaMaps = response.data.aida_maps;
-            });
-        },
-
         pdfLink(id) {
             return `/aida-maps/${id}/pdf`;
         },
@@ -27,12 +47,16 @@ new Vue({
             return `/aida-maps/${id}`;
         },
 
-        trash(id) {
-            this.$http.delete(`/aida-maps/${id}`).then(response => {
-                this.message = response.data.message;
-                this.hideMessage();
-                this.getAidaMaps();
+        getAidaMaps() {
+            this.$http.get(`/aida-maps`).then(response => {
+                this.aidaMaps = response.data.aida_maps;
             });
+        },
+
+        processData(response) {
+            this.message = response.data.message;
+            this.hideMessage();
+            this.getAidaMaps();
         },
 
         sendEmail(id) {
@@ -48,6 +72,24 @@ new Vue({
             setTimeout(() => {
                 this.message = '';
             }, 1500);
+        },
+
+        addFilter(payload) {
+            this.filter.add(payload);
+
+            this.applyFilter();
+        },
+
+        applyOrder(payload) {
+            this.filter.order(payload);
+
+            this.applyFilter();
+        },
+
+        applyFilter() {
+            this.filter.apply().then(response => {
+                this.aidaMaps = response.data.aida_maps;
+            });
         }
     }
 });

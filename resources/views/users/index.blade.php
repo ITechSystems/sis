@@ -37,11 +37,9 @@
                                 <td>@{{ user.email }}</td>
                                 <td>
                                     <a class="btn btn-default btn-xs" :href="editLink(user.id)">
-                                        <i class="fa fa-pencil"></i> Edit
+                                        <i class="fa fa-pencil fa-fw"></i>
                                     </a>
-                                    <a class="btn btn-danger btn-xs" @click="trash(user.id)">
-                                        <i class="fa fa-trash"></i> Delete
-                                    </a>
+                                    <delete-button resource="users" :primary-key="user.id" @deleted="applyFilter"></delete-button>
                                 </td>
                             </tr>
                         </tbody>

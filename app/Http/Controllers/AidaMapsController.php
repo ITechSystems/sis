@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\AidaMap;
+use App\Filters\AidaMapFilters;
 use App\Mail\SendAidaMapToLeads;
 use Illuminate\Support\Facades\Mail;
 
 class AidaMapsController extends ApiController
 {
-    public function index()
+    public function index(AidaMapFilters $filters)
     {
         if (request()->wantsJson()) {
             return $this->respond([
-                'aida_maps' => AidaMap::with('buyer', 'user', 'unit')->latest()->get(),
+                'aida_maps' => AidaMap::filter($filters)->with('buyer', 'user', 'unit')->latest()->get(),
             ]);
         }
 

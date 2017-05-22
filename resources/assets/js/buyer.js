@@ -3,12 +3,14 @@ import Filter from './core/Filter.js';
 import BuyerModal from './components/BuyerModal.vue';
 import SortableHeader from './components/Filters/SortableHeader.vue';
 import Search from './components/Filters/Search.vue';
+import DeleteButton from './components/Buttons/DeleteButton.vue';
 
 new Vue({
     components: {
         BuyerModal,
         SortableHeader,
         Search,
+        DeleteButton,
     },
 
     data: {
@@ -28,6 +30,19 @@ new Vue({
             { column: 'created_at', name: 'Date Added' },
             { column: '', name: 'Action' },
         ],
+        searchables: [
+            { column: 'id', name: 'ID' },
+            { column: 'last_name', name: 'Last Name' },
+            { column: 'first_name', name: 'First Name' },
+            { column: 'middle_name', name: 'Middle Name' },
+            { column: 'extension', name: 'Extension' },
+            { column: 'mobile', name: 'Mobile' },
+            { column: 'email', name: 'Email' },
+            { column: 'country', name: 'Country' },
+            { column: 'agent', name: 'Added By' },
+            { column: 'created_at', name: 'Date Added' },
+            { column: '', name: 'Action' },
+        ],
         filter: new Filter('buyers'),
     },
 
@@ -37,12 +52,6 @@ new Vue({
         setForm(buyerId, action) {
             this.action = action;
             this.buyerId = buyerId;
-        },
-
-        trash(buyerId) {
-            this.$http.delete(`/buyers/${buyerId}`).then(response => {
-                this.getBuyers();
-            });
         },
 
         addFilter(payload) {
@@ -57,7 +66,7 @@ new Vue({
             this.applyFilter();
         },
 
-        applyFilter(payload) {
+        applyFilter() {
             this.filter.apply().then(response => {
                 this.buyers = response.data;
             });

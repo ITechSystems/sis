@@ -2,11 +2,14 @@
 
 namespace App;
 
+use App\Filters\Filterable;
 use App\Scopes\AgentScope;
 use Illuminate\Database\Eloquent\Model;
 
 class AidaMap extends Model
 {
+    use Filterable;
+
     protected $fillable = [
         'user_id',
         'unit_id',
