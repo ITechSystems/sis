@@ -1,7 +1,12 @@
 import './bootstrap.js';
+import DeleteButton from './components/Buttons/DeleteButton.vue';
 
 new Vue({
     el: '#app',
+
+    components: {
+        DeleteButton,
+    },
 
     data: {
         message: '',
@@ -13,12 +18,6 @@ new Vue({
     },
 
     methods: {
-        getAidaMaps() {
-            this.$http.get(`/aida-maps`).then(response => {
-                this.aidaMaps = response.data.aida_maps;
-            });
-        },
-
         pdfLink(id) {
             return `/aida-maps/${id}/pdf`;
         },
@@ -27,12 +26,16 @@ new Vue({
             return `/aida-maps/${id}`;
         },
 
-        trash(id) {
-            this.$http.delete(`/aida-maps/${id}`).then(response => {
-                this.message = response.data.message;
-                this.hideMessage();
-                this.getAidaMaps();
+        getAidaMaps() {
+            this.$http.get(`/aida-maps`).then(response => {
+                this.aidaMaps = response.data.aida_maps;
             });
+        },
+
+        processData(response) {
+            this.message = response.data.message;
+            this.hideMessage();
+            this.getAidaMaps();
         },
 
         sendEmail(id) {

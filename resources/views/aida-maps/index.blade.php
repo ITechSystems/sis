@@ -33,13 +33,12 @@
                                 <td>@{{ aidaMap.finance_type }}</td>
                                 <td>@{{ aidaMap.created_at }}</td>
                                 <td>
-                                    <button class="btn btn-info btn-xs">View</button>
                                     <a :href="pdfLink(aidaMap.id)" target="_blank" class="btn btn-warning btn-xs">PDF</a>
                                     <form :action="pdfLink(aidaMap.id)" target="_blank" id="pdf-email" style="display:none">
                                         <input type="hidden" name="download" value="1">
                                     </form>
                                     <button type="button" class="btn btn-success btn-xs" @click="sendEmail(aidaMap.id)">Email</button>
-                                    <button type="button" class="btn btn-danger btn-xs" @click="trash(aidaMap.id)">Delete</button>
+                                    <delete-button resource="aida-maps" :primary-key="aidaMap.id" @deleted="processData"></delete-button>
                                 </td>
                             </tr>
                         </tbody>

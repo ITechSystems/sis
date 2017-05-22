@@ -36,16 +36,14 @@
                                 <td>@{{ buyer.country }}</td>
                                 <td>@{{ buyer.agent.first_name }} @{{ buyer.agent.last_name }}</td>
                                 <td>@{{ buyer.created_at }}</td>
-                                <td>
+                                <td nowrap>
                                     <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#buyer-modal" @click="setForm(buyer.id, 'edit')">
-                                        <i class="fa fa-pencil fa-fw"></i> Edit
+                                        <i class="fa fa-pencil fa-fw"></i>
                                     </button>
                                     <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#buyer-modal" @click="setForm(buyer.id, 'show')">
-                                        <i class="fa fa-eye fa-fw"></i> Details
+                                        <i class="fa fa-eye fa-fw"></i>
                                     </button>
-                                    <button class="btn btn-danger btn-xs" @click="trash(buyer.id)">
-                                        <i class="fa fa-trash fa-fw"></i> Delete
-                                    </button>
+                                    <delete-button resource="buyers" :primary-key="buyer.id" @deleted="applyFilter"></delete-button>
                                 </td>
                             </tr>
                         </tbody>

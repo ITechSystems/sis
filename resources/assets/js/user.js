@@ -3,12 +3,14 @@ import Filter from './core/Filter.js';
 import UserModal from './components/UserModal.vue';
 import SortableHeader from './components/Filters/SortableHeader.vue';
 import Search from './components/Filters/Search.vue';
+import DeleteButton from './components/Buttons/DeleteButton.vue';
 
 new Vue({
     components: {
         UserModal,
         SortableHeader,
         Search,
+        DeleteButton,
     },
 
     data: {
@@ -40,12 +42,6 @@ new Vue({
             this.userId = userId;
         },
 
-        trash(userId) {
-            this.$http.delete(`/users/${userId}`).then(response => {
-                this.applyFilter();
-            });
-        },
-
         addFilter(payload) {
             this.filter.add(payload);
 
@@ -65,4 +61,3 @@ new Vue({
         }
     }
 });
-
