@@ -1,29 +1,31 @@
 @extends("layouts.app")
 
 @section("content")
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default mb-0">
-                <div class="panel-heading" style="display: flex; align-items: center; justify-content: space-between">
-                    <span>AIDA MAPS</span>
-                    <a  href="/aida-maps/create" class="btn btn-xs btn-primary">Create</a>
+    <div class="container" v-cloak>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <search :searchables="searchables" @searched="addFilter"></search>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="/aida-maps/create" class="btn btn-md btn-primary btn-block">
+                                <i class="fa fa-user-plus"></i> ADD AIDA MAP
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="panel-body">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
                     <div class="alert alert-success" v-if="message" v-cloak>
                         @{{ message }}
                     </div>
-                    <table class="table" v-cloak>
-                        <thead>
-                            <tr>
-                                <th>Control #</th>
-                                <th>Unit ID</th>
-                                <th>Buyer</th>
-                                <th>Agent</th>
-                                <th>Financing Type</th>
-                                <th>Date Created</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
+                    <table class="table table-hover table-striped table-bordered mb-0" v-cloak>
+                        <thead is="sortable-header" :headers="headers" @sorted="applyOrder"></thead>
                         <tbody>
                             <tr v-for="aidaMap in aidaMaps">
                                 <td>@{{ aidaMap.id }}</td>

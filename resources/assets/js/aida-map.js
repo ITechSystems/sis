@@ -1,20 +1,41 @@
 import './bootstrap.js';
+import Filter from './core/Filter.js';
+import BuyerModal from './components/BuyerModal.vue';
+import SortableHeader from './components/Filters/SortableHeader.vue';
+import Search from './components/Filters/Search.vue';
 import DeleteButton from './components/Buttons/DeleteButton.vue';
 
 new Vue({
     el: '#app',
 
     components: {
+        BuyerModal,
+        SortableHeader,
+        Search,
         DeleteButton,
     },
 
     data: {
         message: '',
+        headers: [
+            {column: 'id', name: 'Control #'},
+            {column: '', name: 'Unit ID'},
+            {column: '', name: 'Buyer'},
+            {column: '', name: 'Agent'},
+            {column: 'finance_type', name: 'Financing Type'},
+            {column: 'created_at', name: 'Date Created'},
+            {column: '', name: 'Actions'},
+        ],
+        searchables: [
+            {column: 'id', name: 'Control #'},
+            {column: 'unit', name: 'Unit ID'},
+            {column: 'buyer', name: 'Buyer'},
+            {column: 'agent', name: 'Agent'},
+            {column: 'finance_type', name: 'Financing Type'},
+            {column: 'created_at', name: 'Date Created'},
+        ],
         aidaMaps: [],
-    },
-
-    mounted() {
-        this.getAidaMaps();
+        filter: new Filter('aida-maps'),
     },
 
     methods: {
@@ -51,6 +72,24 @@ new Vue({
             setTimeout(() => {
                 this.message = '';
             }, 1500);
+        },
+
+        addFilter(payload) {
+            this.filter.add(payload);
+
+            this.applyFilter();
+        },
+
+        applyOrder(payload) {
+            this.filter.order(payload);
+
+            this.applyFilter();
+        },
+
+        applyFilter() {
+            this.filter.apply().then(response => {
+                this.aidaMaps = response.data.aida_maps;
+            });
         }
     }
 });

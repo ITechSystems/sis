@@ -8,7 +8,7 @@
                 <div class="box">
                     <div class="row">
                         <div class="col-md-10">
-                            <search :searchables="headers" @searched="addFilter"></search>
+                            <search :searchables="searchables" @searched="addFilter"></search>
                         </div>
                         <div class="col-md-2">
                             <button type="button" class="btn btn-md btn-primary btn-block" data-toggle="modal" data-target="#buyer-modal" @click="setForm('', 'create')">
