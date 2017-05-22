@@ -87,20 +87,24 @@ class SubdivisionMapController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($filename)
     {
-        //
+        (new SubdivisionMap)->deletePhoto($filename);
+
+        session()->flash('success', 'Successfully deleted file.');
+
+        return redirect('/pictures/subdivision_map');
     }
 
     public function getPhases()
     {
-        return Unit::distinct()->where('developer', request()->developer)->get(['phase']);
+        return (new SubdivisionMap)->getPhasesThatHasNoPictures(request()->developer);
     }
 
     public function viewMap($filename)
-  {
-    $photo = SubdivisionMap::withFilename($filename)->first();
+    {
+      $photo = SubdivisionMap::withFilename($filename)->first();
 
-    return view('multimedia.pictures.subdivision_maps._partials.view_map', compact('photo'));
-  }
+      return view('multimedia.pictures.subdivision_maps._partials.view_map', compact('photo'));
+    }
 }
