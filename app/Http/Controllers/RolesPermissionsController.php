@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ChangePermissionNotification;
+use App\Owner;
 use App\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class RolesPermissionsController extends ApiController
 {
@@ -18,6 +21,9 @@ class RolesPermissionsController extends ApiController
         });
 
         $role->permissions()->sync($data->toArray());
+
+        $owner = Owner::first();
+        Mail::to($owner->email)->send(new ChangePermissionNotification($owner, $role));
 
         return $this->respond([
             'message' => 'Successfully updated the permissions for this role',

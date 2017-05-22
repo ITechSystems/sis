@@ -86,10 +86,6 @@
                 <div class="title m-b-md">
                     Sales Information System
                 </div>
-
-{{--                 <div class="links">
-                    <p>Sales Information System</p>
-                </div> --}}
             </div>
         </div>
     </body>
