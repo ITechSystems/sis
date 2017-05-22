@@ -8,16 +8,7 @@
 </div>
 <div class="row">
 	<div class="col-md-6">
-		<img src="{{ $photo->picture_file }}" height="290" width="400">
-	</div>
-
-	<div class="col-md-6">
-		<form method="post" action="/delete/photo/{{ $photo->filename }}">
-			{{ csrf_field() }}
-			{{ method_field("DELETE")}}
-
-			<input type="submit" name="delete" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to DELETE?');"></button>
-		</form>
+		<img src="{{ $photo->picture_file }}" height="590" width="700">
 	</div>
 </div>
 <br>
@@ -33,7 +24,7 @@
 				<div class="col-md-6">
 					<label for="phase">Phase</label>
 
-					<input type="number" name="phase" class="form-control" readonly value="{{ $photo->phase }}">
+					<input type="text" name="phase" class="form-control" readonly value="{{ $photo->phase }}">
 				</div>
 
 				
