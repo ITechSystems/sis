@@ -84,11 +84,13 @@ class Photo extends Model
 
             $photo->save();
 
-            //attach amenities
-            foreach($data['amenities'] as $a){
-                $amenity = Amenity::find($a);
+            if(isset($amenities)){
+                //attach amenities
+                foreach($data['amenities'] as $a){
+                    $amenity = Amenity::find($a);
 
-                $photo->giveAmenity($amenity);
+                    $photo->giveAmenity($amenity);
+                }
             }
         });
     }
@@ -162,5 +164,18 @@ class Photo extends Model
     public function giveAmenity($amenity)
     {
         return $this->amenities()->attach($amenity);
+    }
+
+    public function getModelNamesThatDoesNotHavePicture($developer)
+    {
+        $with_pics = Photo::distinct()
+        ->where('developer', $developer)
+        ->pluck('house_model_name');
+
+        return $unique_phases = Unit::distinct()
+        ->active()
+        ->where('developer', request()->developer)
+        ->whereNotIn('house_model', $with_pics)
+        ->get(['house_model']);
     }
 }
