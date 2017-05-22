@@ -29,7 +29,7 @@
 
 					<a href="/house_models/{{ $entry->id }}/edit" class="btn btn-info btn-xs">Edit</a>
 
-					<form method="post" action="/delete/photo/{{ $entry->filename }}">
+					<form method="post" action="/delete/map/{{ $entry->filename }}">
 						{{ csrf_field() }}
 						{{ method_field("DELETE")}}
 

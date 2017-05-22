@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Unit;
 use Illuminate\Database\Eloquent\Model;
 
 class SubdivisionMap extends Model
@@ -94,6 +95,46 @@ class SubdivisionMap extends Model
     public function scopeWithFilename($query, $filename)
     {
         return $query->where('filename', $filename);
+    }
+
+    public static function getImagePath($filename)
+    {
+        $photo = self::getPhotoByFilename($filename);
+
+        $developer = $photo->developer;
+
+        $phase = $photo->phase;
+
+        return "storage/$developer/maps/$phase/" . $photo->filename;
+    }
+
+    public function deletePhoto($filename)
+    {
+        $photo = SubdivisionMap::getPhotoByFilename($filename);
+
+        $image_src = SubdivisionMap::getImagePath($filename);
+
+        try{
+            unlink($image_src);
+
+            $photo->delete();
+        }catch(\Exception $e){
+            echo 'file not found';
+        }
+    }
+
+    public function getPhasesThatHasNoPictures($developer)
+    {
+        $with_pics = SubdivisionMap::distinct()
+        ->where('developer', $developer)
+        ->pluck('phase');
+
+        return $unique_phases = Unit::distinct()
+        ->active()
+        ->where('developer', request()->developer)
+        ->whereNotIn('phase', $with_pics)
+        ->get(['phase']);
+        
     }
 
 }
