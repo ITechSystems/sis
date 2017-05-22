@@ -83,6 +83,9 @@
                                 <li>
                                     <a href="/pictures/units/upload"><i class="fa fa-circle-o"></i> Units</a>
                                 </li>
+                                <li>
+                                    <a href="/pictures/subdivision_map"><i class="fa fa-circle-o"></i> Subdivision Maps</a>
+                                </li>
                             </ul>
                         </li>
 

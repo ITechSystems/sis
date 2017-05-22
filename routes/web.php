@@ -90,6 +90,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('/photo/unit/{id}', 'ApplyController@updateUnitPhoto');
     Route::get('/units/getBlockLots', 'ApplyController@getBlockLots');
 
+    Route::get('/pictures/subdivision_map', 'SubdivisionMapController@create');
+    Route::get('/units/getPhases', 'SubdivisionMapController@getPhases');
+    Route::post('/apply/maps/upload', 'SubdivisionMapController@store');
+    Route::get('/view/map/{filename}', 'SubdivisionMapController@viewMap');
+
     Route::get('/roles', 'RolesController@index');
     Route::get('/roles/{role}', 'RolesController@show');
 
