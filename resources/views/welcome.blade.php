@@ -62,6 +62,12 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            @media screen and (max-width: 500px) {
+                .title {
+                    font-size: 50px;
+                }
+            }
         </style>
     </head>
     <body>
@@ -72,23 +78,18 @@
                         <a href="{{ url('/dashboard') }}">Dashboard</a>
                     @else
                         <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
                     @endif
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Sales Information System
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+{{--                 <div class="links">
+                    <p>Sales Information System</p>
+                </div> --}}
             </div>
         </div>
     </body>
