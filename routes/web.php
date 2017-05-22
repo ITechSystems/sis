@@ -53,6 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/units/locations', 'UnitLocationsController@index');
 
+    Route::get('/search/getDevelopers', 'InventoryController@getDevelopers');
+    Route::get('/search/locations', 'InventoryController@getLocationsByDeveloper');
     Route::post('/search/unit', 'InventoryController@search');
     Route::get('/search/getProjectsByLocation', 'InventoryController@getProjectsByLocation');
     Route::get('/search/getBlocksByProject', 'InventoryController@getBlocksByProject');

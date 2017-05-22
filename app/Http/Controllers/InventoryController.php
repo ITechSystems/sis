@@ -26,7 +26,7 @@ class InventoryController extends ApiController
 
         $project_name = $data['project_name_horizontal'];
 
-        $block = $data['block_horizontal'];
+        $block = strtolower($data['block_horizontal']);
 
         $lot = $data['lot_horizontal'];
 
@@ -87,16 +87,11 @@ class InventoryController extends ApiController
         //if $block is set
         if ($block != '') {
             $units = $units->filter(function ($item) use ($block) {
-                return $item->block_lot == $block;
-            });
-        }
+                $pos = strpos(strtolower($item->block_lot), $block);
 
-        //if lot is set
-        if ($lot != '') {
-            $units = $units->filter(function ($item) use ($lot) {
-                $lot_str = explode("-", $item->block_lot)[1];
-
-                return $lot_str == $lot;
+                if($pos === false)
+                    return false;
+                return true;
             });
         }
 
@@ -152,30 +147,44 @@ class InventoryController extends ApiController
         //if $lot_type is set
         if ($lot_type != '') {
             $units = $units->filter(function ($item) use ($lot_type) {
-                return $item->lot_type == $lot_type;
+                $pos = strpos(strtolower($item->lot_type), strtolower($lot_type));
+
+                if($pos === false)
+                    return false;
+                return true;
             });
         }
 
         //if $house_model is set
         if ($house_model != '') {
             $units = $units->filter(function ($item) use ($house_model) {
-                if(strtolower($item->house_model) ==  strtolower($house_model)){
-                    return $item;
-                }
+                $pos = strpos(strtolower($item->house_model), strtolower($house_model));
+
+                if($pos === false)
+                    return false;
+                return true;
             });
         }
 
         //if $zone is set
         if($zone != ''){
             $units = $units->filter(function($item) use ($zone){
-                return $item->zone == $zone;
+                $pos = strpos(strtolower($item->zone), strtolower($zone));
+
+                if($pos === false)
+                    return false;
+                return true;
             });
         }
 
         //if $phase is set
         if($phase != ''){
             $units = $units->filter(function($item) use($phase){
-                return $item->phase == $phase;
+                $pos = strpos(strtolower($item->phase), strtolower($phase));
+
+                if($pos === false)
+                    return false;
+                return true;
             });
         }
 
@@ -203,5 +212,17 @@ class InventoryController extends ApiController
             ->where('block_lot', $blockLot)
             ->with('downpayment', 'loans', 'photos', 'mapPhotos', 'unitPhotos')
             ->get();
+    }
+
+    public function getDevelopers()
+    {
+        return Unit::distinct()->get(['developer']);
+    }
+
+    public function getLocationsByDeveloper()
+    {
+        return Unit::distinct()
+        ->where('developer', request()->developer)
+        ->get(['location']);
     }
 }

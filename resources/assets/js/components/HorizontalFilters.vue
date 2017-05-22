@@ -10,7 +10,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="developer">Developer</label>
-                                        <input type="text" class="form-control" name="developer" id="developer" v-model="form.developer">
+                                        <select name="developer" class="form-control" v-model="form.developer" id="developer" @change="getLocationByDeveloper(form.developer)">
+                                            <option v-for="developer in developers">{{ developer.developer }}</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -18,7 +20,7 @@
                                         <label for="developer">Location</label>
                                         <select name="location_horizontal" id="location_horizontal" class="form-control" @change="getProjectsByLocation(form.location_horizontal)" v-model="form.location_horizontal">
                                             <option value="">From where</option>
-                                            <option v-for="unit in units">{{ unit.location }}</option>
+                                            <option v-for="l in locations">{{ l.location }}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -166,24 +168,32 @@
                 }),
                 projects: [],
                 units: [],
+                developers: [],
+                locations: []
             }
         },
 
         mounted() {
-            this.getLocations();
+            this.getDevelopers()
         },
 
         methods: {
-            getLocations() {
-                this.$http.get(`/units/locations`).then(response => {
-                    this.units = response.data.units;
-                });
+            getDevelopers(){
+                this.$http.get(`/search/getDevelopers`).then(res => {
+                    this.developers = res.data
+                })
             },
 
             getProjectsByLocation(location) {
                 this.$http.get(`/search/getProjectsByLocation?location=${location}`).then(response => {
                     this.projects = response.data;
                 });
+            },
+
+            getLocationByDeveloper(developer){
+                this.$http.get(`/search/locations?developer=${developer}`).then(res => {
+                    this.locations = res.data
+                })
             },
 
             reset() {
