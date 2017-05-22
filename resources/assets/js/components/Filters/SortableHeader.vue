@@ -1,7 +1,11 @@
 <template>
     <thead>
         <tr>
-            <th v-for="header in headers" @click="setOrder(header.column)">{{ header.name }}</th>
+            <th v-for="header in headers">
+                <a href="#" v-if="header.column" @click="setOrder(header.column)">{{ header.name }}</a>
+                <span v-else>{{ header.name }}</span>
+                <i v-if="header.column == currentColumn" :class="icon"></i>
+            </th>
         </tr>
     </thead>
 </template>
@@ -15,6 +19,12 @@
                 currentColumn: '',
                 previousColumn: '',
                 direction: 'desc',
+            }
+        },
+
+        computed: {
+            icon() {
+                return `fa fa-sort-${this.direction}`;
             }
         },
 

@@ -24,7 +24,7 @@ new Vue({
             { column: 'mobile', name: 'Mobile' },
             { column: 'email', name: 'Email' },
             { column: 'country', name: 'Country' },
-            { column: 'agent', name: 'Added By' },
+            { column: '', name: 'Added By' },
             { column: 'created_at', name: 'Date Added' },
             { column: '', name: 'Action' },
         ],
