@@ -116,4 +116,17 @@ class UnitPhoto extends Model
 
         return UnitPhoto::whereIn('id', $unique_ids)->get();
     }
+
+    public function getUnitThatDoesNotHaveAPic($developer)
+    {
+        $with_pics = UnitPhoto::distinct()
+        ->where('developer', $developer)
+        ->pluck('unit');
+
+        return Unit::distinct()
+        ->active()
+        ->where('developer', request()->developer)
+        ->whereNotIn('block_lot', $with_pics)
+        ->get(['block_lot']);
+    }
 }

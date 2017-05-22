@@ -220,16 +220,12 @@ class ApplyController extends Controller {
 
   public function getModelNames()
   {
-    $developer = request()->developer;
-
-    return Unit::distinct()->where('developer', $developer)->get(['house_model']);
+    return (new Photo)->getModelNamesThatDoesNotHavePicture(request()->developer);
   }
 
   public function getBlockLots()
   {
-    $developer = request()->developer;
-
-    return Unit::distinct()->where('developer', $developer)->get(['block_lot']);
+    return (new UnitPhoto)->getUnitThatDoesNotHaveAPic(request()->developer);
   }
   
 }
