@@ -49,9 +49,14 @@ class Unit extends Model
         return $this->hasMany(Photo::class, 'house_model_name', 'house_model')->latest('id');
     }
 
-    public function mapPhotos()
+    public function unitPhotos()
     {
         return $this->hasMany(UnitPhoto::class, 'unit', 'block_lot')->latest('id');
+    }
+
+    public function mapPhotos()
+    {
+        return $this->hasMany(SubdivisionMap::class, 'phase', 'phase')->latest('id');
     }
 
     public function getHeaders()

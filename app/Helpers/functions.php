@@ -22,3 +22,8 @@ function unitPhotoPath($developer, $unit, $filename)
 {
     return "storage/{$developer}/units/{$unit}/{$filename}";
 }
+
+function mapPhotoPath($developer, $phase, $filename)
+{
+    return "storage/{$developer}/maps/{$phase}/{$filename}";
+}

@@ -152,7 +152,10 @@
         </div>
         <div class="row">
             <p class="heading">Map of the Subdivision</p>
-            <div class="col-md-12 mb-20">
+            <div class="col-md-6 mb-20">
+                <img :src="mapPath" alt="" style="width: 100%">
+            </div>
+            <div class="col-md-6 mb-20">
                 <img :src="unitPath" alt="" style="width: 100%">
             </div>
         </div>
@@ -225,15 +228,31 @@
                 return '';
             },
 
+            unitPhoto() {
+                if (this.unit.unit_photos) {
+                    return this.unit.unit_photos.find(photo => {
+                        return photo.developer == this.unit.developer;
+                    });
+                }
+
+                return '';
+            },
+
             houseModelPath() {
                 if (this.photo) {
                     return `/storage/${this.photo.developer}/models/${this.photo.house_model_name}/${this.photo.filename}`;
                 }
             },
 
-            unitPath() {
+            mapPath() {
                 if (this.mapPhoto) {
-                    return `/storage/${this.mapPhoto.developer}/units/${this.mapPhoto.unit}/${this.mapPhoto.filename}`;
+                    return `/storage/${this.mapPhoto.developer}/maps/${this.mapPhoto.phase}/${this.mapPhoto.filename}`;
+                }
+            },
+
+            unitPath() {
+                if (this.unitPhoto) {
+                    return `/storage/${this.unitPhoto.developer}/units/${this.unitPhoto.unit}/${this.unitPhoto.filename}`;
                 }
             }
         },

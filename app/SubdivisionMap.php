@@ -12,7 +12,7 @@ class SubdivisionMap extends Model
 
     public static function saveImage($data)
     {
-    	\DB::transaction(function()use($data){
+    	\DB::transaction(function () use ($data) {
             $file = request()->file;
 
             $developer = $data['developer'];

@@ -45,9 +45,11 @@ $pdf->Cell(60, 5, $aidaMap->buyer->country, 0, 1, 'L');
 $pdf->SetXY(115, 70);
 $pdf->Cell(60, 5, $aidaMap->buyer->equity_type, 0, 1, 'L', 1);
 
-$photo = $aidaMap->unit->mapPhotos->first();
+$photo = $aidaMap->unit->unitPhotos->where('developer', $aidaMap->unit->developer)->first();
 $pdf->Image(unitPhotoPath($photo->developer, $photo->unit, $photo->filename), 180, 25, 55, 50);
-$pdf->Image(unitPhotoPath($photo->developer, $photo->unit, $photo->filename), 115, 80, 120, 95);
+
+$photo = $aidaMap->unit->mapPhotos->where('developer', $aidaMap->unit->developer)->first();
+$pdf->Image(mapPhotoPath($photo->developer, $photo->phase, $photo->filename), 115, 80, 120, 95);
 
 $pdf->SetXY(240, 25);
 $pdf->SetFont('Arial', 'B', 8);
