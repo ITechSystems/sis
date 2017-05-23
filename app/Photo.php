@@ -16,10 +16,16 @@ class Photo extends Model
     ];
 
     public static $rules = [
-    	'house_model_name' => 'required|min:2',
+        'house_model_name' => 'required|min:2',
         'developer' => 'required|min:2',
-    	'description' => 'required|min:3',
-    	'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        'lot_size' => 'required|numeric|min:1',
+        'floor_size' => 'required|numeric|min:1',
+        'number_of_rooms' => 'required|numeric',
+        'number_of_bathrooms' => 'required|numeric|min:1',
+        'storeys' => 'required|numeric|min:1',
+        'with_carport' => 'required',
+        'description' => 'required|min:3',
+        'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
     ];
 
     protected $appends = [
