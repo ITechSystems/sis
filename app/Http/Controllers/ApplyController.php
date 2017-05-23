@@ -112,7 +112,11 @@ class ApplyController extends Controller {
 
     $developers = Unit::distinct()->get(['developer']);
 
-    return view('multimedia.pictures.edit_photo', compact('photo', 'names', 'developers'));
+    $amenities = Amenity::all();
+
+    $checked_amenities = $photo->amenities;
+
+    return view('multimedia.pictures.edit_photo', compact('photo', 'names', 'developers', 'amenities', 'checked_amenities'));
   }
 
   public function updateHouseModel($id)
@@ -219,6 +223,8 @@ class ApplyController extends Controller {
     $photo->description = $data['description'];
 
     if($file){
+      $this->validate(request(), UnitPhoto::$file_rule);
+
       $path = "public/" . $data['developer'] . "/units/" . $data['unit'] . "/";
 
       $extension = $file->getClientOriginalExtension();

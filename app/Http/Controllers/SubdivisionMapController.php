@@ -68,7 +68,9 @@ class SubdivisionMapController extends Controller
      */
     public function edit($id)
     {
-        //
+        $photo = SubdivisionMap::find($id);
+
+        return view('multimedia.pictures.subdivision_maps.edit', compact('photo'));
     }
 
     /**
@@ -80,7 +82,31 @@ class SubdivisionMapController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $file = $request->file;
+
+        $photo = SubdivisionMap::find($id);
+
+        $photo->description = $request->description;
+
+        if($file){
+          $this->validate(request(), SubdivisionMap::$file_rule);
+
+          $path = "public/" . $request['developer'] . "/maps/" . $request['phase'] . "/";
+
+          $extension = $file->getClientOriginalExtension();
+
+          \Storage::disk('local')->put($path . $file->getFilename() . '.' . $extension, \File::get($file));
+
+          $photo->mime = $file->getClientMimeType();
+
+          $photo->original_filename = $file->getClientOriginalName();
+
+          $photo->filename = $file->getFilename() . '.' . $extension;
+        }
+
+        $photo->save();
+
+        return redirect('/pictures/subdivision_map');
     }
 
     /**

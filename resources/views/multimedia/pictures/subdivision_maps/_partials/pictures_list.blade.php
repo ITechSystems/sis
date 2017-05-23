@@ -27,7 +27,7 @@
 				<td>
 					<a href="/view/map/{{ $entry->filename }}" class="btn btn-success btn-xs">View</a>
 
-					<a href="/house_models/{{ $entry->id }}/edit" class="btn btn-info btn-xs">Edit</a>
+					<a href="/maps/{{ $entry->id }}/edit" class="btn btn-info btn-xs">Edit</a>
 
 					<form method="post" action="/delete/map/{{ $entry->filename }}">
 						{{ csrf_field() }}

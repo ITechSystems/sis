@@ -42,7 +42,7 @@
 							    			</div>
 							    			<div class="row">
 							    				<div class="col-md-6">
-							    					<label for="unit">House Model Name</label>
+							    					<label for="unit">Unit</label>
 
 							    					<input type="text" name="unit" class="form-control" value="{{ $photo->unit }}" readonly>
 							    				</div>
@@ -68,7 +68,7 @@
 							    			<div class="row">
 							    				<div class="col-md-6">
 								    				<label>File to upload:</label>
-								    				<input type="file" name="file" id="file">
+								    				<input type="file" name="file" id="file" accept="image/*">
 							    				</div>
 							    			</div><br>
 							    			<div class="row">

@@ -21,6 +21,10 @@ class UnitPhoto extends Model
         'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
     ];
 
+    public static $file_rule = [
+        'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+    ];
+
     protected $appends = [
         'picture_file'
     ];
