@@ -98,6 +98,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/apply/maps/upload', 'SubdivisionMapController@store');
     Route::get('/view/map/{filename}', 'SubdivisionMapController@viewMap');
     Route::delete('/delete/map/{filename}', 'SubdivisionMapController@destroy');
+    Route::get('/maps/{id}/edit', 'SubdivisionMapController@edit');
+    Route::patch('/maps/update/{id}', 'SubdivisionMapController@update');
 
     Route::get('/roles', 'RolesController@index');
     Route::get('/roles/{role}', 'RolesController@show');

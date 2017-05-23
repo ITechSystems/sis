@@ -18,6 +18,10 @@ class SubdivisionMap extends Model
         'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
     ];
 
+    public static $file_rule = [
+        'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+    ];
+
     public static function saveImage($data)
     {
     	\DB::transaction(function () use ($data) {

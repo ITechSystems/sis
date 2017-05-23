@@ -107,6 +107,27 @@
 								    				</textarea>
 												</div>
 											</div>
+											<!-- <div class="row">
+												<div class="col-md-6">
+													<label for="amenities">Amenities</label>
+													
+													<table>
+														@foreach($checked_amenities as $checked)
+															<tr>
+																<td>{{ $checked->name }}</td>
+															</tr>
+														@endforeach
+														@foreach($amenities as $a)
+															<tr>
+																<td>
+																	<input type="checkbox" name="amenities[]" value="{{ $a->id }}">{{ $a->name }}
+																</td>
+															</tr>
+														@endforeach
+													</table>
+												</div>
+											</div> -->
+											<br>
 							    			<div class="row">
 							    				<div class="col-md-6">
 							    					<b>Uploaded Image:</b>
