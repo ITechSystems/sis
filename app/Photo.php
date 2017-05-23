@@ -84,7 +84,8 @@ class Photo extends Model
 
             $photo->save();
 
-            if(isset($amenities)){
+            if(isset($data['amenities'])){
+                \Log::info('saving amenities');
                 //attach amenities
                 foreach($data['amenities'] as $a){
                     $amenity = Amenity::find($a);
