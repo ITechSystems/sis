@@ -117,6 +117,7 @@ class ApplyController extends Controller {
 
   public function updateHouseModel($id)
   {
+    // $this->validate(request(), Photo::$rules);//need to add this for optional file
     $file = request()->file;
 
     $data = request()->all();
@@ -127,9 +128,23 @@ class ApplyController extends Controller {
 
     $photo->house_model_name = $data['house_model_name'];
 
+    $photo->lot_size = $data['lot_size'];
+
+    $photo->floor_size = $data['floor_size'];
+
+    $photo->number_of_rooms = $data['number_of_rooms'];
+
+    $photo->number_of_bathrooms = $data['number_of_bathrooms'];
+
+    $photo->storeys = $data['storeys'];
+
+    $photo->with_carport = $data['with_carport'];
+
     $photo->description = $data['description'];
 
     if($file){
+      $this->validate(request(), Photo::$file_rule);
+
       $path = "public/" . $data['developer'] . "/models/" . $data['house_model_name'] . "/";
 
       $extension = $file->getClientOriginalExtension();
