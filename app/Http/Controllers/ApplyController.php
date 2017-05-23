@@ -3,11 +3,13 @@ use App\Amenity;
 use App\Photo;
 use App\Unit;
 use App\UnitPhoto;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Redirect;
 use Session;
 use Validator;
+
 class ApplyController extends Controller {
   public function index()
   {
@@ -22,6 +24,10 @@ class ApplyController extends Controller {
 
   public function upload()
   {
+    if($this->validate(request(), Photo::$rules)){
+      session()->flash('message', 'Please check the error messages.');
+    }
+
     Photo::saveImage(request()->all());
 
     session()->flash('success', 'Successfully uploaded photo.');

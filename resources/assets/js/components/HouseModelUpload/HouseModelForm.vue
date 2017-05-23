@@ -1,20 +1,12 @@
-<form action="/apply/upload" method="post" enctype="multipart/form-data">
-	{{ csrf_field() }}
-
+<template>
 	<div class="control-group">
 		<div class="controls">
 			<div class="row">
 				<div class="col-md-6">
 					<label for="developer">Developer</label>
 
-					<select name="developer" class="form-control" @change="getModelNames(developer)" v-model="developer" required>
-						@foreach($developers as $key => $d)
-							@if (old("developer") == $d->developer)
-							      <option value="{{ $d->developer }}" selected>{{ $d->developer }}</option>
-							@else
-							      <option value="{{ $d->developer }}">{{ $d->developer }}</option>
-							@endif
-						@endforeach
+					<select name="developer" class="form-control" @change="getModelNames(form.developer)" v-model="form.developer" required>
+						<option v-for="d in developers">{{ d.developer }}</option>
 					</select>
 				</div>
 
@@ -23,7 +15,7 @@
 
 					<select name="house_model_name" class="form-control" required>
 						<option value="">Choose</option>
-						<option v-for="model in model_names">@{{ model.house_model }}</option>
+						<option v-for="model in model_names">{{ model.house_model }}</option>
 					</select>
 				</div>
 			</div>
@@ -32,13 +24,13 @@
 				<div class="col-md-6">
 					<label for="lot_size">Lot Size</label>
 
-					<input type="number" name="lot_size" class="form-control" required>
+					<input type="number" name="lot_size" class="form-control" step="0.01" required>
 				</div>
 
 				<div class="col-md-6">
 					<label for="floor_size">Floor Size</label>
 
-					<input type="number" name="floor_size" class="form-control" required>
+					<input type="number" name="floor_size" class="form-control" step="0.01" required>
 				</div>
 			</div>
 			
@@ -84,12 +76,14 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label>Amenities</label>
-
-					@foreach($amenities as $a)
-						<p>
-							<input type="checkbox" name="amenities[]" value="{{ $a->id }}">{{ $a->name }}
-						</p>
-					@endforeach
+					
+					<table>
+						<tr v-for="a in amenities">
+							<td>
+								<input type="checkbox" name="amenities[]" :value="a.id">{{ a.name }}
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 			
@@ -106,4 +100,46 @@
 			</div>
 		</div>
 	</div>
-</form>
+</template>
+
+<script>
+	import Form from '../../core/Form.js';
+
+	export default{
+		data(){
+			return {
+				form: new Form({
+					developer: ''
+				}),
+				developers: [],
+				model_names: [],
+				amenities: []
+			}
+		},
+
+		mounted(){
+			this.getDevelopers()
+			this.getAmenities()
+		},
+
+		methods: {
+			getDevelopers(){
+                this.$http.get(`/search/getDevelopers`).then(res => {
+                    this.developers = res.data
+                })
+            },
+
+            getModelNames(developer){
+				this.$http.get('/house_model_photos/getModelNames?developer=' + developer).then(res => {
+					this.model_names = res.data
+				})
+			},
+
+			getAmenities(){
+				this.$http.get(`/data/amenities/getAll`).then(res => {
+					this.amenities = res.data
+				})
+			}
+		}
+	}
+</script>

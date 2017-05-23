@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/data/amenities', 'AmenityController@index');
     Route::get('/data/amenities/create', 'AmenityController@create');
     Route::post('/data/amenities', 'AmenityController@store');
+    Route::get('/data/amenities/getAll', 'AmenityController@getAll');
 
     Route::get('/buyers', 'BuyersController@index');
     Route::get('/buyers/all', 'BuyersController@all');

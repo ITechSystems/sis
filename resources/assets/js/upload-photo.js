@@ -1,5 +1,11 @@
 import './bootstrap.js';
+import HouseModel from './components/HouseModelUpload/HouseModelForm.vue'
+
 new Vue({
+	components: {
+		HouseModel
+	},
+
 	data: {
 		photo_id: '',
 		developer: '',
@@ -10,9 +16,6 @@ new Vue({
 	el: '#app',
 
 	ready(){
-		if(this.photo_id){
-			alert(this.photo_id)
-		}
 	},
 
 	methods: {

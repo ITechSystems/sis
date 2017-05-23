@@ -2,6 +2,7 @@
 
 @section("content")
 	<div class="container">
+		<meta id="token" name="token" value="{{csrf_token()}}">
 		<div class="row">
 			<div class="col-md-12">
 				@if(\Session::has('message'))
@@ -26,8 +27,11 @@
 						          <h2>{!! Session::get('success') !!}</h2>
 						          </div>
 						        @endif
+						        <form action="/apply/upload" method="post" enctype="multipart/form-data">
+						        	{{ csrf_field() }}
+						        	<house-model></house-model>
+						        </form>
 
-						        @include('multimedia.pictures._partials.form')
 						      </div>
 
 						      @if(count($errors) > 0)

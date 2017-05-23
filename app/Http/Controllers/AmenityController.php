@@ -88,4 +88,9 @@ class AmenityController extends Controller
     {
         //
     }
+
+    public function getAll()
+    {
+        return Amenity::all();
+    }
 }
