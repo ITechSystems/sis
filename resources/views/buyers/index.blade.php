@@ -12,7 +12,7 @@
                         </div>
                         <div class="col-md-2">
                             <button type="button" class="btn btn-md btn-primary btn-block" data-toggle="modal" data-target="#buyer-modal" @click="setForm('', 'create')">
-                                <i class="fa fa-user-plus"></i> ADD BUYER
+                                <i class="fa fa-user-plus"></i> ADD LEAD
                             </button>
                         </div>
                     </div>
