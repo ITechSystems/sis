@@ -54,67 +54,69 @@
                         <li><a href="#"><i class="fa fa-circle-o"></i> Executive Report</a></li>
                     </ul>
                 </li>
-                <li class="header">
-                    <span>Maintenance</span>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-file-text" aria-hidden="true"></i><span> Multimedia</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <!-- <li>
-                            <a href="/pictures/upload"><i class="fa fa-circle-o"></i> Pictures</a>
-                        </li> -->
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                    <span>Pictures</span>
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li>
-                                    <a href="/pictures/upload"><i class="fa fa-circle-o"></i> House Models</a>
-                                </li>
-                                <li>
-                                    <a href="/pictures/units/upload"><i class="fa fa-circle-o"></i> Units</a>
-                                </li>
-                                <li>
-                                    <a href="/pictures/subdivision_map"><i class="fa fa-circle-o"></i> Subdivision Maps</a>
-                                </li>
-                            </ul>
-                        </li>
+                @if(auth()->user()->role_id != 1)
+                    <li class="header">
+                        <span>Maintenance</span>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-file-text" aria-hidden="true"></i><span> Multimedia</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <!-- <li>
+                                <a href="/pictures/upload"><i class="fa fa-circle-o"></i> Pictures</a>
+                            </li> -->
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-file-text" aria-hidden="true"></i>
+                                        <span>Pictures</span>
+                                        <span class="pull-right-container">
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li>
+                                        <a href="/pictures/upload"><i class="fa fa-circle-o"></i> House Models</a>
+                                    </li>
+                                    <li>
+                                        <a href="/pictures/units/upload"><i class="fa fa-circle-o"></i> Units</a>
+                                    </li>
+                                    <li>
+                                        <a href="/pictures/subdivision_map"><i class="fa fa-circle-o"></i> Subdivision Maps</a>
+                                    </li>
+                                </ul>
+                            </li>
 
 
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Videos</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Audio</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-file-text" aria-hidden="true"></i><span> Data</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="/data/upload"><i class="fa fa-circle-o"></i> Import</a></li>
-                        <li><a href="/data/export"><i class="fa fa-circle-o"></i> Export</a></li>
-                        <li><a href="/data/template"><i class="fa fa-circle-o"></i> Download Template</a></li>
-                        <li><a href="/data/amenities/create"><i class="fa fa-circle-o"></i>Add Amenity</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="{{ url('/users') }}"><i class="fa fa-users"></i> <span>Users</span></a>
-                </li>
-                <li class="treeview">
-                    <a href="{{ url('/permissions') }}"><i class="fa fa-check"></i> <span>Permissions</span></a>
-                </li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Videos</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Audio</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-file-text" aria-hidden="true"></i><span> Data</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/data/upload"><i class="fa fa-circle-o"></i> Import</a></li>
+                            <li><a href="/data/export"><i class="fa fa-circle-o"></i> Export</a></li>
+                            <li><a href="/data/template"><i class="fa fa-circle-o"></i> Download Template</a></li>
+                            <li><a href="/data/amenities/create"><i class="fa fa-circle-o"></i>Add Amenity</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="{{ url('/users') }}"><i class="fa fa-users"></i> <span>Users</span></a>
+                    </li>
+                    <li class="treeview">
+                        <a href="{{ url('/permissions') }}"><i class="fa fa-check"></i> <span>Permissions</span></a>
+                    </li>
+                @endif
                 <li class="header">
                     <span>Settings</span>
                 </li>
