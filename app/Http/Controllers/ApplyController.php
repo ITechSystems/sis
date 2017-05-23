@@ -24,9 +24,7 @@ class ApplyController extends Controller {
 
   public function upload()
   {
-    if($this->validate(request(), Photo::$rules)){
-      session()->flash('message', 'Please check the error messages.');
-    }
+    $this->validate(request(), Photo::$rules);
 
     Photo::saveImage(request()->all());
 
@@ -67,6 +65,8 @@ class ApplyController extends Controller {
 
   public function unitsUpload()
   {
+    $this->validate(request(), UnitPhoto::$rules);
+
     UnitPhoto::saveImage(request()->all());
 
     session()->flash('success', 'Successfully uploaded photo.');

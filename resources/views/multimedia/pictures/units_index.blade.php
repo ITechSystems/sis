@@ -36,8 +36,7 @@
 							    				<div class="col-md-6">
 							    					<label for="developer">Developer</label>
 
-							    					<select name="developer" class="form-control" @change="getUnits(developer)" v-model="developer">
-							    						<option>Choose</option>
+							    					<select name="developer" class="form-control" @change="getUnits(developer)" v-model="developer" required>
 							    						@foreach($developers as $d)
 							    							<option>{{ $d->developer }}</option>
 							    						@endforeach
@@ -50,7 +49,7 @@
 							    					<label for="unit">Unit</label>
 
 							    					<select name="unit" class="form-control" required>
-							    						<option>Choose</option>
+							    						<option></option>
 							    						<option v-for="unit in units">@{{ unit.block_lot }}</option>
 							    					</select>
 							    				</div>
@@ -66,7 +65,7 @@
 							    			<div class="row">
 							    				<div class="col-md-6">
 								    				<label>File to upload:</label>
-								    				<input type="file" name="file" id="file" required>
+								    				<input type="file" name="file" id="file" accept="image/*" required>
 							    				</div>
 							    			</div><br>
 							    			<div class="row">

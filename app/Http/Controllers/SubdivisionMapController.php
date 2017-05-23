@@ -40,6 +40,8 @@ class SubdivisionMapController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, SubdivisionMap::$rules);
+        
         SubdivisionMap::saveImage($request->all());
 
         session()->flash('success', 'Successfully uploaded photo.');

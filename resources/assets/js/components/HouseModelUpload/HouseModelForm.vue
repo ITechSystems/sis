@@ -24,13 +24,13 @@
 				<div class="col-md-6">
 					<label for="lot_size">Lot Size</label>
 
-					<input type="number" name="lot_size" class="form-control" step="0.01" required>
+					<input type="number" name="lot_size" class="form-control" step="0.01" min="1" required>
 				</div>
 
 				<div class="col-md-6">
 					<label for="floor_size">Floor Size</label>
 
-					<input type="number" name="floor_size" class="form-control" step="0.01" required>
+					<input type="number" name="floor_size" class="form-control" step="0.01" min="1" required>
 				</div>
 			</div>
 			
@@ -44,7 +44,7 @@
 				<div class="col-md-6">
 					<label for="number_of_bathrooms">No. of Bathrooms</label>
 
-					<input type="number" name="number_of_bathrooms" class="form-control" required>
+					<input type="number" name="number_of_bathrooms" class="form-control" min="1" required>
 				</div>
 			</div>
 
@@ -52,7 +52,7 @@
 				<div class="col-md-6">
 					<label for="storeys">Storeys</label>
 
-					<input type="number" name="storeys" class="form-control" required>
+					<input type="number" name="storeys" class="form-control" min="1" required>
 				</div>
 
 				<div class="col-md-6">
@@ -90,7 +90,7 @@
 			<div class="row">
 				<div class="col-md-6">
     				<label>File to upload:</label>
-    				<input type="file" name="file" id="file" required>
+    				<input type="file" name="file" id="file" accept="image/*" required>
 				</div>
 			</div><br>
 			<div class="row">

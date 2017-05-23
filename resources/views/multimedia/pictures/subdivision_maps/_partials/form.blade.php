@@ -7,8 +7,7 @@
 				<div class="col-md-6">
 					<label for="developer">Developer</label>
 
-					<select name="developer" class="form-control" @change="getZones(developer)" v-model="developer">
-						<option>Choose</option>
+					<select name="developer" class="form-control" @change="getZones(developer)" v-model="developer" required>
 						@foreach($developers as $d)
 							<option>{{ $d->developer }}</option>
 						@endforeach
@@ -21,7 +20,7 @@
 					<label for="phase">Phase</label>
 
 					<select name="phase" class="form-control" required>
-						<option>Choose</option>
+						<option></option>
 						<option v-for="p in phases">@{{ p.phase }}</option>
 					</select>
 				</div>
@@ -37,7 +36,7 @@
 			<div class="row">
 				<div class="col-md-6">
     				<label>File to upload:</label>
-    				<input type="file" name="file" id="file" required>
+    				<input type="file" name="file" id="file" accept="image/*" required>
 				</div>
 			</div><br>
 			<div class="row">

@@ -11,6 +11,13 @@ class SubdivisionMap extends Model
         'picture_file'
     ];
 
+    public static $rules = [
+        'phase' => 'required|min:2',
+        'developer' => 'required|min:2',
+        'description' => 'required|min:3',
+        'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+    ];
+
     public static function saveImage($data)
     {
     	\DB::transaction(function () use ($data) {
