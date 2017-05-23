@@ -27,7 +27,7 @@
                 </li>
                 <li class="treeview">
                     <a href="/buyers">
-                        <i class="fa fa-users"></i> <span>Buyers</span>
+                        <i class="fa fa-users"></i> <span>Leads</span>
                     </a>
                 </li>
                 <li class="treeview">
