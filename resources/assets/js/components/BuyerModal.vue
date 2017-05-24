@@ -56,6 +56,8 @@
                                     <option value="Single">Single</option>
                                     <option value="Married">Married</option>
                                     <option value="Widowed">Widowed</option>
+                                    <option value="Separated">Separated</option>
+                                    <option value="Annulled">Annulled</option>
                                 </select>
                             </div>
                         </div>
@@ -74,11 +76,10 @@
                                 <span class="text-danger" v-if="form.errors.has('work_type')">{{ form.errors.get('work_type') }}</span>
                                 <select class="form-control" name="work_type" id="work_type" v-model="form.work_type" :disabled="action == 'show'">
                                     <option value="">Choose</option>
-                                    <option value="Local (Private)">Local (Private)</option>
-                                    <option value="Local (Government)">Local (Government)</option>
-                                    <option value="OFW (Land-Based)">OFW (Land-Based)</option>
-                                    <option value="OFW (Sea-Based)">OFW (Sea-Based)</option>
+                                    <option value="Local">Locally Employed</option>
+                                    <option value="Overseas">OFW</option>
                                     <option value="Self-Employed">Self-Employed</option>
+                                    <option value="Foreigner">Foreigner</option>
                                 </select>
                             </div>
                         </div>
@@ -99,8 +100,8 @@
                                     <option value="">Choose</option>
                                     <option value="Bank">Bank</option>
                                     <option value="In-House">In-House</option>
-                                    <option value="Deferred">Deferred</option>
-                                    <option value="Full Payment">Full Payment</option>
+                                    <option value="HDMF">HDMF</option>
+                                    <option value="Cash Payment">Cash Payment</option>
                                 </select>
                             </div>
                         </div>
@@ -116,6 +117,9 @@
                                         {{ country }}
                                     </option>
                                     <option v-for="city in cities" :value="city" v-if="form.work_type.includes('Local')">
+                                        {{ city }}
+                                    </option>
+                                    <option v-for="city in cities" :value="city" v-if="form.work_type.includes('Self-Employed')">
                                         {{ city }}
                                     </option>
                                 </select>

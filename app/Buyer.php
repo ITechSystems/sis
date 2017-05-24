@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\BuyerRequirement;
 use App\Filters\Filterable;
 use App\Scopes\AgentScope;
 use Illuminate\Database\Eloquent\Model;
@@ -45,6 +46,23 @@ class Buyer extends Model
     public function status()
     {
         return $this->belongsTo(BuyerStatus::class, 'status');
+    }
+
+    public function requirements()
+    {
+        return BuyerRequirement::with('requirement')
+            ->where('finance_type', $this->financing_type)
+            ->where('marital_status', $this->marital_status)
+            ->where('work_type', $this->workLocation())->get();
+    }
+
+    public function workLocation()
+    {
+        if (strpos($this->work_type, 'Local') !== false || strpos($this->work_type, 'Self') !== false) {
+            return 'Local';
+        }
+
+        return 'Overseas';
     }
 
     public function fullName()

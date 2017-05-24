@@ -34,6 +34,7 @@ class CreateRequirementsTable extends Migration
             ['type' => 'A', 'name' => 'Photocopy of Passport'],
             ['type' => 'A', 'name' => 'Marriage Contract'],
             ['type' => 'A', 'name' => 'Post Dated Checks (Equity)'],
+            ['type' => 'A', 'name' => 'Post Dated Checks'],
             ['type' => 'A', 'name' => 'Waiver of Rights'],
             ['type' => 'A', 'name' => 'Legal Separation Paper'],
             ['type' => 'B', 'name' => 'Buyer\'s Information Sheet (BIS)'],

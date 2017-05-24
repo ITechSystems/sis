@@ -21,6 +21,15 @@ class BuyerRequirements extends Migration
             $table->unsignedInteger('requirement_id');
             $table->timestamps();
         });
+
+        foreach ([1, 2, 4, 10, 13, 14, 15, 16, 17, 18, 19, 21, 22, 26] as $requirement) {
+            DB::table('buyer_requirements')->insert([
+                'work_type' => 'Local',
+                'marital_status' => 'Single',
+                'finance_type' => 'In-House',
+                'requirement_id' => $requirement,
+            ]);
+        }
     }
 
     /**
