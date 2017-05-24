@@ -53,28 +53,34 @@ $pdf->Image(mapPhotoPath($photo->developer, $photo->phase, $photo->filename), 11
 
 $pdf->SetXY(240, 25);
 $pdf->SetFont('Arial', 'B', 8);
-$pdf->Cell(110, 10, 'DOCUMENTARY REQUIREMENTS FOR', 0, 1, 'C', 1);
+$pdf->Cell(110, 10, 'DOCUMENTARY REQUIREMENTS FOR ' . $aidaMap->buyer->financing_type . '/' . $aidaMap->buyer->marital_status . '/' . $aidaMap->buyer->work_type, 0, 1, 'C', 1);
 $pdf->SetFont('Arial', '', 8);
-$pdf->SetXY(240, 35);
-$pdf->Cell(110, 5, 'Bank Financing', 0, 1, 'L');
-$pdf->SetXY(240, 40);
-$pdf->Cell(110, 5, 'Married', 0, 1, 'L');
-$pdf->SetXY(240, 45);
-$pdf->Cell(110, 5, 'OFW (Land-Based)', 0, 1, 'L');
-$pdf->SetXY(240, 50);
-$pdf->Cell(110, 5, '3pcs. 1x1 ID Picture (Buyer, Spouse & Atty-in-Fact) w/ name &amp; Unit ID at the back', 0, 1, 'L');
-$pdf->SetXY(240, 55);
-$pdf->Cell(110, 5, '2 Valid ID\'s with 3 specimen signature (Photocopy only) (Buyer &amp; Spouse)', 0, 1, 'L');
-$pdf->SetXY(240, 60);
-$pdf->Cell(110, 5, 'SSS, GSIS, Driver\'s License, Voter\'s, PRC, Passport', 0, 1, 'L');
-$pdf->SetXY(240, 65);
-$pdf->Cell(110, 5, 'Postal ID\'s are allowed for AIF only (or unemployed spouse)', 0, 1, 'L');
-$pdf->SetXY(240, 70);
-$pdf->Cell(110, 5, 'Passport - validity should not be expired (Buyer)', 0, 1, 'L');
-$pdf->SetXY(240, 75);
-$pdf->Cell(110, 5, 'Must have date of arrival & departure', 0, 1, 'L');
-$pdf->SetXY(240, 80);
-$pdf->Cell(110, 5, 'Residence Certificate for the Current Year (Cedula) (Spouse &amp; Atty-In-Fact)', 0, 1, 'L');
+
+$buyerRequirements = $aidaMap->buyer->requirements();
+foreach ($buyerRequirements as $index => $buyerRequirement) {
+    $pdf->SetXY(240, 35 + ($index * 5));
+    $pdf->Cell(110, 5, $buyerRequirement->requirement->name, 0, 1, 'L');
+}
+// $pdf->SetXY(240, 35);
+// $pdf->Cell(110, 5, 'Bank Financing', 0, 1, 'L');
+// $pdf->SetXY(240, 40);
+// $pdf->Cell(110, 5, 'Married', 0, 1, 'L');
+// $pdf->SetXY(240, 45);
+// $pdf->Cell(110, 5, 'OFW (Land-Based)', 0, 1, 'L');
+// $pdf->SetXY(240, 50);
+// $pdf->Cell(110, 5, '3pcs. 1x1 ID Picture (Buyer, Spouse & Atty-in-Fact) w/ name &amp; Unit ID at the back', 0, 1, 'L');
+// $pdf->SetXY(240, 55);
+// $pdf->Cell(110, 5, '2 Valid ID\'s with 3 specimen signature (Photocopy only) (Buyer &amp; Spouse)', 0, 1, 'L');
+// $pdf->SetXY(240, 60);
+// $pdf->Cell(110, 5, 'SSS, GSIS, Driver\'s License, Voter\'s, PRC, Passport', 0, 1, 'L');
+// $pdf->SetXY(240, 65);
+// $pdf->Cell(110, 5, 'Postal ID\'s are allowed for AIF only (or unemployed spouse)', 0, 1, 'L');
+// $pdf->SetXY(240, 70);
+// $pdf->Cell(110, 5, 'Passport - validity should not be expired (Buyer)', 0, 1, 'L');
+// $pdf->SetXY(240, 75);
+// $pdf->Cell(110, 5, 'Must have date of arrival & departure', 0, 1, 'L');
+// $pdf->SetXY(240, 80);
+// $pdf->Cell(110, 5, 'Residence Certificate for the Current Year (Cedula) (Spouse &amp; Atty-In-Fact)', 0, 1, 'L');
 
 $pdf->SetXY(240, 95);
 $pdf->SetFont('Arial', 'B', 8);
