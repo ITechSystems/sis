@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AidaMap;
 use App\Filters\AidaMapFilters;
 use App\Mail\SendAidaMapToLeads;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 
 class AidaMapsController extends ApiController
@@ -61,7 +62,11 @@ class AidaMapsController extends ApiController
 
     public function email(AidaMap $aidaMap)
     {
+        $aidaMap->load('buyer', 'user', 'unit');
+
         Mail::to($aidaMap->buyer->email)->send(new SendAidaMapToLeads($aidaMap));
+
+        File::delete(storage_path() . '/app/public/' . $aidaMap->id . '.pdf');
 
         return $this->respond([
             'message' => 'Email sent successfully',

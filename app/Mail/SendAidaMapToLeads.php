@@ -32,7 +32,7 @@ class SendAidaMapToLeads extends Mailable implements ShouldQueue
     {
         return $this->from(['address' => auth()->user()->email])
             ->subject('AIDA Map')
-            ->view('emails.aida-map', ['name' => $this->aidaMap->buyer->first_name])
+            ->view('emails.aida-map', ['name' => $this->aidaMap->buyer->first_name, 'aidaMap' => $this->aidaMap])
             ->attach(storage_path() . '/app/public/' . $this->aidaMap->id . '.pdf', [
                 'as' => 'AIDA Map.pdf',
             ]);
