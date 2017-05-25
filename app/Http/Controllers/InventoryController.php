@@ -59,10 +59,11 @@ class InventoryController extends ApiController
                 'units' => $units,
                 'result_count' => $result_count,
                 'locations' => $locations,
+                'search_flag' => true
             ]);
         }
 
-        return view('inventory.index', compact('units', 'result_count', 'locations'));
+        // return view('inventory.index', compact('units', 'result_count', 'locations'));
     }
 
     public function getSearchQuery($location = '', $project_name = '', $block = '', $lot = '', $min_price = 0, $max_price = 0, $min_lot = 0, $max_lot = 0, $min_floor = 0, $max_floor, $lot_type = '', $house_model = '', $zone = '', $phase = '', $developer = '')
