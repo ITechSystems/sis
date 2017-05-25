@@ -11,7 +11,7 @@ new Vue({
         data: [],
         items: [],
         unit_id: '',
-        result_count: 0,
+        result_count: -1,
         locations: [],
         units: [],
         block_lot: ''
