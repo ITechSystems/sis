@@ -21,6 +21,7 @@ class CreateRequirementsTable extends Migration
                     B - REQUIRED DOCUMENTS FOR FILL-UP AND SIGNATURE OF BUYER
                 ');
             $table->string('name', 300);
+            $table->string('description', 300);
             $table->timestamps();
         });
 
