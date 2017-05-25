@@ -52,6 +52,7 @@ class CreateRequirementsTable extends Migration
             ['type' => 'B', 'name' => 'Atty-In-Fact Information Sheet'],
             ['type' => 'B', 'name' => 'Signature Card'],
             ['type' => 'B', 'name' => 'PCFI SPA Form'],
+            ['type' => 'A', 'name' => 'Certificate of No Marriage'],
         ]);
     }
 

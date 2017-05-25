@@ -1,7 +1,7 @@
     <?php
 
 $pdf = new \App\PDF;
-$pdf->ShowGrid(false);
+$pdf->ShowGrid(true);
 
 $pdf->AddPage('L', 'Legal');
 $pdf->SetFont('Arial', '', 8);
@@ -51,14 +51,49 @@ $pdf->Image(unitPhotoPath($photo->developer, $photo->unit, $photo->filename), 18
 $photo = $aidaMap->unit->mapPhotos->where('developer', $aidaMap->unit->developer)->first();
 $pdf->Image(mapPhotoPath($photo->developer, $photo->phase, $photo->filename), 115, 80, 120, 95);
 
+$pdf->SetXY(240, 5);
+$pdf->SetFont('Arial', 'B', 8);
+$pdf->Cell(110, 10, 'FOR RESERVATIONS, CONTACT US AT', 0, 1, 'C', 1);
+
+$pdf->SetFont('Arial', '', 8);
+$pdf->SetXY(240, 15);
+$pdf->SetFont('Arial', 'B', 8);
+$pdf->Cell(110, 5, 'MR. HERVIE FAJARDO', 0, 1, 'L');
+$pdf->SetFont('Arial', '', 8);
+$pdf->SetXY(240, 20);
+$pdf->Cell(110, 5, 'Globe: +63 917 872 0176', 0, 1, 'L');
 $pdf->SetXY(240, 25);
+$pdf->Cell(110, 5, 'Smart: +63 917 565 8645', 0, 1, 'L');
+$pdf->SetXY(240, 30);
+$pdf->SetFont('Arial', 'B', 8);
+$pdf->Cell(110, 5, 'LANDLINE HOTLINES', 0, 1, 'L');
+$pdf->SetFont('Arial', '', 8);
+$pdf->SetXY(240, 35);
+$pdf->Cell(110, 5, 'Manila Telephone: (02) 256 6574', 0, 1, 'L');
+$pdf->SetXY(240, 40);
+$pdf->Cell(110, 5, 'Cavite Telephone: (046) 440 6474', 0, 1, 'L');
+
+$pdf->SetXY(240, 50);
+$pdf->SetFont('Arial', 'B', 8);
+$pdf->Cell(110, 5, 'MAIN OFFICE', 0, 1, 'L');
+$pdf->SetFont('Arial', '', 8);
+$pdf->SetXY(240, 55);
+$pdf->Cell(110, 5, '55 Tinio St. Brgy. Addition Hills Mandaluyong City Philippines 1552', 0, 1, 'L');
+
+$pdf->SetXY(240, 65);
+$pdf->SetFont('Arial', 'B', 8);
+$pdf->Cell(110, 5, 'BRANCH OFFICE', 0, 1, 'L');
+$pdf->SetFont('Arial', '', 8);
+$pdf->SetXY(240, 70);
+$pdf->Cell(110, 5, '55 Gen. Aguinaldo Hi-way Brgy. Tanzang Luma Imus City, Cavite Philippines 4103', 0, 1, 'L');
+
+$pdf->SetXY(240, 80);
 $pdf->SetFont('Arial', 'B', 8);
 $pdf->Cell(110, 10, 'DOCUMENTARY REQUIREMENTS FOR ' . $aidaMap->buyer->financing_type . '/' . $aidaMap->buyer->marital_status . '/' . $aidaMap->buyer->work_type, 0, 1, 'C', 1);
 $pdf->SetFont('Arial', '', 8);
-
 $buyerRequirements = $aidaMap->buyer->requirements();
 foreach ($buyerRequirements as $index => $buyerRequirement) {
-    $pdf->SetXY(240, 35 + ($index * 5));
+    $pdf->SetXY(240, 90 + ($index * 5));
     $pdf->Cell(110, 5, $buyerRequirement->requirement->name, 0, 1, 'L');
 }
 // $pdf->SetXY(240, 35);
@@ -81,41 +116,6 @@ foreach ($buyerRequirements as $index => $buyerRequirement) {
 // $pdf->Cell(110, 5, 'Must have date of arrival & departure', 0, 1, 'L');
 // $pdf->SetXY(240, 80);
 // $pdf->Cell(110, 5, 'Residence Certificate for the Current Year (Cedula) (Spouse &amp; Atty-In-Fact)', 0, 1, 'L');
-
-$pdf->SetXY(240, 95);
-$pdf->SetFont('Arial', 'B', 8);
-$pdf->Cell(110, 10, 'FOR RESERVATIONS, CONTACT US AT', 0, 1, 'C', 1);
-$pdf->SetFont('Arial', '', 8);
-$pdf->SetXY(240, 105);
-$pdf->SetFont('Arial', 'B', 8);
-$pdf->Cell(110, 5, 'MR. HERVIE FAJARDO', 0, 1, 'L');
-$pdf->SetFont('Arial', '', 8);
-$pdf->SetXY(240, 110);
-$pdf->Cell(110, 5, 'Globe: +63 917 872 0176', 0, 1, 'L');
-$pdf->SetXY(240, 115);
-$pdf->Cell(110, 5, 'Smart: +63 917 565 8645', 0, 1, 'L');
-$pdf->SetXY(240, 120);
-$pdf->SetFont('Arial', 'B', 8);
-$pdf->Cell(110, 5, 'LANDLINE HOTLINES', 0, 1, 'L');
-$pdf->SetFont('Arial', '', 8);
-$pdf->SetXY(240, 125);
-$pdf->Cell(110, 5, 'Manila Telephone: (02) 256 6574', 0, 1, 'L');
-$pdf->SetXY(240, 130);
-$pdf->Cell(110, 5, 'Cavite Telephone: (046) 440 6474', 0, 1, 'L');
-
-$pdf->SetXY(240, 140);
-$pdf->SetFont('Arial', 'B', 8);
-$pdf->Cell(110, 5, 'MAIN OFFICE', 0, 1, 'L');
-$pdf->SetFont('Arial', '', 8);
-$pdf->SetXY(240, 145);
-$pdf->Cell(110, 5, '55 Tinio St. Brgy. Addition Hills Mandaluyong City Philippines 1552', 0, 1, 'L');
-
-$pdf->SetXY(240, 155);
-$pdf->SetFont('Arial', 'B', 8);
-$pdf->Cell(110, 5, 'BRANCH OFFICE', 0, 1, 'L');
-$pdf->SetFont('Arial', '', 8);
-$pdf->SetXY(240, 160);
-$pdf->Cell(110, 5, '55 Gen. Aguinaldo Hi-way Brgy. Tanzang Luma Imus City, Cavite Philippines 4103', 0, 1, 'L');
 
 $photo = $aidaMap->unit->photos->first();
 $pdf->Image(houseModelPhotoPath($photo->developer, $photo->house_model_name, $photo->filename), 5, 25, 105, 70);

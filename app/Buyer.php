@@ -51,6 +51,7 @@ class Buyer extends Model
     public function requirements()
     {
         return BuyerRequirement::with('requirement')
+            ->where('secondary_buyer', 0)
             ->where('finance_type', $this->financing_type)
             ->where('marital_status', $this->marital_status)
             ->where('work_type', $this->workLocation())->get();
