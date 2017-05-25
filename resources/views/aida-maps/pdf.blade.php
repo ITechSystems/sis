@@ -1,7 +1,7 @@
-    <?php
+<?php
 
 $pdf = new \App\PDF;
-$pdf->ShowGrid(true);
+$pdf->ShowGrid(false);
 
 $pdf->AddPage('L', 'Legal');
 $pdf->SetFont('Arial', '', 8);
