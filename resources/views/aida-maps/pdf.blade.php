@@ -46,10 +46,17 @@ $pdf->SetXY(115, 70);
 $pdf->Cell(60, 5, $aidaMap->buyer->equity_type, 0, 1, 'L', 1);
 
 $photo = $aidaMap->unit->unitPhotos->where('developer', $aidaMap->unit->developer)->first();
-$pdf->Image(unitPhotoPath($photo->developer, $photo->unit, $photo->filename), 180, 25, 55, 50);
+if ($photo) {
+    $pdf->Image(unitPhotoPath($photo->developer, $photo->unit, $photo->filename), 180, 25, 55, 50);
+} else {
+    $pdf->SetXY(180, 25);
+    $pdf->Cell(55, 50, 'No Image Found!');
+}
 
 $photo = $aidaMap->unit->mapPhotos->where('developer', $aidaMap->unit->developer)->first();
-$pdf->Image(mapPhotoPath($photo->developer, $photo->phase, $photo->filename), 115, 80, 120, 95);
+if ($photo) {
+    $pdf->Image(mapPhotoPath($photo->developer, $photo->phase, $photo->filename), 115, 80, 120, 95);
+}
 
 $pdf->SetXY(240, 5);
 $pdf->SetFont('Arial', 'B', 8);
@@ -118,7 +125,9 @@ foreach ($buyerRequirements as $index => $buyerRequirement) {
 // $pdf->Cell(110, 5, 'Residence Certificate for the Current Year (Cedula) (Spouse &amp; Atty-In-Fact)', 0, 1, 'L');
 
 $photo = $aidaMap->unit->photos->first();
-$pdf->Image(houseModelPhotoPath($photo->developer, $photo->house_model_name, $photo->filename), 5, 25, 105, 70);
+if ($photo) {
+    $pdf->Image(houseModelPhotoPath($photo->developer, $photo->house_model_name, $photo->filename), 5, 25, 105, 70);
+}
 
 $pdf->SetXY(5, 100);
 $pdf->Cell(80, 5, 'BLOCK AND LOT', 1, 'L');
