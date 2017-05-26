@@ -48,9 +48,6 @@ $pdf->Cell(60, 5, $aidaMap->buyer->equity_type, 0, 1, 'L', 1);
 $photo = $aidaMap->unit->unitPhotos->where('developer', $aidaMap->unit->developer)->first();
 if ($photo) {
     $pdf->Image(unitPhotoPath($photo->developer, $photo->unit, $photo->filename), 180, 25, 55, 50);
-} else {
-    $pdf->SetXY(180, 25);
-    $pdf->Cell(55, 50, 'No Image Found!');
 }
 
 $photo = $aidaMap->unit->mapPhotos->where('developer', $aidaMap->unit->developer)->first();
