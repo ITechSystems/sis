@@ -61,7 +61,7 @@ class SubdivisionMap extends Model
     public static function getLatestAndUniqueRecords()
     {
         $ids = SubdivisionMap::distinct()
-        ->select(\DB::raw('max(id) AS id, ANY_VALUE(phase) as phase, ANY_VALUE(filename) as filename'))
+        ->select(\DB::raw('max(id) AS id, MAX(phase) as phase, MAX(filename) as filename'))
         ->groupBy('phase')
         ->orderBy('id', 'asc')
         ->get();

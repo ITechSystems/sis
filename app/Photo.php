@@ -155,7 +155,7 @@ class Photo extends Model
     public static function getLatestAndUniqueRecords()
     {
         $ids = Photo::distinct()
-        ->select(\DB::raw('max(id) AS id, ANY_VALUE(house_model_name) as house_model_name, ANY_VALUE(filename) as filename'))
+        ->select(\DB::raw('max(id) AS id, MAX(house_model_name) as house_model_name, MAX(filename) as filename'))
         ->groupBy('house_model_name')
         ->orderBy('id', 'asc')
         ->get();
