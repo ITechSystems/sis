@@ -1,7 +1,5 @@
 <?php
 
-use App\Owner;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::get('password/reset/{token}', 'Auth\ForgotPasswordController@showResetForm')->name('password.reset');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'HomeController@index');
