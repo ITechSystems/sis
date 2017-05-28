@@ -109,7 +109,7 @@ class UnitPhoto extends Model
     public static function getLatestAndUniqueRecords()
     {
         $ids = UnitPhoto::distinct()
-        ->select(\DB::raw('max(id) AS id, ANY_VALUE(unit) as unit, ANY_VALUE(filename) as filename'))
+        ->select(\DB::raw('max(id) AS id, MAX(unit) as unit, MAX(filename) as filename'))
         ->groupBy('unit')
         ->orderBy('id', 'asc')
         ->get();

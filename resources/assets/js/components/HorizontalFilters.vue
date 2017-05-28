@@ -58,13 +58,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="price_minimum">Price</label>
-                                                <input class="form-control" name="price_minimum_horizontal" id="price_minimum_horizontal" placeholder="Min" v-model="form.price_minimum_horizontal">
+                                                <input class="form-control" name="price_minimum_horizontal" id="price_minimum_horizontal" placeholder="Min" v-model="form.price_minimum_horizontal" type="number">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="price_maximum">&nbsp;</label>
-                                                <input class="form-control" name="price_maximum_horizontal" id="price_maximum_horizontal" placeholder="Max" v-model="form.price_maximum_horizontal">
+                                                <input class="form-control" name="price_maximum_horizontal" id="price_maximum_horizontal" placeholder="Max" v-model="form.price_maximum_horizontal" type="number">
                                             </div>
                                         </div>
                                     </div>
@@ -87,13 +87,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="lot_area_min">Lot Area (sq. m)</label>
-                                                <input type="text" class="form-control" name="lot_area_min_horizontal" id="lot_area_min_horizontal" placeholder="Min" v-model="form.lot_area_min_horizontal">
+                                                <input type="number" class="form-control" name="lot_area_min_horizontal" id="lot_area_min_horizontal" placeholder="Min" v-model="form.lot_area_min_horizontal">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="lot_area_max">&nbsp;</label>
-                                                <input type="text" class="form-control" name="lot_area_max_horizontal" id="lot_area_max_horizontal" placeholder="Max" v-model="form.lot_area_max_horizontal">
+                                                <input type="number" class="form-control" name="lot_area_max_horizontal" id="lot_area_max_horizontal" placeholder="Max" v-model="form.lot_area_max_horizontal">
                                             </div>
                                         </div>
                                     </div>
@@ -103,13 +103,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="floor_area_min">Floor Area (sq. m)</label>
-                                                <input type="text" class="form-control" name="floor_area_min_horizontal" id="floor_area_min_horizontal" placeholder="Min" v-model="form.floor_area_min_horizontal">
+                                                <input type="number" class="form-control" name="floor_area_min_horizontal" id="floor_area_min_horizontal" placeholder="Min" v-model="form.floor_area_min_horizontal">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="floor_area_max">&nbsp;</label>
-                                                <input type="text" class="form-control" name="floor_area_max_horizontal" id="floor_area_max_horizontal" placeholder="Max" v-model="form.floor_area_max_horizontal">
+                                                <input type="number" class="form-control" name="floor_area_max_horizontal" id="floor_area_max_horizontal" placeholder="Max" v-model="form.floor_area_max_horizontal">
                                             </div>
                                         </div>
                                     </div>
