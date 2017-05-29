@@ -105,6 +105,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/maps/{id}/edit', 'SubdivisionMapController@edit');
     Route::patch('/maps/update/{id}', 'SubdivisionMapController@update');
 
+    Route::get('/pictures/floor_plan', 'FloorPlanController@create');
+    Route::post('/apply/floor_plans/upload', 'FloorPlanController@store');
+    Route::get('/view/floor_plan/{filename}', 'FloorPlanController@show');
+    Route::get('/house_model_photos/getModelNamesForFloorPlan', 'FloorPlanController@getModelNames');
+    Route::delete('/delete/floor_plan/{filename}', 'FloorPlanController@destroy');
+    Route::get('/floor_plans/{id}/edit', 'FloorPlanController@edit');
+    Route::patch('/update/floor_plans/{id}', 'FloorPlanController@update');
+
     Route::get('/roles', 'RolesController@index');
     Route::get('/roles/{role}', 'RolesController@show');
 
