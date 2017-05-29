@@ -23,6 +23,14 @@ new Vue({
 			this.$http.get('/house_model_photos/getModelNames?developer=' + developer).then(res => {
 				this.model_names = res.data
 			})
+		},
+
+		getModelNamesForFloorPlan(developer){
+			this.$http.get('/house_model_photos/getModelNamesForFloorPlan?developer=' + developer).then(res => {
+				this.model_names = res.data
+				if(this.model_names.length < 1)
+					alert('No house model available for floor plan upload for developer: ' + developer)
+			})
 		}
 	}
 })

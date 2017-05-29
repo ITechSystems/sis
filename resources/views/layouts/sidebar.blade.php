@@ -82,6 +82,9 @@
                                         <a href="/pictures/upload"><i class="fa fa-circle-o"></i> House Models</a>
                                     </li>
                                     <li>
+                                        <a href="/pictures/floor_plan"><i class="fa fa-circle-o"></i> Floor Plans</a>
+                                    </li>
+                                    <li>
                                         <a href="/pictures/units/upload"><i class="fa fa-circle-o"></i> Units</a>
                                     </li>
                                     <li>
