@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDevelopersTable extends Migration
+class CreateBranchOfficesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,11 @@ class CreateDevelopersTable extends Migration
      */
     public function up()
     {
-        Schema::create('developers', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+        Schema::create('branch_offices', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('created_by');
-            $table->string('name', 75);
+            $table->unsignedInteger('developer_id');
             $table->string('address', 150);
             $table->string('land_line', 100);
-            $table->string('contact_person', 100);
-            $table->string('contact_number_one', 50);
-            $table->string('contact_number_two', 50);
             $table->timestamps();
         });
     }
@@ -34,6 +29,6 @@ class CreateDevelopersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('developers');
+        Schema::dropIfExists('branch_offices');
     }
 }

@@ -10,18 +10,18 @@ $pdf->SetXY(5, 5);
 $pdf->Cell(40, 15, 'Company Logo', 1, 1, 'C');
 
 $pdf->SetXY(115, 5);
-$pdf->Cell(60, 5, 'Prepared By: Mr. Hervie Fajardo', 0, 1, 'L');
+$pdf->Cell(60, 5, 'Prepared By: ' . $aidaMap->user->first_name . ' ' . $aidaMap->user->last_name, 0, 1, 'L');
 $pdf->SetXY(115, 10);
-$pdf->Cell(60, 5, 'Contact No: 0917-8720176', 0, 1, 'L');
+$pdf->Cell(60, 5, 'Contact No: ' . $aidaMap->user->contact_number, 0, 1, 'L');
 $pdf->SetXY(115, 15);
-$pdf->Cell(60, 5, 'Email: hervie.fajardo@gmail.com', 0, 1, 'L');
+$pdf->Cell(60, 5, 'Email: ' . $aidaMap->user->email, 0, 1, 'L');
 
 $pdf->SetXY(175, 5);
-$pdf->Cell(60, 5, 'Developer: Property Company of Friends Inc.', 0, 1, 'L');
+$pdf->Cell(60, 5, 'Developer: ' . $aidaMap->unit->developer, 0, 1, 'L');
 $pdf->SetXY(175, 10);
-$pdf->Cell(60, 5, 'Project: Lancaster New City', 0, 1, 'L');
+$pdf->Cell(60, 5, 'Project: ' . $aidaMap->unit->project, 0, 1, 'L');
 $pdf->SetXY(175, 15);
-$pdf->Cell(60, 5, 'Location: Cavite', 0, 1, 'L');
+$pdf->Cell(60, 5, 'Location: ' . $aidaMap->unit->location, 0, 1, 'L');
 
 $pdf->SetXY(115, 25);
 $pdf->SetFont('Arial', 'B', 8);
@@ -59,37 +59,40 @@ $pdf->SetXY(240, 5);
 $pdf->SetFont('Arial', 'B', 8);
 $pdf->Cell(110, 10, 'FOR RESERVATIONS, CONTACT US AT', 0, 1, 'C', 1);
 
+$developer = $aidaMap->unit->developer()->first();
+$branches = $developer->branchOffices;
+
 $pdf->SetFont('Arial', '', 8);
 $pdf->SetXY(240, 15);
 $pdf->SetFont('Arial', 'B', 8);
-$pdf->Cell(110, 5, 'MR. HERVIE FAJARDO', 0, 1, 'L');
+$pdf->Cell(110, 5, $developer->contact_person, 0, 1, 'L');
 $pdf->SetFont('Arial', '', 8);
 $pdf->SetXY(240, 20);
-$pdf->Cell(110, 5, 'Globe: +63 917 872 0176', 0, 1, 'L');
+$pdf->Cell(110, 5, $developer->contact_number_one, 0, 1, 'L');
 $pdf->SetXY(240, 25);
-$pdf->Cell(110, 5, 'Smart: +63 917 565 8645', 0, 1, 'L');
+$pdf->Cell(110, 5, $developer->contact_number_two, 0, 1, 'L');
 $pdf->SetXY(240, 30);
 $pdf->SetFont('Arial', 'B', 8);
 $pdf->Cell(110, 5, 'LANDLINE HOTLINES', 0, 1, 'L');
 $pdf->SetFont('Arial', '', 8);
 $pdf->SetXY(240, 35);
-$pdf->Cell(110, 5, 'Manila Telephone: (02) 256 6574', 0, 1, 'L');
+$pdf->Cell(110, 5, 'Main Office Telephone: ' . $developer->land_line, 0, 1, 'L');
 $pdf->SetXY(240, 40);
-$pdf->Cell(110, 5, 'Cavite Telephone: (046) 440 6474', 0, 1, 'L');
+$pdf->Cell(110, 5, 'Branch Office Telephone: ' . $branches[0]->land_line, 0, 1, 'L');
 
 $pdf->SetXY(240, 50);
 $pdf->SetFont('Arial', 'B', 8);
 $pdf->Cell(110, 5, 'MAIN OFFICE', 0, 1, 'L');
 $pdf->SetFont('Arial', '', 8);
 $pdf->SetXY(240, 55);
-$pdf->Cell(110, 5, '55 Tinio St. Brgy. Addition Hills Mandaluyong City Philippines 1552', 0, 1, 'L');
+$pdf->Cell(110, 5, $developer->address, 0, 1, 'L');
 
 $pdf->SetXY(240, 65);
 $pdf->SetFont('Arial', 'B', 8);
 $pdf->Cell(110, 5, 'BRANCH OFFICE', 0, 1, 'L');
 $pdf->SetFont('Arial', '', 8);
 $pdf->SetXY(240, 70);
-$pdf->Cell(110, 5, '55 Gen. Aguinaldo Hi-way Brgy. Tanzang Luma Imus City, Cavite Philippines 4103', 0, 1, 'L');
+$pdf->Cell(110, 5, $branches[0]->address, 0, 1, 'L');
 
 $pdf->SetXY(240, 80);
 $pdf->SetFont('Arial', 'B', 8);
@@ -100,26 +103,6 @@ foreach ($buyerRequirements as $index => $buyerRequirement) {
     $pdf->SetXY(240, 90 + ($index * 5));
     $pdf->Cell(110, 5, $buyerRequirement->requirement->name, 0, 1, 'L');
 }
-// $pdf->SetXY(240, 35);
-// $pdf->Cell(110, 5, 'Bank Financing', 0, 1, 'L');
-// $pdf->SetXY(240, 40);
-// $pdf->Cell(110, 5, 'Married', 0, 1, 'L');
-// $pdf->SetXY(240, 45);
-// $pdf->Cell(110, 5, 'OFW (Land-Based)', 0, 1, 'L');
-// $pdf->SetXY(240, 50);
-// $pdf->Cell(110, 5, '3pcs. 1x1 ID Picture (Buyer, Spouse & Atty-in-Fact) w/ name &amp; Unit ID at the back', 0, 1, 'L');
-// $pdf->SetXY(240, 55);
-// $pdf->Cell(110, 5, '2 Valid ID\'s with 3 specimen signature (Photocopy only) (Buyer &amp; Spouse)', 0, 1, 'L');
-// $pdf->SetXY(240, 60);
-// $pdf->Cell(110, 5, 'SSS, GSIS, Driver\'s License, Voter\'s, PRC, Passport', 0, 1, 'L');
-// $pdf->SetXY(240, 65);
-// $pdf->Cell(110, 5, 'Postal ID\'s are allowed for AIF only (or unemployed spouse)', 0, 1, 'L');
-// $pdf->SetXY(240, 70);
-// $pdf->Cell(110, 5, 'Passport - validity should not be expired (Buyer)', 0, 1, 'L');
-// $pdf->SetXY(240, 75);
-// $pdf->Cell(110, 5, 'Must have date of arrival & departure', 0, 1, 'L');
-// $pdf->SetXY(240, 80);
-// $pdf->Cell(110, 5, 'Residence Certificate for the Current Year (Cedula) (Spouse &amp; Atty-In-Fact)', 0, 1, 'L');
 
 $photo = $aidaMap->unit->photos->first();
 if ($photo) {
@@ -202,28 +185,6 @@ foreach($aidaMap->unit->loans as $index => $loan) {
     $pdf->SetXY(85, 160 + ($index * 5));
     $pdf->Cell(25, 5, number_format($loan->monthly_amortization, 2), 1, 1, 'R');
 }
-
-// foreach ($aidaMap->unit->loans as $index => $loan) {
-//     if ($loan->finance_type == $aidaMap->finance_type) {
-//         $pdf->SetXY(35, 150 + (15 * $index));
-//         $pdf->Cell(10, 15, $loan->percentage, 1, 1, 'C');
-
-//         $pdf->SetXY(45, 150 + (15 * $index));
-//         $pdf->Cell(40, 5, 'Loanable Amount', 1, 1, 'L');
-//         $pdf->SetXY(85, 150 + (15 * $index));
-//         $pdf->Cell(25, 5, number_format($loan->total, 2), 1, 1, 'R');
-
-//         $pdf->SetXY(45, 155 + (15 * $index));
-//         $pdf->Cell(40, 5, 'MRI & FIRE', 1, 1, 'L');
-//         $pdf->SetXY(85, 155 + (15 * $index));
-//         $pdf->Cell(25, 5, number_format($loan->mri, 2), 1, 1, 'R');
-
-//         $pdf->SetXY(45, 160 + (15 * $index));
-//         $pdf->Cell(40, 5, $loan->years . ' years / ' . $loan->monthly_percentage . '%', 1, 1, 'L');
-//         $pdf->SetXY(85, 160 + (15 * $index));
-//         $pdf->Cell(25, 5, number_format($loan->monthly_amortization, 2), 1, 1, 'R');
-//     }
-// }
 
 if (isset($download)) {
     $pdf->Output($filePath, 'F');

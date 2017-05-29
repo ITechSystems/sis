@@ -117,4 +117,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('/users/{user}', 'UsersController@patch');
     Route::post('/users', 'UsersController@store');
     Route::delete('/users/{user}', 'UsersController@destroy');
+
+    Route::get('/developers', 'DevelopersController@index');
 });

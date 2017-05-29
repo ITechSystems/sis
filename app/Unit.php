@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Developer;
 use Illuminate\Database\Eloquent\Model;
 
 class Unit extends Model
@@ -57,6 +58,11 @@ class Unit extends Model
     public function mapPhotos()
     {
         return $this->hasMany(SubdivisionMap::class, 'phase', 'phase')->latest('id');
+    }
+
+    public function developer()
+    {
+        return $this->belongsTo(Developer::class, 'developer', 'name');
     }
 
     public function getHeaders()

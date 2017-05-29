@@ -89,8 +89,6 @@
                                     </li>
                                 </ul>
                             </li>
-
-
                             <li><a href="#"><i class="fa fa-circle-o"></i> Videos</a></li>
                             <li><a href="#"><i class="fa fa-circle-o"></i> Audio</a>
                             </li>
@@ -109,6 +107,9 @@
                             <li><a href="/data/template"><i class="fa fa-circle-o"></i> Download Template</a></li>
                             <li><a href="/data/amenities/create"><i class="fa fa-circle-o"></i>Add Amenity</a></li>
                         </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="{{ url('/developers') }}"><i class="fa fa-users"></i> <span>Developers</span></a>
                     </li>
                     <li class="treeview">
                         <a href="{{ url('/users') }}"><i class="fa fa-users"></i> <span>Users</span></a>
