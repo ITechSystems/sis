@@ -48,11 +48,17 @@ $pdf->Cell(60, 5, $aidaMap->buyer->equity_type, 0, 1, 'L', 1);
 $photo = $aidaMap->unit->unitPhotos->where('developer', $aidaMap->unit->developer)->first();
 if ($photo) {
     $pdf->Image(unitPhotoPath($photo->developer, $photo->unit, $photo->filename), 180, 25, 55, 50);
+} else {
+    $pdf->SetXY(180, 25);
+    $pdf->Cell(55, 50, 'NO IMAGE', 0, 0, 'C', 1);
 }
 
 $photo = $aidaMap->unit->mapPhotos->where('developer', $aidaMap->unit->developer)->first();
 if ($photo) {
     $pdf->Image(mapPhotoPath($photo->developer, $photo->phase, $photo->filename), 115, 80, 120, 95);
+} else {
+    $pdf->SetXY(115, 80);
+    $pdf->Cell(120, 95, 'NO IMAGE', 0, 0, 'C', 1);
 }
 
 $pdf->SetXY(240, 5);
@@ -107,6 +113,9 @@ foreach ($buyerRequirements as $index => $buyerRequirement) {
 $photo = $aidaMap->unit->photos->first();
 if ($photo) {
     $pdf->Image(houseModelPhotoPath($photo->developer, $photo->house_model_name, $photo->filename), 5, 25, 105, 70);
+} else {
+    $pdf->SetXY(5, 25);
+    $pdf->Cell(105, 70, 'NO IMAGE', 0, 0, 'C', 1);
 }
 
 $pdf->SetXY(5, 100);
